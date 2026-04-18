@@ -32,6 +32,7 @@ nav a { margin-right: 16px; color: var(--ink); text-decoration: underline }
 .cell-label { font-size: 0.78rem; color: var(--muted); margin-bottom: 4px; font-variant: all-small-caps; letter-spacing: 0.06em }
 .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 4px }
 .pair.triple { grid-template-columns: 1fr 1fr 1fr }
+.pair.quad { grid-template-columns: 1fr 1fr 1fr 1fr }
 .half { position: relative; background: #eee1c6; aspect-ratio: 1/1; overflow: hidden; border-radius: 4px }
 .half img { width: 100%; height: 100%; object-fit: cover; display: block }
 .badge {
@@ -43,6 +44,7 @@ nav a { margin-right: 16px; color: var(--ink); text-decoration: underline }
 .badge.old { color: #8a6f38 }
 .badge.new { color: var(--new) }
 .badge.v2 { color: #2f6b9a }
+.badge.v3 { color: #8e4fa3 }
 .fail { padding: 8px; font-size: 0.75rem; color: #c03; background: #ffeeea; height: 100%; display: flex; align-items: center }
 .model-heads { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 8px; position: sticky; top: 0; background: var(--bg); padding: 10px 0; z-index: 5; border-bottom: 1px solid #e0d4bd }
 .model-head { font-size: 0.9rem; font-weight: 600; text-align: center }
@@ -70,7 +72,7 @@ An additive <code>## Recipes</code> section for p5.brush's <code>llms.txt</code>
 
 <h2 id="grid">Controlled comparison</h2>
 <p class="lede">
-For each prompt, each model generates a sketch in three conditions: <span style="color:var(--old)">old</span> (upstream docs only), <span style="color:var(--new)">v1</span> (upstream + our Recipes), and <span style="color:#2f6b9a">v2</span> (Recipes after the iteration pass: added Particle Fields, Gestural marker, tighter Pen, sweet-spot framing). One seed per cell. Failures stay visible — blank/error canvases are data.
+For each prompt, each model generates a sketch in four conditions: <span style="color:var(--old)">old</span> (upstream docs only), <span style="color:var(--new)">v1</span> (upstream + our Recipes), <span style="color:#2f6b9a">v2</span> (Recipes + Particle Fields, Gestural marker, tighter Pen), and <span style="color:#8e4fa3">v3</span> (v2 + Watercolor Form/Field split + "When NOT to apply graduated density"). One seed per cell. Failures stay visible — blank/error canvases are data.
 </p>
 <div class="model-heads"><div class="model-head">Claude Sonnet 4.6</div><div class="model-head">GPT-5.4</div><div class="model-head">Gemini 3.1 Pro</div><div class="model-head">Qwen3-235B</div><div class="model-head">Gemma 3 27B</div></div>
 
@@ -82,46 +84,51 @@ For each prompt, each model generates a sketch in three conditions: <span style=
         <div class="models-grid">
         <div class="cell">
           <div class="cell-label">p01</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p01.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p01.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p01.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p01.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p01</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p01.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p01.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p01.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p01.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p01</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p01.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p01.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p01.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p01.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p01</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p01.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p01.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p01.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p01.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p01</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p01.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p01.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemma3_27b__p01.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p01.png" alt="v3" loading="lazy"></div>
           </div>
         </div></div>
       </section>
@@ -134,46 +141,51 @@ For each prompt, each model generates a sketch in three conditions: <span style=
         <div class="models-grid">
         <div class="cell">
           <div class="cell-label">p02</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p02.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p02.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p02.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p02.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p02</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p02.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p02.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p02.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p02.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p02</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p02.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p02.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p02.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p02.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p02</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p02.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p02.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p02.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p02.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p02</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p02.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p02.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemma3_27b__p02.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p02.png" alt="v3" loading="lazy"></div>
           </div>
         </div></div>
       </section>
@@ -186,47 +198,52 @@ For each prompt, each model generates a sketch in three conditions: <span style=
         <div class="models-grid">
         <div class="cell">
           <div class="cell-label">p03</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p03.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p03.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p03.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p03.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p03</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p03.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p03.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p03.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p03.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p03</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p03.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p03.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p03.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p03.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p03</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p03.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p03.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p03.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p03.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p03</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p03.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p03.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><div class="fail">failed: brush.noWiggle is not a function
 draw (file:///Users/suryanarreddi/projects/expe</div></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p03.png" alt="v3" loading="lazy"></div>
           </div>
         </div></div>
       </section>
@@ -239,46 +256,51 @@ draw (file:///Users/suryanarreddi/projects/expe</div></div>
         <div class="models-grid">
         <div class="cell">
           <div class="cell-label">p04</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p04.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p04.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p04.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p04.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p04</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p04.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p04.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p04.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p04.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p04</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p04.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p04.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p04.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p04.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p04</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p04.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p04.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p04.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p04.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p04</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p04.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p04.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemma3_27b__p04.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><div class="fail">failed: no render</div></div>
           </div>
         </div></div>
       </section>
@@ -291,47 +313,52 @@ draw (file:///Users/suryanarreddi/projects/expe</div></div>
         <div class="models-grid">
         <div class="cell">
           <div class="cell-label">p05</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p05.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p05.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p05.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p05.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p05</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p05.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p05.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p05.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p05.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p05</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p05.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p05.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p05.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p05.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p05</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p05.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p05.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p05.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p05.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p05</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><div class="fail">failed: Uncaught (in promise) Error: No brush or color set. Call brush.set('brushName', </div></div>
             <div class="half"><span class="badge new">v1</span><div class="fail">failed: Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'k</div></div>
             <div class="half"><span class="badge v2">v2</span><div class="fail">failed: brush.ellipse is not a function
 draw (file:///Users/suryanarreddi/projects/exper</div></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p05.png" alt="v3" loading="lazy"></div>
           </div>
         </div></div>
       </section>
@@ -344,47 +371,52 @@ draw (file:///Users/suryanarreddi/projects/exper</div></div>
         <div class="models-grid">
         <div class="cell">
           <div class="cell-label">p06</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p06.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p06.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p06.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p06.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p06</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p06.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p06.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p06.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p06.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p06</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p06.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p06.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p06.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p06.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p06</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p06.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p06.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p06.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p06.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p06</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><div class="fail">failed: Cannot access 'color' before initialization
 draw (file:///Users/suryanarreddi/pr</div></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p06.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemma3_27b__p06.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p06.png" alt="v3" loading="lazy"></div>
           </div>
         </div></div>
       </section>
@@ -397,48 +429,53 @@ draw (file:///Users/suryanarreddi/pr</div></div>
         <div class="models-grid">
         <div class="cell">
           <div class="cell-label">p07</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p07.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p07.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p07.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p07.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p07</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p07.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p07.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p07.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p07.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p07</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p07.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p07.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p07.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p07.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p07</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p07.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p07.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p07.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p07.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p07</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><div class="fail">failed: Cannot access 'color' before initialization
 draw (file:///Users/suryanarreddi/pr</div></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p07.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><div class="fail">failed: Cannot access 'color' before initialization
 draw (file:///Users/suryanarreddi/pr</div></div>
+            <div class="half"><span class="badge v3">v3</span><div class="fail">failed: Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'k</div></div>
           </div>
         </div></div>
       </section>
@@ -451,46 +488,51 @@ draw (file:///Users/suryanarreddi/pr</div></div>
         <div class="models-grid">
         <div class="cell">
           <div class="cell-label">p08</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p08.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p08.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p08.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p08.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p08</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p08.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p08.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p08.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p08.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p08</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p08.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p08.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p08.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p08.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p08</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p08.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p08.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p08.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p08.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p08</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p08.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p08.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemma3_27b__p08.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p08.png" alt="v3" loading="lazy"></div>
           </div>
         </div></div>
       </section>
@@ -503,46 +545,51 @@ draw (file:///Users/suryanarreddi/pr</div></div>
         <div class="models-grid">
         <div class="cell">
           <div class="cell-label">p09</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p09.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p09.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p09.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p09.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p09</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p09.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p09.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p09.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p09.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p09</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p09.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p09.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p09.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p09.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p09</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p09.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p09.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p09.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p09.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p09</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p09.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p09.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemma3_27b__p09.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p09.png" alt="v3" loading="lazy"></div>
           </div>
         </div></div>
       </section>
@@ -555,46 +602,51 @@ draw (file:///Users/suryanarreddi/pr</div></div>
         <div class="models-grid">
         <div class="cell">
           <div class="cell-label">p10</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p10.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p10.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p10.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p10.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p10</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p10.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p10.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p10.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p10.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p10</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p10.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p10.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p10.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p10.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p10</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p10.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p10.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p10.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p10.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p10</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><div class="fail">failed: Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'x</div></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p10.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><div class="fail">failed: Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'k</div></div>
+            <div class="half"><span class="badge v3">v3</span><div class="fail">failed: Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'k</div></div>
           </div>
         </div></div>
       </section>
@@ -607,47 +659,52 @@ draw (file:///Users/suryanarreddi/pr</div></div>
         <div class="models-grid">
         <div class="cell">
           <div class="cell-label">p11</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p11.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p11.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p11.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p11.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p11</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p11.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p11.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p11.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p11.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p11</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p11.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p11.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p11.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p11.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p11</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p11.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p11.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><div class="fail">failed: brush.push is not a function
 hatchedRect (file:///Users/suryanarreddi/projects/e</div></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p11.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p11</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p11.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p11.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemma3_27b__p11.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p11.png" alt="v3" loading="lazy"></div>
           </div>
         </div></div>
       </section>
@@ -660,46 +717,51 @@ hatchedRect (file:///Users/suryanarreddi/projects/e</div></div>
         <div class="models-grid">
         <div class="cell">
           <div class="cell-label">p12</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p12.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p12.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p12.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p12.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p12</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p12.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p12.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p12.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p12.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p12</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p12.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p12.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p12.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p12.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p12</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p12.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p12.png" alt="new" loading="lazy"></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p12.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p12.png" alt="v3" loading="lazy"></div>
           </div>
         </div>
 
         <div class="cell">
           <div class="cell-label">p12</div>
-          <div class="pair triple">
+          <div class="pair quad">
             <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p12.png" alt="old" loading="lazy"></div>
             <div class="half"><span class="badge new">v1</span><div class="fail">failed: no render</div></div>
             <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemma3_27b__p12.png" alt="v2" loading="lazy"></div>
+            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p12.png" alt="v3" loading="lazy"></div>
           </div>
         </div></div>
       </section>

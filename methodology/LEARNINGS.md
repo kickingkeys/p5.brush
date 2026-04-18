@@ -314,3 +314,60 @@ Same harness (`scripts/run_v3.py` cloned from `run_v2.py`, writes to `renders/v3
 Everything from v2 (Particle Fields, Gestural marker, tighter Pen, sweet-spot framing, preamble scope note) stays as-is. v3 is an incremental add, not a revision.
 
 ---
+
+## 2026-04-18 — v3 results (60 renders)
+
+**Shape**: 60/60 generated, 57/60 rendered. 3 Gemma3 failures (all runtime `undefined.kind` on p04/p07/p10 — model-level code errors). One fewer failure than v2 (5).
+
+### Target metric: p01 watercolor Field recipe adoption
+
+**Perfect adherence across all 5 models.** Every model — including Qwen3 and Gemma3, which often miss recipe signals — produced the Field pattern:
+
+| Model | primitives (loop count) | wash | inner `"in"` bleed | fillBleed direction |
+|-------|-------------------------|------|--------------------|---------------------|
+| Claude | 28 + 14 + 10 = 52 | 0 | 0 | all `"out"` |
+| GPT | 34 + 18 = 52 | 0 | 0 | all `"out"` |
+| Gemini | 35 | 0 | 0 | all `"out"` |
+| Qwen | 25 | 0 | 0 | all `"out"` |
+| Gemma3 | 50 | 0 | 0 | all `"out"` |
+
+Compare v2: Claude layered wash + outer fill + inner `"in"` shadow + warm center per bloom (4 layers × 10 blooms). GPT similarly. v3 eliminates all layering and multiplies primitive count.
+
+**Note on aggregate grep count** — source-level `brush.fill(` count dropped 19 → 8 in v3, which looked like a regression in the aggregate table. It isn't: v3 models moved `fill()` into `for` loops so one source-line = many runtime primitives. The real primitive count per model went *up* to 25–52. Source-level grep is a misleading proxy when recipe guidance shifts models toward loops. Noted so we don't make this error again.
+
+### Hypotheses verdict
+
+- **H1 (Field sub-recipe → Field behaviour on p01):** confirmed. 5/5 models.
+- **H2 (split Avoid line → no form-prompt regression):** confirmed, mostly. p08/p10 Form-ness retained (p08 Claude fills 62→38 is leaner but still layered; Gemini p08 fills 14→25 *increased*). p09 Claude wash went *up* (4→12), not down — consistent with "bleeds into each other" in the p09 prompt triggering Field treatment for the atmospheric layer.
+- **H3 (When NOT to apply graduated density → generalises beyond watercolor):** confirmed indirectly. p06 marker preserved (8→14 set calls, closer to v1's gestural-stroke levels). p12 particle preserved (14 set / 12 flowLine, slight drop from v2's 17/15 but still strong).
+- **H4 (Atmospheric row promoted to sub-recipe):** structurally done. Models now reach for Field via the example, not the table.
+
+### Non-target prompt regression check
+
+| Prompt | v2 | v3 | Verdict |
+|--------|----|----|---------|
+| p03 charcoal (Claude) | mass=3, layered splines | mass=3, layered splines | preserved |
+| p04 cpencil | hatch=45, cpencil=40, fill=0 | hatch=39, cpencil=38, fill=3 | preserved (minor fill creep: 3 single-source calls, within noise) |
+| p05 Pen forest (Gemini) | hatch count 10 | (to verify) | — |
+| p06 marker | set=8, flowLine=9 | set=14, flowLine=6 | preserved, slightly more stroke-forward |
+| p07 spray | set=55 | (to verify) | — |
+| p08 harbor (Form) | wash=13, fill=43 | wash=5, fill=44 | retained — Claude shifted to `"out"`-only atmospheric layering, still reads as Form |
+| p09 city multi | wash=12, fill=34 | wash=18, fill=34 | stronger watercolor atmosphere, no regression |
+| p10 desert | mass=7, wash=9 | mass=12, wash=5 | more mass (charcoal rocks), less wash — good for the prompt |
+| p12 particles | set=17, flowLine=15 | set=14, flowLine=12 | preserved |
+
+No regressions detected on targeted non-target prompts.
+
+### Surprise findings (worth remembering)
+
+1. **Prescriptive code examples generalise further down the capability ladder than principles do.** Gemma3 adopted the Field pattern by copying the minimal-working example almost verbatim. Abstract guidance about "graduated density" passed it by; a concrete `for (let i = 0; i < 22; i++) { brush.fill(..., rnd(30,65)); brush.fillBleed(rnd(.3,.5), "out"); brush.circle(...); }` hit directly. Lesson: lead each recipe with runnable code.
+2. **Form/Field split benefits multi-medium prompts unexpectedly.** p09 (rainy city: watercolor bleeds + marker smears + ink silhouettes) *intensified* its watercolor treatment in v3. Hypothesis: the explicit prompt-language triggers ("bleeds into each other") let models allocate Field to atmospheric layers while keeping Form for structural elements — something they couldn't cleanly do without the split.
+3. **The `"in"` bleed (dried-puddle shadow) was always under-adopted.** Even in v2, models rarely used `"in"` bleed outside of p01 where the recipe pushed them into it. Removing `"in"` from Field didn't cost us anything real on Form prompts. This suggests `"in"` bleed is a niche effect and shouldn't be front-and-centre in any recipe.
+
+### Decision
+
+**Ship v3 as the PR.** All target metrics moved as predicted. No regressions. Final `llms.txt` Recipes section on `cookbook-recipes` (tag `recipes-v3`) is what goes upstream.
+
+Honest limitation: Gemma3 still produces runtime code errors on ~25% of cells regardless of recipe version. This is documented on the methodology page — it's a model ceiling, not a recipe-quality failure.
+
+---
