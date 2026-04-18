@@ -69,3 +69,27 @@ Clearly labeled on the final page as two distinct experiments answering two dist
 **Why**: 120 renders at 1 seed is a snapshot; 360 renders at 3 seeds is a distribution. For a PR exhibit, the snapshot is enough to let Alejandro and readers form an opinion. Scripts + manifest are committed, so anyone who wants variance can rerun.
 
 ---
+
+## 2026-04-18 — Recipes draft leads with a complete watercolor example, terser elsewhere
+
+**Alternatives**: (a) uniform terse placeholders for all 7 mediums; (b) uniform full working examples for all 7; (c) watercolor-lead with complete example, others terse.
+
+**Chose**: (c).
+
+**Why**: Watercolor is the #1 ask and the hardest medium to get right (wash + fill layering + fillBleed direction is non-obvious). A weak model (Gemma 3 27B, Qwen3-235B) needs a complete working pattern to copy from — placeholder-heavy templates assume too much. Other mediums pattern-match from the Universal Principles 3-layer template + medium-specific code + Avoid block. Full working examples for all 7 would balloon llms.txt past what agent context windows handle cleanly.
+
+**Cost**: Final llms.txt grows 430 → 768 lines (~+338). Still tractable; within most 128k+ context budgets.
+
+---
+
+## 2026-04-18 — Explicit "Avoid" block per medium
+
+**Why**: Failure modes are as teachable as successes. Stronger models don't need them, but the 1% of edge cases where a strong model hallucinates `brush.fill()` for marker or `charcoal` hatching for technical pen are easier to prevent than diagnose. Weak models need them as guardrails. Costs ~3–4 lines per medium; bought cheaply.
+
+---
+
+## 2026-04-18 — "Colors render lighter than hex" insight promoted to Universal Principles
+
+**Why**: This came out of the research phase (real, validated finding across all mediums), but a single-line observation in Universal Principles steers every color decision downstream without needing per-medium reminders. Under-noted in prior versions.
+
+---
