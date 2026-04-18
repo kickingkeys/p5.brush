@@ -15,6 +15,8 @@ p5.brush.js adds natural drawing tools to p5.js — pencils, charcoal, markers, 
 > ▶️ **[Check the teaser live →](https://editor.p5js.org/acamposuribe/sketches/bkb_CyJyi)**
 > Live on the p5.js Web Editor, where you can read and edit code.
 
+> 🤖 **For LLMs and coding agents:** see [`llms.txt`](./llms.txt), especially the `## Recipes` section for medium-specific technique patterns (watercolor layering, charcoal + mass fills, cross-hatching, etc.). The API reference answers *what* each function does; the Recipes section covers *which combinations produce medium-authentic output*.
+
 ## Two builds
 
 p5.brush ships in two flavors:
