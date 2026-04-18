@@ -177,4 +177,140 @@ If v2 shows targeted improvements without regressions, ship v2 as the PR. If v2 
 
 ---
 
+## 2026-04-18 — v2 results (60 renders, same 5 models × 12 prompts × v2 condition)
+
+**Shape**: 60/60 generated, 55/60 rendered. Failures: 1 Qwen (`brush.push is not a function` — hallucinated standalone-build API, model-level) + 4 Gemma3 code errors (model-ceiling, same shape as v1).
+
+### Targeted wins — all three v2 goals landed
+
+**p12 Particle Fields gap CLOSED**. v1 had zero `flowLine`/`addField` usage on p12 (the vector-field swarm prompt). v2: all 5 models including Gemma3 use `addField` + `field` + `wiggle` + `flowLine`. Aggregate `flowLine` count across all prompts: 40 → 59 (+19). `spray_set`: 41 → 55 (+14) — the Particle Fields recipe is pulling spray into the swarm vocabulary.
+
+**p05 Gemini pen-forest REGRESSION REVERSED**. v1 Gemini on p05 (dense pen-hatching forest) collapsed to `hatch_count=1` — one giant polygon wrapped around hatching. v2: `hatch_count=10`, multi-angle hatching restored. The "Hatching IS the composition, not a fill for shapes" line in the tightened Pen recipe hit exactly this failure mode.
+
+**p06 Gestural marker recipe adopted**. v1 had no model pulling `wash+fill` for marker gestures (correctly — strokes were right for the prompt). v2's new Gestural marker subsection reinforces that interpretation: models continue using `set("marker")` strokes with `field("hand")` + `wiggle(1)`, now with more confidence.
+
+### Charcoal p03 — investigated mass-count drop (36 → 19)
+
+Feared regression. **Isn't one.** Per-model read of v2 code:
+
+- **Claude v2**: 3 `mass()` calls (torso/pelvis/head) + many layered `set("charcoal")` splines across 8 grey values (0d0d0d → aaa) for motion trails. More graduated density than v1, not less. Mass is reserved for anchored body zones; motion uses gestural spline sweeps — arguably *better* charcoal authenticity.
+- **GPT v2**: 2 `mass()` calls + heavy `flowLine` swarm with `field("hand")+wiggle(5)` for the motion streak behind the dancer. GPT pulled the Particle Fields recipe into charcoal gesture — unexpected cross-pollination that produces authentic streak-motion. Mass on body, flowLine on motion.
+- **Gemini v2**: unchanged (2 mass calls, same pattern).
+- **Qwen v2**: unchanged (1 mass call).
+
+Conclusion: v2 didn't under-apply the charcoal recipe; frontier models refactored motion-rendering to use gestural splines / flowLine instead of mass-blobs. Graduated-density principle preserved; mass types preserved (crayon, pastel, never charcoal). No regression.
+
+### Other aggregate metrics (v1 new → v2)
+
+- `wash` flat (48 → 48): no watercolor regression from the opacity sweet-spot reframe.
+- `fill` stable (~60 → 58): minor, within noise.
+- `marker_set` -9 (40 → 31): consistent with Gestural marker subsection encouraging fewer set-calls per stroke. Not a miss.
+- `hatch` count on p07 spray-graffiti slightly up: spray+pen cross-use reinforced.
+
+### Decision
+
+**Ship v2 as the PR.** All three targeted edits produced measurable improvements. The mass-count drop was a refactoring artifact, not a loss of technique. No aggregate regression on watercolor/pencil/marker.
+
+Remaining risk: Gemma3 still fails ~33% of cells regardless of condition — this is a model ceiling, documented on the methodology page as an honest limitation, not a doc-quality issue.
+
+---
+
+## 2026-04-18 — v3 scoping: watercolor field/pattern regression on p01, cpencil win on p04
+
+### Observation
+
+User reading the old/v1/v2 grid flagged two things:
+1. **Watercolor p01 (abstract field of blooms) looks better in `old` than in v1/v2.** Blooms feel loose, airy, truly bleeding into each other in old. v1/v2 blooms feel tight, structured, "finished" — each one a self-contained puddle.
+2. **Colored pencil p04 (portrait) looks better in v2 than in old.** Old uses flat color fills on the face; v2 uses layered hatching strokes that read as authentic cpencil.
+
+Both reads hold up in code metrics.
+
+### Evidence — p01 watercolor (old vs v2)
+
+**Claude p01**:
+- old: 0 `wash()`, 9 `fill()`, all `"out"` bleed. 12 blooms × 1 fill each, plus 5 wash overlays + 8 accent circles. Many low-opacity (20–58) passes. Overlap does the work — neighboring circles bleed into each other.
+- v2: 1 `wash()`, 12 `fill()`, mixed `"out"`/`"in"` bleed. 10 blooms × **4 layers each** (wash + outer fill + inner shadow `"in"` + warm center). Opacities 55–170. Each bloom is a finished 3D-looking puddle.
+
+**GPT p01**:
+- old: 26 blooms × 4–8 layers of radial offset circles + paper haze (140 fills). ~100+ passes of low-opacity (20–48) overlapping shapes. Quantity-heavy, field-like.
+- v2: 14 background washes + 11 main blooms × 3 layers each (wash+fill / inner dried-puddle `"in"` / soft offset stain). ~50 passes at higher opacity (95–165). Dense, structured.
+
+**`"in"` bleed usage**: old has 0 (Claude) and 1 (GPT). v2 has 2 (Claude) and 1 (GPT) — *and* all v2 runs verbalize "shadow / dried / inner" in variable names. Models read our recipe and structurally inserted "dried puddle" inward-bleed layers that are wrong for a **pattern field** subject.
+
+### Root cause
+
+The Watercolor section in `llms.txt` treats watercolor as **object/form rendering** — one shape rendered with 3+ graduated layers to give it depth. Specifically:
+
+1. The **"Minimal working recipe"** shows a single organic blob with wash + fill + inner-shadow `"in"` bleed + directional strokes. Models copy this structurally.
+2. The **Universal `3-layer template`** is prefaced "applies to watercolor, colored pencil, …". This generalises a form-rendering pattern onto every medium.
+3. The **Avoid** line says "fill() alone without wash() underneath (too faint)" — directly discourages the exact pattern (many loose single-fill circles) that old-condition models used for p01 and that the prompt actually wants.
+4. The **`fillBleed` table** lists "Inner shadow / warm layer (`"in"`)" as a first-class element; models dutifully include it.
+5. The "Atmospheric background 0.5–0.7 `"out"`" row exists but is buried and not flagged as *the* right choice for abstract/pattern fields.
+
+Net effect: every time a model sees "watercolor", it reaches for `wash + fill + inner shadow + directional stroke` even when the prompt describes a flat field of mutually-bleeding primitives.
+
+### Evidence — p04 cpencil (old vs v2)
+
+**Claude p04**:
+- old: **47 `fill()` + 30 `fillBleed`**, 0 `hatch()`. Model painted the face with watercolor-style fills — wrong medium.
+- v2: 0 `fill()`, **33 `hatch()` + 16 `set()`**, 0 bleed. Layered crosshatched cpencil strokes — right medium.
+
+**GPT p04**:
+- old: 0 `fill()`, 0 `hatch()`, 30 `set()`. All strokes, no layering.
+- v2: 0 `fill()`, **4 `hatch()` + 25 `set()`**. Now includes hatched layers.
+
+The Colored Pencil recipe works because it's narrow and explicitly forbids fill/wash: *"Avoid: fill() or wash(); single color; single hatch angle."* The prohibition list steers models decisively.
+
+### v3 hypotheses (each is testable)
+
+**H1.** Adding a dedicated **"Field / pattern watercolor"** sub-recipe (many low-opacity single-layer fills, bleed `"out"` only, no wash, no inner shadow) will shift p01 code back toward the loose airy pattern — specifically reducing `wash()` count to 0–1 and `"in"` bleed count to 0 on p01 while keeping fill counts ≥15.
+
+**H2.** Softening the Avoid line from "fill() alone without wash() underneath (too faint)" to "fill() alone for a single *structural* shape (too faint) — ok for overlapping atmospheric fields of ≥10 shapes" will remove the false-pressure to add wash to pattern prompts, without hurting structural prompts (p08 harbor, p10 desert).
+
+**H3.** Adding a **"When NOT to apply graduated density"** callout under Universal principles — listing flat pattern fields, overlapping atmospheric washes, abstract mark-making — will generalise the fix beyond watercolor (should also help any abstract prompt where models over-layer).
+
+**H4.** Promoting the "Atmospheric background (0.5–0.7 `"out"`)" row from table to a named sub-recipe will make it easier for models to reach for it by name on the right prompts.
+
+### Assumptions baked into the hypotheses (call out so we can falsify)
+
+- **A1.** Models read the first concrete example in a recipe and structurally copy it. (Evidence: Claude v2 p01 uses *exactly* the blob-recipe shape: outer wash + outer fill + inner "in" shadow + warm center. Same structure as the "Minimal working recipe" example, just replicated 10 times. This is a strong assumption, supported by direct read.)
+- **A2.** Adding a second named sub-recipe lets models select the right one based on prompt language (prompts with "field", "overlapping", "bleeding into each other", "scattered across the page" trigger the field recipe; prompts with "single bloom", "pooled", "rendered" trigger the form recipe). We should test this by checking model behaviour on p01, p07 (spray circles), p09 (rainy street — multi-medium with watercolor atmosphere), p12 (particle field — already separate recipe).
+- **A3.** Cpencil wins are stable under v3 changes because the v3 edits are scoped to the Watercolor section + Universal principles. We should verify p04 stays hatch-dominant.
+- **A4.** Gestural marker and Particle Fields gains from v2 are preserved because those sections aren't touched. Verify p06, p12 don't regress.
+
+### v3 proposed edits (concrete)
+
+1. In **Watercolor section**, split into two named sub-recipes:
+   - **Form watercolor** (current recipe, renamed): for a single subject rendered as a layered object — flowers, harbor boats, one defined stain.
+   - **Field watercolor** (new, ~15 lines): many low-opacity `fill()`-only passes with `"out"` bleed, no wash, no inner shadow. Sweet spots: opacity 25–60, bleed 0.3–0.5, fillTexture 0.5–0.7, shape count ≥ 15, simple circles or gently-noised polygons. Explicit trigger words in the intro: "use Field for prompts saying 'field', 'overlapping', 'bleeding', 'scattered', 'atmospheric', 'bloom field'."
+2. **Rewrite the Avoid line** to split structural vs field cases as in H2.
+3. **Add "When NOT to apply graduated density"** as a third bullet in Universal principles, with the exceptions list.
+4. **Move "Atmospheric 0.5–0.7 out"** out of the table and into the Field sub-recipe body.
+
+Net addition: ≈25–40 lines. Doesn't touch cpencil, charcoal, pen, marker, spray, particle fields.
+
+### v3 experiment design (run after edits)
+
+Same harness (`scripts/run_v3.py` cloned from `run_v2.py`, writes to `renders/v3/`, `manifest_v3.json`). Preserve v2 artifacts exactly like we preserved v1. Target metrics:
+
+| Metric | Goal (v2 → v3) | Check on |
+|--------|----------------|----------|
+| p01 `wash()` per model | drop to 0–1 (from 1–2) | Claude, GPT |
+| p01 `"in"` bleed | drop to 0 | All 5 models |
+| p01 fill count | stay ≥ 15 | All 5 models |
+| p01 unique opacity values | trend lower (more variety <80) | Claude, GPT |
+| p04 cpencil hatch+set | stay at v2 levels or higher | Claude, GPT |
+| p12 particle (flowLine, field) | unchanged from v2 | All 5 models |
+| p06 gestural marker | unchanged from v2 | All 5 models |
+| p08 harbor watercolor (form) | unchanged — still uses wash/fill layering | Claude, GPT |
+| p10 desert layered washes | unchanged | Claude, GPT |
+
+**Success criterion**: p01 watercolor reads as a loose, overlapping field again (subjectively — grid check) *and* p04 cpencil, p06 marker, p08 harbor, p10 desert, p12 particle don't regress on the quantitative metrics.
+
+**Falsification**: if p01 stays structured OR if a non-target prompt regresses, v3 is wrong in a way we can diagnose from the delta. In that case we revert to v2 and revise the sub-recipe split.
+
+### What stays
+
+Everything from v2 (Particle Fields, Gestural marker, tighter Pen, sweet-spot framing, preamble scope note) stays as-is. v3 is an incremental add, not a revision.
+
 ---

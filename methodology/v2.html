@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>p5.brush Recipes v2 — gallery</title>
+<style>
+:root { --bg:#fffaf3; --ink:#222; --muted:#6a6157; }
+*{box-sizing:border-box}
+body{font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--ink);margin:0}
+main{max-width:1400px;margin:0 auto;padding:32px 20px 80px}
+h1{font-size:1.8rem;margin:0 0 8px}
+h3{font-size:1rem;margin:0 0 4px}
+.lede{color:var(--muted);max-width:70ch;margin:0 0 24px}
+.heads{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:8px;position:sticky;top:0;background:var(--bg);padding:10px 0;border-bottom:1px solid #e0d4bd;z-index:5}
+.head{font-size:0.85rem;font-weight:600;text-align:center}
+.row{margin:28px 0}
+.row header{margin-bottom:10px}
+.row header p{color:var(--muted);font-size:0.9rem;margin:0;max-width:80ch}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.cell{background:#eee1c6;aspect-ratio:1/1;overflow:hidden;border-radius:4px}
+.cell img{width:100%;height:100%;object-fit:cover;display:block}
+.cell.fail{padding:10px;font-size:0.75rem;color:#c03;background:#ffeeea;display:flex;align-items:center}
+</style></head><body><main>
+<h1>p5.brush Recipes v2 — gallery</h1>
+<p class="lede">Just the v2 images from the 60-cell run (5 models × 12 prompts). v2 = Recipes with Particle Fields, Gestural marker, tighter Pen, sweet-spot framing. For the old/v1/v2 side-by-side, see <a href="index.html">index.html</a>.</p>
+<div class="heads"><div class="head">Claude Sonnet 4.6</div><div class="head">GPT-5.4</div><div class="head">Gemini 3.1 Pro</div><div class="head">Qwen3-235B</div><div class="head">Gemma 3 27B</div></div>
+
+    <section class="row">
+      <header>
+        <h3>p01 — watercolor</h3>
+        <p>An abstract field of overlapping circular watercolor blooms in dusty pinks and ochres, their edges bleeding into each other on warm paper.</p>
+      </header>
+      <div class="grid"><div class="cell"><img src="renders/v2/claude_sonnet_46__p01.png" alt="claude_sonnet_46 p01" loading="lazy"></div><div class="cell"><img src="renders/v2/gpt_54__p01.png" alt="gpt_54 p01" loading="lazy"></div><div class="cell"><img src="renders/v2/gemini_31_pro__p01.png" alt="gemini_31_pro p01" loading="lazy"></div><div class="cell"><img src="renders/v2/qwen3_235b__p01.png" alt="qwen3_235b p01" loading="lazy"></div><div class="cell"><img src="renders/v2/gemma3_27b__p01.png" alt="gemma3_27b p01" loading="lazy"></div></div>
+    </section>
+
+    <section class="row">
+      <header>
+        <h3>p02 — pencil</h3>
+        <p>A botanical study of wild grasses and seed heads in graphite pencil only — fine outlines, hatching, and tonal shading, no color, unfinished edges.</p>
+      </header>
+      <div class="grid"><div class="cell"><img src="renders/v2/claude_sonnet_46__p02.png" alt="claude_sonnet_46 p02" loading="lazy"></div><div class="cell"><img src="renders/v2/gpt_54__p02.png" alt="gpt_54 p02" loading="lazy"></div><div class="cell"><img src="renders/v2/gemini_31_pro__p02.png" alt="gemini_31_pro p02" loading="lazy"></div><div class="cell"><img src="renders/v2/qwen3_235b__p02.png" alt="qwen3_235b p02" loading="lazy"></div><div class="cell"><img src="renders/v2/gemma3_27b__p02.png" alt="gemma3_27b p02" loading="lazy"></div></div>
+    </section>
+
+    <section class="row">
+      <header>
+        <h3>p03 — charcoal</h3>
+        <p>A gestural figure study of a dancer mid-leap, drawn in loose charcoal with heavy smudges trailing behind the motion.</p>
+      </header>
+      <div class="grid"><div class="cell"><img src="renders/v2/claude_sonnet_46__p03.png" alt="claude_sonnet_46 p03" loading="lazy"></div><div class="cell"><img src="renders/v2/gpt_54__p03.png" alt="gpt_54 p03" loading="lazy"></div><div class="cell"><img src="renders/v2/gemini_31_pro__p03.png" alt="gemini_31_pro p03" loading="lazy"></div><div class="cell"><img src="renders/v2/qwen3_235b__p03.png" alt="qwen3_235b p03" loading="lazy"></div><div class="cell fail">brush.noWiggle is not a function
+draw (file:///Users/suryanarreddi/projects/experiments/p5</div></div>
+    </section>
+
+    <section class="row">
+      <header>
+        <h3>p04 — cpencil</h3>
+        <p>A portrait-like figure made from colored pencil only, with layered imperfect strokes in unexpected colors so the face feels more like a memory or mood than a person.</p>
+      </header>
+      <div class="grid"><div class="cell"><img src="renders/v2/claude_sonnet_46__p04.png" alt="claude_sonnet_46 p04" loading="lazy"></div><div class="cell"><img src="renders/v2/gpt_54__p04.png" alt="gpt_54 p04" loading="lazy"></div><div class="cell"><img src="renders/v2/gemini_31_pro__p04.png" alt="gemini_31_pro p04" loading="lazy"></div><div class="cell"><img src="renders/v2/qwen3_235b__p04.png" alt="qwen3_235b p04" loading="lazy"></div><div class="cell"><img src="renders/v2/gemma3_27b__p04.png" alt="gemma3_27b p04" loading="lazy"></div></div>
+    </section>
+
+    <section class="row">
+      <header>
+        <h3>p05 — pen</h3>
+        <p>A dense black-and-white forest made only with technical-pen hatching, where tree trunks, undergrowth, and shadows become a woven pattern that almost turns abstract.</p>
+      </header>
+      <div class="grid"><div class="cell"><img src="renders/v2/claude_sonnet_46__p05.png" alt="claude_sonnet_46 p05" loading="lazy"></div><div class="cell"><img src="renders/v2/gpt_54__p05.png" alt="gpt_54 p05" loading="lazy"></div><div class="cell"><img src="renders/v2/gemini_31_pro__p05.png" alt="gemini_31_pro p05" loading="lazy"></div><div class="cell"><img src="renders/v2/qwen3_235b__p05.png" alt="qwen3_235b p05" loading="lazy"></div><div class="cell fail">brush.ellipse is not a function
+draw (file:///Users/suryanarreddi/projects/experiments/p5-</div></div>
+    </section>
+
+    <section class="row">
+      <header>
+        <h3>p06 — marker</h3>
+        <p>A flock of birds scattered across the page as quick marker gestures, their paths guided by an invisible swirling wind.</p>
+      </header>
+      <div class="grid"><div class="cell"><img src="renders/v2/claude_sonnet_46__p06.png" alt="claude_sonnet_46 p06" loading="lazy"></div><div class="cell"><img src="renders/v2/gpt_54__p06.png" alt="gpt_54 p06" loading="lazy"></div><div class="cell"><img src="renders/v2/gemini_31_pro__p06.png" alt="gemini_31_pro p06" loading="lazy"></div><div class="cell"><img src="renders/v2/qwen3_235b__p06.png" alt="qwen3_235b p06" loading="lazy"></div><div class="cell"><img src="renders/v2/gemma3_27b__p06.png" alt="gemma3_27b p06" loading="lazy"></div></div>
+    </section>
+
+    <section class="row">
+      <header>
+        <h3>p07 — spray</h3>
+        <p>A city wall of overlapping spray-painted circles, drips, arrows, and ghosted hand-drawn marks, like fragments of graffiti building into an accidental composition.</p>
+      </header>
+      <div class="grid"><div class="cell"><img src="renders/v2/claude_sonnet_46__p07.png" alt="claude_sonnet_46 p07" loading="lazy"></div><div class="cell"><img src="renders/v2/gpt_54__p07.png" alt="gpt_54 p07" loading="lazy"></div><div class="cell"><img src="renders/v2/gemini_31_pro__p07.png" alt="gemini_31_pro p07" loading="lazy"></div><div class="cell"><img src="renders/v2/qwen3_235b__p07.png" alt="qwen3_235b p07" loading="lazy"></div><div class="cell fail">Cannot access 'color' before initialization
+draw (file:///Users/suryanarreddi/projects/exp</div></div>
+    </section>
+
+    <section class="row">
+      <header>
+        <h3>p08 — multi (watercolor + pencil)</h3>
+        <p>A foggy harbor at dawn rendered in soft watercolor washes, with faint graphite pencil lines suggesting masts and ropes over the damp color.</p>
+      </header>
+      <div class="grid"><div class="cell"><img src="renders/v2/claude_sonnet_46__p08.png" alt="claude_sonnet_46 p08" loading="lazy"></div><div class="cell"><img src="renders/v2/gpt_54__p08.png" alt="gpt_54 p08" loading="lazy"></div><div class="cell"><img src="renders/v2/gemini_31_pro__p08.png" alt="gemini_31_pro p08" loading="lazy"></div><div class="cell"><img src="renders/v2/qwen3_235b__p08.png" alt="qwen3_235b p08" loading="lazy"></div><div class="cell"><img src="renders/v2/gemma3_27b__p08.png" alt="gemma3_27b p08" loading="lazy"></div></div>
+    </section>
+
+    <section class="row">
+      <header>
+        <h3>p09 — multi (watercolor + marker + pen)</h3>
+        <p>A rainy city street at night suggested through wet watercolor bleeds, neon marker smears reflecting on the pavement, and sparse ink silhouettes of passersby.</p>
+      </header>
+      <div class="grid"><div class="cell"><img src="renders/v2/claude_sonnet_46__p09.png" alt="claude_sonnet_46 p09" loading="lazy"></div><div class="cell"><img src="renders/v2/gpt_54__p09.png" alt="gpt_54 p09" loading="lazy"></div><div class="cell"><img src="renders/v2/gemini_31_pro__p09.png" alt="gemini_31_pro p09" loading="lazy"></div><div class="cell"><img src="renders/v2/qwen3_235b__p09.png" alt="qwen3_235b p09" loading="lazy"></div><div class="cell"><img src="renders/v2/gemma3_27b__p09.png" alt="gemma3_27b p09" loading="lazy"></div></div>
+    </section>
+
+    <section class="row">
+      <header>
+        <h3>p10 — multi (watercolor + charcoal + pen)</h3>
+        <p>A cracked desert landscape with layered sand-colored washes, jagged charcoal rock formations, and a single thin pen-drawn horizon line bisecting the page.</p>
+      </header>
+      <div class="grid"><div class="cell"><img src="renders/v2/claude_sonnet_46__p10.png" alt="claude_sonnet_46 p10" loading="lazy"></div><div class="cell"><img src="renders/v2/gpt_54__p10.png" alt="gpt_54 p10" loading="lazy"></div><div class="cell"><img src="renders/v2/gemini_31_pro__p10.png" alt="gemini_31_pro p10" loading="lazy"></div><div class="cell"><img src="renders/v2/qwen3_235b__p10.png" alt="qwen3_235b p10" loading="lazy"></div><div class="cell fail">Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'kind')</div></div>
+    </section>
+
+    <section class="row">
+      <header>
+        <h3>p11 — abstract (pen + cpencil)</h3>
+        <p>An abstract composition of intersecting hatched rectangles in muted earth tones, like a Diebenkorn landscape rendered in pen and colored pencil.</p>
+      </header>
+      <div class="grid"><div class="cell"><img src="renders/v2/claude_sonnet_46__p11.png" alt="claude_sonnet_46 p11" loading="lazy"></div><div class="cell"><img src="renders/v2/gpt_54__p11.png" alt="gpt_54 p11" loading="lazy"></div><div class="cell"><img src="renders/v2/gemini_31_pro__p11.png" alt="gemini_31_pro p11" loading="lazy"></div><div class="cell fail">brush.push is not a function
+hatchedRect (file:///Users/suryanarreddi/projects/experiments</div><div class="cell"><img src="renders/v2/gemma3_27b__p11.png" alt="gemma3_27b p11" loading="lazy"></div></div>
+    </section>
+
+    <section class="row">
+      <header>
+        <h3>p12 — abstract (spray, atmospheric)</h3>
+        <p>A swarm of particles following a vector field, each leaving a trail of spray-paint dots that build up into ghostly cloud formations.</p>
+      </header>
+      <div class="grid"><div class="cell"><img src="renders/v2/claude_sonnet_46__p12.png" alt="claude_sonnet_46 p12" loading="lazy"></div><div class="cell"><img src="renders/v2/gpt_54__p12.png" alt="gpt_54 p12" loading="lazy"></div><div class="cell"><img src="renders/v2/gemini_31_pro__p12.png" alt="gemini_31_pro p12" loading="lazy"></div><div class="cell"><img src="renders/v2/qwen3_235b__p12.png" alt="qwen3_235b p12" loading="lazy"></div><div class="cell"><img src="renders/v2/gemma3_27b__p12.png" alt="gemma3_27b p12" loading="lazy"></div></div>
+    </section>
+</main></body></html>

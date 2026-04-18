@@ -18,6 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PROMPTS = json.loads((ROOT / "prompts.json").read_text())
 MANIFEST = json.loads((ROOT / "manifest.json").read_text())
+MANIFEST_V2 = json.loads((ROOT / "manifest_v2.json").read_text()) if (ROOT / "manifest_v2.json").exists() else {}
 OUT = ROOT / "index.html"
 
 MODELS = [
@@ -29,27 +30,37 @@ MODELS = [
 ]
 
 
+def img_for(entry, cond):
+    if entry.get("rendered"):
+        path = entry.get("png_path", "")
+        if path:
+            rel = Path(path).relative_to(ROOT)
+            return f'<img src="{rel}" alt="{cond}" loading="lazy">'
+    err = entry.get("render_note") or entry.get("error") or "no render"
+    return f'<div class="fail">failed: {err[:80]}</div>'
+
+
 def cell(model_key: str, prompt_id: str) -> str:
     old_key = f"{model_key}__old__{prompt_id}"
     new_key = f"{model_key}__new__{prompt_id}"
+    v2_key  = f"{model_key}__v2__{prompt_id}"
     old_entry = MANIFEST.get(old_key, {})
     new_entry = MANIFEST.get(new_key, {})
+    v2_entry  = MANIFEST_V2.get(v2_key, {})
 
-    def img(entry, cond):
-        if entry.get("rendered"):
-            path = entry.get("png_path", "")
-            if path:
-                rel = Path(path).relative_to(ROOT)
-                return f'<img src="{rel}" alt="{cond}" loading="lazy">'
-        err = entry.get("render_note") or entry.get("error") or "no render"
-        return f'<div class="fail">failed: {err[:80]}</div>'
+    v2_half = (
+        f'<div class="half"><span class="badge v2">v2</span>{img_for(v2_entry, "v2")}</div>'
+        if v2_entry else ""
+    )
+    pair_cls = "pair triple" if v2_entry else "pair"
 
     return f"""
         <div class="cell">
           <div class="cell-label">{prompt_id}</div>
-          <div class="pair">
-            <div class="half"><span class="badge old">old</span>{img(old_entry, 'old')}</div>
-            <div class="half"><span class="badge new">new</span>{img(new_entry, 'new')}</div>
+          <div class="{pair_cls}">
+            <div class="half"><span class="badge old">old</span>{img_for(old_entry, 'old')}</div>
+            <div class="half"><span class="badge new">v1</span>{img_for(new_entry, 'new')}</div>
+            {v2_half}
           </div>
         </div>"""
 
@@ -103,6 +114,7 @@ nav a {{ margin-right: 16px; color: var(--ink); text-decoration: underline }}
 }}
 .cell-label {{ font-size: 0.78rem; color: var(--muted); margin-bottom: 4px; font-variant: all-small-caps; letter-spacing: 0.06em }}
 .pair {{ display: grid; grid-template-columns: 1fr 1fr; gap: 4px }}
+.pair.triple {{ grid-template-columns: 1fr 1fr 1fr }}
 .half {{ position: relative; background: #eee1c6; aspect-ratio: 1/1; overflow: hidden; border-radius: 4px }}
 .half img {{ width: 100%; height: 100%; object-fit: cover; display: block }}
 .badge {{
@@ -113,6 +125,7 @@ nav a {{ margin-right: 16px; color: var(--ink); text-decoration: underline }}
 }}
 .badge.old {{ color: #8a6f38 }}
 .badge.new {{ color: var(--new) }}
+.badge.v2 {{ color: #2f6b9a }}
 .fail {{ padding: 8px; font-size: 0.75rem; color: #c03; background: #ffeeea; height: 100%; display: flex; align-items: center }}
 .model-heads {{ display: grid; grid-template-columns: repeat({len(MODELS)}, 1fr); gap: 10px; margin-bottom: 8px; position: sticky; top: 0; background: var(--bg); padding: 10px 0; z-index: 5; border-bottom: 1px solid #e0d4bd }}
 .model-head {{ font-size: 0.9rem; font-weight: 600; text-align: center }}
@@ -140,7 +153,7 @@ An additive <code>## Recipes</code> section for p5.brush's <code>llms.txt</code>
 
 <h2 id="grid">Controlled comparison</h2>
 <p class="lede">
-For each prompt, each model generates one sketch in the <span style="color:var(--old)">old</span> condition (upstream <code>README.md</code> + <code>llms.txt</code> in the system prompt) and one in the <span style="color:var(--new)">new</span> condition (same docs with our Recipes section appended). One seed per cell. Failures are shown honestly — blank/error canvases are data, not excluded.
+For each prompt, each model generates a sketch in three conditions: <span style="color:var(--old)">old</span> (upstream docs only), <span style="color:var(--new)">v1</span> (upstream + our Recipes), and <span style="color:#2f6b9a">v2</span> (Recipes after the iteration pass: added Particle Fields, Gestural marker, tighter Pen, sweet-spot framing). One seed per cell. Failures stay visible — blank/error canvases are data.
 </p>
 <div class="model-heads">{model_heads}</div>
 {rows}
