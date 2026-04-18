@@ -1,0 +1,7 @@
+node_modules/
+package-lock.json
+scripts/_smoke.js
+scripts/_tmp_*.html
+scripts/output.png
+__pycache__/
+*.pyc

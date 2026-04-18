@@ -1,0 +1,83 @@
+{
+  "frozen_at": "2026-04-18",
+  "notes": "12 prompts selected from 24 blind-generated ideas (opus_47 + gpt_54). See prompts_raw.json for the full pool. Selection targets: 1+ per medium (7), 3 multi-medium, 2 abstract. Source attribution: [O#] = opus_47 idea #N, [G#] = gpt_54 idea #N. Light edits only — kept visual language of the source.",
+  "categories": {
+    "single_medium": ["p01", "p02", "p03", "p04", "p05", "p06", "p07"],
+    "multi_medium": ["p08", "p09", "p10"],
+    "abstract_pattern": ["p11", "p12"]
+  },
+  "prompts": [
+    {
+      "id": "p01",
+      "medium_focus": "watercolor",
+      "source": "O3",
+      "text": "An abstract field of overlapping circular watercolor blooms in dusty pinks and ochres, their edges bleeding into each other on warm paper."
+    },
+    {
+      "id": "p02",
+      "medium_focus": "pencil",
+      "source": "O8 (edited — dropped watercolor/ink to isolate pencil)",
+      "text": "A botanical study of wild grasses and seed heads in graphite pencil only — fine outlines, hatching, and tonal shading, no color, unfinished edges."
+    },
+    {
+      "id": "p03",
+      "medium_focus": "charcoal",
+      "source": "O6",
+      "text": "A gestural figure study of a dancer mid-leap, drawn in loose charcoal with heavy smudges trailing behind the motion."
+    },
+    {
+      "id": "p04",
+      "medium_focus": "cpencil",
+      "source": "G6",
+      "text": "A portrait-like figure made from colored pencil only, with layered imperfect strokes in unexpected colors so the face feels more like a memory or mood than a person."
+    },
+    {
+      "id": "p05",
+      "medium_focus": "pen",
+      "source": "G5",
+      "text": "A dense black-and-white forest made only with technical-pen hatching, where tree trunks, undergrowth, and shadows become a woven pattern that almost turns abstract."
+    },
+    {
+      "id": "p06",
+      "medium_focus": "marker",
+      "source": "O7",
+      "text": "A flock of birds scattered across the page as quick marker gestures, their paths guided by an invisible swirling wind."
+    },
+    {
+      "id": "p07",
+      "medium_focus": "spray",
+      "source": "G7",
+      "text": "A city wall of overlapping spray-painted circles, drips, arrows, and ghosted hand-drawn marks, like fragments of graffiti building into an accidental composition."
+    },
+    {
+      "id": "p08",
+      "medium_focus": "multi (watercolor + pencil)",
+      "source": "O1",
+      "text": "A foggy harbor at dawn rendered in soft watercolor washes, with faint graphite pencil lines suggesting masts and ropes over the damp color."
+    },
+    {
+      "id": "p09",
+      "medium_focus": "multi (watercolor + marker + pen)",
+      "source": "O10",
+      "text": "A rainy city street at night suggested through wet watercolor bleeds, neon marker smears reflecting on the pavement, and sparse ink silhouettes of passersby."
+    },
+    {
+      "id": "p10",
+      "medium_focus": "multi (watercolor + charcoal + pen)",
+      "source": "O12",
+      "text": "A cracked desert landscape with layered sand-colored washes, jagged charcoal rock formations, and a single thin pen-drawn horizon line bisecting the page."
+    },
+    {
+      "id": "p11",
+      "medium_focus": "abstract (pen + cpencil)",
+      "source": "O9",
+      "text": "An abstract composition of intersecting hatched rectangles in muted earth tones, like a Diebenkorn landscape rendered in pen and colored pencil."
+    },
+    {
+      "id": "p12",
+      "medium_focus": "abstract (spray, atmospheric)",
+      "source": "O11",
+      "text": "A swarm of particles following a vector field, each leaving a trail of spray-paint dots that build up into ghostly cloud formations."
+    }
+  ]
+}

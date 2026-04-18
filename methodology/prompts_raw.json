@@ -1,0 +1,90 @@
+{
+  "system": "You help brainstorm small sketch ideas a generative-coder might try.",
+  "user": "You're a generative artist who just discovered p5.brush \u2014 a p5.js library with natural drawing tools (pencils, charcoal, markers, watercolor fills, hatch patterns, vector fields).\n\nGive me 12 short sketch ideas you'd ask your AI coding assistant to prototype \u2014 the kinds of generative-art / creative-coding experiments you'd explore to feel out what the library can do.\n\nRequirements:\n- Keep each idea to one or two sentences.\n- Visual and non-technical (no API names).\n- Concrete enough that an assistant knows what to draw (subject + style/medium cues), but open enough to leave interpretation.\n- Mix: some single-medium (watercolor, charcoal, pencil, marker, colored pencil, technical pen, spray), some mixed-medium, some abstract/pattern-based, some gestural/figurative.\n- Avoid photorealism and UI-style tasks. These are sketches, not illustrations of specific people/logos.\n\nReturn a JSON array of 12 strings, nothing else. No preamble, no trailing text. Just the array.",
+  "models": {
+    "opus_47": {
+      "model_id": "anthropic/claude-opus-4.7",
+      "ok": true,
+      "raw": "[\"A foggy harbor at dawn rendered in soft watercolor washes, with faint graphite pencil lines suggesting masts and ropes over the damp color.\",\"A dense forest of vertical charcoal strokes with patches of smudged darkness, a single bright marker-red bird perched somewhere in the middle distance.\",\"An abstract field of overlapping circular watercolor blooms in dusty pinks and ochres, their edges bleeding into each other on warm paper.\",\"A topographic map of an imaginary island drawn entirely in thin technical pen lines, with tight hatching for elevation and stippling for shallow waters.\",\"A still life of three lemons and a ceramic jug, built up in colored pencil cross-hatching with visible strokes and unfinished edges.\",\"A gestural figure study of a dancer mid-leap, drawn in loose charcoal with heavy smudges trailing behind the motion.\",\"A flock of birds scattered across the page as quick marker gestures, their paths guided by an invisible swirling wind.\",\"A botanical study of wild grasses and seed heads, fine pencil outlines filled with delicate watercolor tints and occasional ink accents.\",\"An abstract composition of intersecting hatched rectangles in muted earth tones, like a Diebenkorn landscape rendered in pen and colored pencil.\",\"A rainy city street at night suggested through wet watercolor bleeds, neon marker smears reflecting on the pavement, and sparse ink silhouettes of passersby.\",\"A swarm of particles following a vector field, each leaving a trail of spray-paint dots that build up into ghostly cloud formations.\",\"A cracked desert landscape with layered sand-colored washes, jagged charcoal rock formations, and a single thin pen-drawn horizon line bisecting the page.\"]",
+      "parsed": [
+        "A foggy harbor at dawn rendered in soft watercolor washes, with faint graphite pencil lines suggesting masts and ropes over the damp color.",
+        "A dense forest of vertical charcoal strokes with patches of smudged darkness, a single bright marker-red bird perched somewhere in the middle distance.",
+        "An abstract field of overlapping circular watercolor blooms in dusty pinks and ochres, their edges bleeding into each other on warm paper.",
+        "A topographic map of an imaginary island drawn entirely in thin technical pen lines, with tight hatching for elevation and stippling for shallow waters.",
+        "A still life of three lemons and a ceramic jug, built up in colored pencil cross-hatching with visible strokes and unfinished edges.",
+        "A gestural figure study of a dancer mid-leap, drawn in loose charcoal with heavy smudges trailing behind the motion.",
+        "A flock of birds scattered across the page as quick marker gestures, their paths guided by an invisible swirling wind.",
+        "A botanical study of wild grasses and seed heads, fine pencil outlines filled with delicate watercolor tints and occasional ink accents.",
+        "An abstract composition of intersecting hatched rectangles in muted earth tones, like a Diebenkorn landscape rendered in pen and colored pencil.",
+        "A rainy city street at night suggested through wet watercolor bleeds, neon marker smears reflecting on the pavement, and sparse ink silhouettes of passersby.",
+        "A swarm of particles following a vector field, each leaving a trail of spray-paint dots that build up into ghostly cloud formations.",
+        "A cracked desert landscape with layered sand-colored washes, jagged charcoal rock formations, and a single thin pen-drawn horizon line bisecting the page."
+      ],
+      "usage": {
+        "prompt_tokens": 388,
+        "completion_tokens": 589,
+        "total_tokens": 977,
+        "cost": 0.01649835,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.016665,
+          "upstream_inference_prompt_cost": 0.00194,
+          "upstream_inference_completions_cost": 0.014725
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      }
+    },
+    "gpt_54": {
+      "model_id": "openai/gpt-5.4",
+      "ok": true,
+      "raw": "[\n  \"A page of loose botanical studies: wildflowers and seed pods drawn in faint pencil, with soft watercolor blooms that drift slightly outside the lines like a field guide made in the wind.\",\n  \"An abstract storm map made from sweeping charcoal smudges and scratchy dark strokes, with pale gaps left like lightning and weather fronts colliding across the page.\",\n  \"A cluster of tiny houses on a hillside at dusk, blocked in with warm marker shapes and finished with a few crisp technical-pen lines for windows, stairs, and crooked antennas.\",\n  \"A school of jellyfish floating upward through deep blue watercolor washes, their bells translucent and their tentacles trailing in delicate white or pencil-like threads.\",\n  \"A dense black-and-white forest made only with technical-pen hatching, where tree trunks, undergrowth, and shadows become a woven pattern that almost turns abstract.\",\n  \"A portrait-like figure made from colored pencil only, with layered imperfect strokes in unexpected colors so the face feels more like a memory or mood than a person.\",\n  \"A city wall of overlapping spray-painted circles, drips, arrows, and ghosted hand-drawn marks, like fragments of graffiti building into an accidental composition.\",\n  \"A flock of birds crossing the sky as a gestural experiment: just a few rapid ink-like strokes for each body, with the whole page showing shifting directions and near-collisions.\",\n  \"A patchwork landscape seen from above, where fields, rivers, and roads are simplified into flat watercolor shapes and stitched together with colored-pencil textures.\",\n  \"A page of seashells, pebbles, and bits of seaweed rendered in soft charcoal and chalky highlights, as if collected and sketched on rough paper after a beach walk.\",\n  \"An abstract textile design built from repeating hatch patterns that bend and flow around invisible currents, creating pockets of density like woven fabric under tension.\",\n  \"A nighttime carnival scene with glowing marker color blocks, loose pencil scaffolding, and smoky dark edges, so tents, rides, and crowds emerge from a lively haze.\"\n]",
+      "parsed": [
+        "A page of loose botanical studies: wildflowers and seed pods drawn in faint pencil, with soft watercolor blooms that drift slightly outside the lines like a field guide made in the wind.",
+        "An abstract storm map made from sweeping charcoal smudges and scratchy dark strokes, with pale gaps left like lightning and weather fronts colliding across the page.",
+        "A cluster of tiny houses on a hillside at dusk, blocked in with warm marker shapes and finished with a few crisp technical-pen lines for windows, stairs, and crooked antennas.",
+        "A school of jellyfish floating upward through deep blue watercolor washes, their bells translucent and their tentacles trailing in delicate white or pencil-like threads.",
+        "A dense black-and-white forest made only with technical-pen hatching, where tree trunks, undergrowth, and shadows become a woven pattern that almost turns abstract.",
+        "A portrait-like figure made from colored pencil only, with layered imperfect strokes in unexpected colors so the face feels more like a memory or mood than a person.",
+        "A city wall of overlapping spray-painted circles, drips, arrows, and ghosted hand-drawn marks, like fragments of graffiti building into an accidental composition.",
+        "A flock of birds crossing the sky as a gestural experiment: just a few rapid ink-like strokes for each body, with the whole page showing shifting directions and near-collisions.",
+        "A patchwork landscape seen from above, where fields, rivers, and roads are simplified into flat watercolor shapes and stitched together with colored-pencil textures.",
+        "A page of seashells, pebbles, and bits of seaweed rendered in soft charcoal and chalky highlights, as if collected and sketched on rough paper after a beach walk.",
+        "An abstract textile design built from repeating hatch patterns that bend and flow around invisible currents, creating pockets of density like woven fabric under tension.",
+        "A nighttime carnival scene with glowing marker color blocks, loose pencil scaffolding, and smoky dark edges, so tents, rides, and crowds emerge from a lively haze."
+      ],
+      "usage": {
+        "prompt_tokens": 237,
+        "completion_tokens": 424,
+        "total_tokens": 661,
+        "cost": 0,
+        "is_byok": true,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0.0069525,
+          "upstream_inference_prompt_cost": 0.0005925,
+          "upstream_inference_completions_cost": 0.00636
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      }
+    }
+  }
+}
