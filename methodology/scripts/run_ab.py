@@ -75,23 +75,23 @@ Canvas is 600×600. Scale your composition accordingly."""
 MODELS = {
     "claude_sonnet_46": {
         "model_id": "anthropic/claude-sonnet-4.6",
-        "max_tokens": 8000,
+        "max_tokens": 16000,
     },
     "gpt_54": {
         "model_id": "openai/gpt-5.4",
-        "max_tokens": 8000,
+        "max_tokens": 16000,
     },
     "gemini_31_pro": {
-        "model_id": "google/gemini-3-pro-preview",
-        "max_tokens": 8000,
+        "model_id": "google/gemini-3.1-pro-preview",
+        "max_tokens": 16000,
     },
     "qwen3_235b": {
         "model_id": "qwen/qwen3-235b-a22b-2507",
-        "max_tokens": 8000,
+        "max_tokens": 16000,
     },
     "gemma3_27b": {
         "model_id": "google/gemma-3-27b-it",
-        "max_tokens": 8000,
+        "max_tokens": 16000,
     },
 }
 

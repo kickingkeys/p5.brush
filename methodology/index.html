@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>p5.brush Recipes — before / after</title>
+<style>
+:root {
+  --bg: #fffaf3; --ink: #222; --muted: #6a6157;
+  --old: #c9b89a; --new: #4a8a66;
+}
+* { box-sizing: border-box }
+body {
+  font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  background: var(--bg); color: var(--ink); margin: 0;
+  padding: 0;
+}
+main { max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px }
+h1 { font-size: 2.2rem; line-height: 1.15; margin: 0 0 12px }
+h2 { font-size: 1.5rem; margin: 48px 0 16px; border-bottom: 1px solid #e0d4bd; padding-bottom: 6px }
+h3 { font-size: 1.05rem; margin: 0 0 4px }
+.lede { font-size: 1.1rem; color: var(--muted); max-width: 72ch; margin: 0 0 16px }
+nav a { margin-right: 16px; color: var(--ink); text-decoration: underline }
+.prompt-text { color: var(--muted); font-size: 0.95rem; margin: 0 0 12px; max-width: 80ch }
+.prompt-row { margin: 36px 0 }
+.prompt-row header { margin-bottom: 12px }
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+.cell-label { font-size: 0.78rem; color: var(--muted); margin-bottom: 4px; font-variant: all-small-caps; letter-spacing: 0.06em }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 4px }
+.half { position: relative; background: #eee1c6; aspect-ratio: 1/1; overflow: hidden; border-radius: 4px }
+.half img { width: 100%; height: 100%; object-fit: cover; display: block }
+.badge {
+  position: absolute; top: 4px; left: 4px;
+  font-size: 0.7rem; padding: 2px 6px; border-radius: 3px;
+  font-weight: 600; background: rgba(255,250,243,0.9);
+  z-index: 2;
+}
+.badge.old { color: #8a6f38 }
+.badge.new { color: var(--new) }
+.fail { padding: 8px; font-size: 0.75rem; color: #c03; background: #ffeeea; height: 100%; display: flex; align-items: center }
+.model-heads { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 8px; position: sticky; top: 0; background: var(--bg); padding: 10px 0; z-index: 5; border-bottom: 1px solid #e0d4bd }
+.model-head { font-size: 0.9rem; font-weight: 600; text-align: center }
+.limitations, .methodology { max-width: 80ch }
+.limitations li, .methodology li { margin: 6px 0 }
+code { background: #f0e6d0; padding: 1px 4px; border-radius: 2px; font-size: 0.9em }
+.footnote { color: var(--muted); font-size: 0.85rem; margin-top: 48px; border-top: 1px solid #e0d4bd; padding-top: 16px }
+</style>
+</head>
+<body>
+<main>
+
+<h1>p5.brush Recipes — before / after</h1>
+<p class="lede">
+An additive <code>## Recipes</code> section for p5.brush's <code>llms.txt</code>, evaluated by running the same 12 prompts through 5 models in two conditions: the upstream docs alone, vs the upstream docs with our Recipes section appended.
+</p>
+<nav>
+  <a href="#grid">Comparison grid</a>
+  <a href="#clips">Live sessions</a>
+  <a href="#limits">Limitations</a>
+  <a href="#method">Methodology</a>
+  <a href="https://github.com/acamposuribe/p5.brush">Upstream</a>
+  <a href="https://github.com/kickingkeys/p5.brush/tree/cookbook-recipes">Fork</a>
+</nav>
+
+<h2 id="grid">Controlled comparison</h2>
+<p class="lede">
+For each prompt, each model generates one sketch in the <span style="color:var(--old)">old</span> condition (upstream <code>README.md</code> + <code>llms.txt</code> in the system prompt) and one in the <span style="color:var(--new)">new</span> condition (same docs with our Recipes section appended). One seed per cell. Failures are shown honestly — blank/error canvases are data, not excluded.
+</p>
+<div class="model-heads"><div class="model-head">Claude Sonnet 4.6</div><div class="model-head">GPT-5.4</div><div class="model-head">Gemini 3.1 Pro</div><div class="model-head">Qwen3-235B</div><div class="model-head">Gemma 3 27B</div></div>
+
+      <section class="prompt-row" data-prompt="p01">
+        <header>
+          <h3>p01 — watercolor</h3>
+          <p class="prompt-text">An abstract field of overlapping circular watercolor blooms in dusty pinks and ochres, their edges bleeding into each other on warm paper.</p>
+        </header>
+        <div class="models-grid">
+        <div class="cell">
+          <div class="cell-label">p01</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p01.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/claude_sonnet_46__p01.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p01</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p01.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gpt_54__p01.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p01</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p01.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemini_31_pro__p01.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p01</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p01.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/qwen3_235b__p01.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p01</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p01.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemma3_27b__p01.png" alt="new" loading="lazy"></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="prompt-row" data-prompt="p02">
+        <header>
+          <h3>p02 — pencil</h3>
+          <p class="prompt-text">A botanical study of wild grasses and seed heads in graphite pencil only — fine outlines, hatching, and tonal shading, no color, unfinished edges.</p>
+        </header>
+        <div class="models-grid">
+        <div class="cell">
+          <div class="cell-label">p02</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p02.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/claude_sonnet_46__p02.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p02</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p02.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gpt_54__p02.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p02</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p02.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemini_31_pro__p02.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p02</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p02.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/qwen3_235b__p02.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p02</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p02.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemma3_27b__p02.png" alt="new" loading="lazy"></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="prompt-row" data-prompt="p03">
+        <header>
+          <h3>p03 — charcoal</h3>
+          <p class="prompt-text">A gestural figure study of a dancer mid-leap, drawn in loose charcoal with heavy smudges trailing behind the motion.</p>
+        </header>
+        <div class="models-grid">
+        <div class="cell">
+          <div class="cell-label">p03</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p03.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/claude_sonnet_46__p03.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p03</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p03.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gpt_54__p03.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p03</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p03.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemini_31_pro__p03.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p03</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p03.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/qwen3_235b__p03.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p03</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p03.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemma3_27b__p03.png" alt="new" loading="lazy"></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="prompt-row" data-prompt="p04">
+        <header>
+          <h3>p04 — cpencil</h3>
+          <p class="prompt-text">A portrait-like figure made from colored pencil only, with layered imperfect strokes in unexpected colors so the face feels more like a memory or mood than a person.</p>
+        </header>
+        <div class="models-grid">
+        <div class="cell">
+          <div class="cell-label">p04</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p04.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/claude_sonnet_46__p04.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p04</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p04.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gpt_54__p04.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p04</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p04.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemini_31_pro__p04.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p04</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p04.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/qwen3_235b__p04.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p04</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p04.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemma3_27b__p04.png" alt="new" loading="lazy"></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="prompt-row" data-prompt="p05">
+        <header>
+          <h3>p05 — pen</h3>
+          <p class="prompt-text">A dense black-and-white forest made only with technical-pen hatching, where tree trunks, undergrowth, and shadows become a woven pattern that almost turns abstract.</p>
+        </header>
+        <div class="models-grid">
+        <div class="cell">
+          <div class="cell-label">p05</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p05.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/claude_sonnet_46__p05.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p05</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p05.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gpt_54__p05.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p05</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p05.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemini_31_pro__p05.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p05</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p05.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/qwen3_235b__p05.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p05</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><div class="fail">failed: Uncaught (in promise) Error: No brush or color set. Call brush.set('brushName', </div></div>
+            <div class="half"><span class="badge new">new</span><div class="fail">failed: Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'k</div></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="prompt-row" data-prompt="p06">
+        <header>
+          <h3>p06 — marker</h3>
+          <p class="prompt-text">A flock of birds scattered across the page as quick marker gestures, their paths guided by an invisible swirling wind.</p>
+        </header>
+        <div class="models-grid">
+        <div class="cell">
+          <div class="cell-label">p06</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p06.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/claude_sonnet_46__p06.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p06</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p06.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gpt_54__p06.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p06</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p06.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemini_31_pro__p06.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p06</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p06.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/qwen3_235b__p06.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p06</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><div class="fail">failed: Cannot access 'color' before initialization
+draw (file:///Users/suryanarreddi/pr</div></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemma3_27b__p06.png" alt="new" loading="lazy"></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="prompt-row" data-prompt="p07">
+        <header>
+          <h3>p07 — spray</h3>
+          <p class="prompt-text">A city wall of overlapping spray-painted circles, drips, arrows, and ghosted hand-drawn marks, like fragments of graffiti building into an accidental composition.</p>
+        </header>
+        <div class="models-grid">
+        <div class="cell">
+          <div class="cell-label">p07</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p07.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/claude_sonnet_46__p07.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p07</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p07.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gpt_54__p07.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p07</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p07.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemini_31_pro__p07.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p07</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p07.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/qwen3_235b__p07.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p07</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><div class="fail">failed: Cannot access 'color' before initialization
+draw (file:///Users/suryanarreddi/pr</div></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemma3_27b__p07.png" alt="new" loading="lazy"></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="prompt-row" data-prompt="p08">
+        <header>
+          <h3>p08 — multi (watercolor + pencil)</h3>
+          <p class="prompt-text">A foggy harbor at dawn rendered in soft watercolor washes, with faint graphite pencil lines suggesting masts and ropes over the damp color.</p>
+        </header>
+        <div class="models-grid">
+        <div class="cell">
+          <div class="cell-label">p08</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p08.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/claude_sonnet_46__p08.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p08</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p08.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gpt_54__p08.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p08</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p08.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemini_31_pro__p08.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p08</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p08.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/qwen3_235b__p08.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p08</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p08.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemma3_27b__p08.png" alt="new" loading="lazy"></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="prompt-row" data-prompt="p09">
+        <header>
+          <h3>p09 — multi (watercolor + marker + pen)</h3>
+          <p class="prompt-text">A rainy city street at night suggested through wet watercolor bleeds, neon marker smears reflecting on the pavement, and sparse ink silhouettes of passersby.</p>
+        </header>
+        <div class="models-grid">
+        <div class="cell">
+          <div class="cell-label">p09</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p09.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/claude_sonnet_46__p09.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p09</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p09.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gpt_54__p09.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p09</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p09.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemini_31_pro__p09.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p09</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p09.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/qwen3_235b__p09.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p09</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p09.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemma3_27b__p09.png" alt="new" loading="lazy"></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="prompt-row" data-prompt="p10">
+        <header>
+          <h3>p10 — multi (watercolor + charcoal + pen)</h3>
+          <p class="prompt-text">A cracked desert landscape with layered sand-colored washes, jagged charcoal rock formations, and a single thin pen-drawn horizon line bisecting the page.</p>
+        </header>
+        <div class="models-grid">
+        <div class="cell">
+          <div class="cell-label">p10</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p10.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/claude_sonnet_46__p10.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p10</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p10.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gpt_54__p10.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p10</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p10.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemini_31_pro__p10.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p10</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p10.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/qwen3_235b__p10.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p10</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><div class="fail">failed: Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'x</div></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemma3_27b__p10.png" alt="new" loading="lazy"></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="prompt-row" data-prompt="p11">
+        <header>
+          <h3>p11 — abstract (pen + cpencil)</h3>
+          <p class="prompt-text">An abstract composition of intersecting hatched rectangles in muted earth tones, like a Diebenkorn landscape rendered in pen and colored pencil.</p>
+        </header>
+        <div class="models-grid">
+        <div class="cell">
+          <div class="cell-label">p11</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p11.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/claude_sonnet_46__p11.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p11</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p11.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gpt_54__p11.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p11</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p11.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemini_31_pro__p11.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p11</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p11.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/qwen3_235b__p11.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p11</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p11.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemma3_27b__p11.png" alt="new" loading="lazy"></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="prompt-row" data-prompt="p12">
+        <header>
+          <h3>p12 — abstract (spray, atmospheric)</h3>
+          <p class="prompt-text">A swarm of particles following a vector field, each leaving a trail of spray-paint dots that build up into ghostly cloud formations.</p>
+        </header>
+        <div class="models-grid">
+        <div class="cell">
+          <div class="cell-label">p12</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p12.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/claude_sonnet_46__p12.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p12</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p12.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gpt_54__p12.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p12</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p12.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/gemini_31_pro__p12.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p12</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p12.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><img src="renders/new/qwen3_235b__p12.png" alt="new" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="cell">
+          <div class="cell-label">p12</div>
+          <div class="pair">
+            <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p12.png" alt="old" loading="lazy"></div>
+            <div class="half"><span class="badge new">new</span><div class="fail">failed: no render</div></div>
+          </div>
+        </div></div>
+      </section>
+
+<h2 id="clips">Live sessions</h2>
+<p class="lede">
+The controlled test above uses context injection via OpenRouter. Below are three screen recordings of the realistic deployment flow: a user shares the GitHub URL with their AI assistant, which fetches and uses the docs directly. Same prompts, three frontier models.
+</p>
+<p><em>Coming — see <code>methodology/clips/</code>.</em></p>
+
+<h2 id="limits">Honest limitations</h2>
+<ul class="limitations">
+  <li><strong>Library ceilings are real.</strong> Marker simulation can't fully reproduce real marker streakiness; spray loses subject recognition without structural anchoring. Recipes flag this honestly rather than promising perfection.</li>
+  <li><strong>Open-source models have their own ceilings.</strong> Qwen3-235B and Gemma 3 27B may struggle with p5.brush code regardless of docs. We include them for breadth and display failures alongside successes.</li>
+  <li><strong>One seed per cell.</strong> This is a snapshot, not a distribution. Scripts and manifest are committed — anyone can rerun with more seeds.</li>
+  <li><strong>No automated judge.</strong> Prior experiments showed VLM judges had ~0.36 human correlation and a translucency bias that penalized structured output. No scores. Trust your eyes.</li>
+  <li><strong>Controlled test uses context injection.</strong> OpenRouter doesn't fetch URLs, so the realistic URL-share flow is demonstrated only in the live clips.</li>
+</ul>
+
+<h2 id="method">Methodology</h2>
+<ul class="methodology">
+  <li><strong>Prompts.</strong> 12 generative-art sketch ideas, selected from 24 blind-generated ideas (Opus 4.7 + GPT-5.4, independent queries). Coverage: ≥1 per medium (7), 3 multi-medium, 2 abstract/pattern. See <code>prompts.json</code> + <code>prompts_raw.json</code>.</li>
+  <li><strong>A/B conditions.</strong> Old = upstream <code>README.md</code> + <code>llms.txt</code> in system prompt. New = same with the <code>## Recipes</code> section appended (+338 lines). User prompt + structural rules are identical across conditions.</li>
+  <li><strong>Models.</strong> Claude Sonnet 4.6, GPT-5.4, Gemini 3.1 Pro, Qwen3-235B, Gemma 3 27B — frontier + open-source.</li>
+  <li><strong>Rendering.</strong> Headless Puppeteer with Metal WebGL backend; p5.brush 2.1.0-beta pinned. Code pastes directly into a 600×600 WEBGL canvas.</li>
+  <li><strong>Reproducibility.</strong> <code>scripts/run_ab.py</code> + <code>scripts/render_local.js</code> + <code>manifest.json</code> in the repo. Rerun with any model set, any number of seeds.</li>
+</ul>
+
+<p class="footnote">
+Forked from <a href="https://github.com/acamposuribe/p5.brush">acamposuribe/p5.brush</a>.
+PR: <a href="https://github.com/acamposuribe/p5.brush/pulls">(link on open)</a>.
+Methodology source: <a href="https://github.com/kickingkeys/p5.brush/tree/methodology/methodology">github.com/kickingkeys/p5.brush/methodology</a>.
+</p>
+
+</main>
+</body>
+</html>
