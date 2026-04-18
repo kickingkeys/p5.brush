@@ -442,13 +442,20 @@ for (const [scale, opacity] of [[1.00, 150], [0.75, 180], [0.45, 210]]) {
 
 **Opacity and weight ranges are sweet spots, not hard constraints.** Recipe ranges (watercolor wash 150–200, pencil weight 0.4–1.5, spray passes ≥ 5) produce the target medium look in typical scenes. Break them deliberately when the subject demands it — an opaque night sky is `brush.wash(color, 255)`, a heavy dramatic pencil mark can go above 1.5. The ranges are where you land by default, not walls.
 
+**When NOT to apply graduated density.** The 3-layer template above is for rendering *form* — a subject with volume, shading, or internal depth. For **pattern fields** (many overlapping primitives meant to blend), atmospheric haze, abstract mark-making, or particle/swarm subjects, skip the layering: use single-pass primitives and let quantity + overlap + `fillBleed("out")` do the work. Over-layering collapses the airy, gestural character of field-based subjects. See Watercolor → Field below for the canonical example.
+
 ---
 
 ### Watercolor
 
-Translucent washes. Color bleeds at edges. Paper shows through. Three elements: (1) contained shapes with controlled bleed, (2) translucent layered fills, (3) directional strokes for form.
+Translucent washes. Color bleeds at edges. Paper shows through. **Two recipes depending on what you're drawing:**
 
-**Minimal working recipe — a single watercolor blob:**
+- **Form watercolor** — *one* subject rendered as a layered object (a flower, a boat, a single defined stain). Use wash + fill layers + optional inner `"in"` bleed for a dried-puddle shadow.
+- **Field watercolor** — *many* overlapping primitives that blend through overlap (bloom fields, atmospheric clouds, scattered stains, loose pigment). Use single-fill passes at low opacity with `"out"` bleed only.
+
+Choose by asking: is the subject **one thing with internal structure**, or **many things that blend together**? Prompt language like *"field of"*, *"overlapping"*, *"bleeding into each other"*, *"scattered"*, *"cluster"*, *"cloud of"*, *"dusty"* signals Field. *"a single …"*, *"rendered …"*, *"a pooled …"*, *"a defined …"* signals Form. Multi-medium prompts with a structured subject (harbor boats, desert rocks) → Form for the subject, Field for the atmosphere.
+
+**Form watercolor — minimal working recipe (one layered blob):**
 
 ```js
 // Generate organic shape
@@ -482,18 +489,45 @@ brush.set("cpencil", "#b30000", 0.5);
 brush.spline(pts.slice(0, 12), 0.3);
 ```
 
+**Field watercolor — minimal working recipe (many overlapping primitives):**
+
+```js
+const palette = ["#d7a6a1", "#c88f91", "#d7b07c", "#c79a5e", "#b9874c"];
+brush.noStroke();
+brush.fillTexture(0.55, 0.3);
+
+// 20+ primitives, single-fill pass each, low opacity, "out" bleed only.
+// Don't wrap in wash(); don't add an inner "in" bleed — those collapse
+// the mutual-bleed effect where neighbouring primitives blend.
+for (let i = 0; i < 22; i++) {
+  const x = random(60, 540);
+  const y = random(60, 540);
+  const r = random(45, 120);
+  brush.fill(random(palette), random(30, 65));
+  brush.fillBleed(random(0.3, 0.5), "out");
+  brush.circle(x, y, r);
+}
+brush.noFill();
+```
+
+For Field, the composition comes from **quantity and overlap**, not per-shape depth. If you find yourself layering a wash beneath or an `"in"` bleed inside each primitive, stop — you're rendering Form. Keep each primitive flat; let adjacent ones bleed into each other.
+
 **`fillBleed` by element type:**
 
 | Element | fillBleed | Notes |
 |---------|-----------|-------|
-| Structural (petals, leaves) | 0.25–0.4 (`"out"`) | Contained, soft edges |
-| Inner shadow / warm layer | 0.3–0.5 (`"in"`) | Inward bleed = dried puddle |
-| Atmospheric background | 0.5–0.7 (`"out"`) | Loose, dreamy, out-of-focus |
+| Structural (Form — petals, boats, one defined bloom) | 0.25–0.4 (`"out"`) | Contained, soft edges |
+| Inner shadow / warm layer (Form only) | 0.3–0.5 (`"in"`) | Inward bleed = dried puddle |
+| Field / atmospheric / overlapping primitives | 0.4–0.7 (`"out"`) | Loose, dreamy; many shapes |
 | Fine detail | 0.1–0.2 | Precise without spreading |
 
-**Sweet spots**: fill opacity 120–200, wash opacity 150–200, `fillTexture(0.6–0.9, 0.3–0.6)`, curvature 0.4–0.55, 20–40+ vertices per organic shape. Warm cream backgrounds (`"#fdfbf4"`, `"#faf4ec"`) simulate watercolor paper.
+**Sweet spots (Form)**: fill opacity 120–200, wash opacity 150–200, `fillTexture(0.6–0.9, 0.3–0.6)`, curvature 0.4–0.55, 20–40+ vertices per organic shape.
 
-**Avoid**: `fill()` alone without `wash()` underneath (too faint); uniform `fillBleed` on every shape; outlines around watercolor shapes (washes define edges); a single opaque pass instead of 2–4 layered fills.
+**Sweet spots (Field)**: fill opacity 25–70 (no wash), `fillBleed 0.3–0.6 "out"` only, `fillTexture(0.4–0.7, 0.2–0.4)`, **≥ 15 primitives**. Warm cream backgrounds (`"#fdfbf4"`, `"#faf4ec"`) simulate watercolor paper.
+
+**Avoid (Form)**: `fill()` alone for a single structural shape (too faint on one shape); uniform `fillBleed` on every layer; outlines around watercolor shapes (washes define edges); a single opaque pass instead of 2–4 layered fills.
+
+**Avoid (Field)**: adding `wash()` or inner `"in"` bleed to individual primitives (collapses the mutual-bleed effect); fewer than 10 shapes (reads sparse, not a field); uniform opacity across all shapes (flattens the pile); one dominant large shape with small accents (that's Form with garnish, not a Field).
 
 ---
 
