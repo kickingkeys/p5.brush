@@ -24,6 +24,7 @@ MANIFESTS = {
     "v4": json.loads((ROOT / "manifest_v4.json").read_text()) if (ROOT / "manifest_v4.json").exists() else {},
     "v5": json.loads((ROOT / "manifest_v5.json").read_text()) if (ROOT / "manifest_v5.json").exists() else {},
     "v6": json.loads((ROOT / "manifest_v6.json").read_text()) if (ROOT / "manifest_v6.json").exists() else {},
+    "v7": json.loads((ROOT / "manifest_v7.json").read_text()) if (ROOT / "manifest_v7.json").exists() else {},
 }
 OUT = ROOT / "index.html"
 
@@ -43,6 +44,7 @@ VERSIONS = [
     ("v4", "v4", "+ Spray Chaos, cpencil cap, anchor narrowing"),
     ("v5", "v5", "+ Charcoal mass color value floor"),
     ("v6", "v6", "+ De-prescriptivized, Form watercolor 3-pass reassertion"),
+    ("v7", "v7", "+ Narrow multi-medium, in-code hints for weak models"),
 ]
 
 
@@ -143,7 +145,7 @@ def build() -> str:
     index_nav = prompt_index()
     version_checkboxes = "".join(
         f'<label class="chk"><input type="checkbox" class="ver-chk" data-ver="{v}" '
-        f'{"checked" if v in ("old", "v5", "v6") else ""}> {label}</label>'
+        f'{"checked" if v in ("old", "v6", "v7") else ""}> {label}</label>'
         for v, label, _ in VERSIONS
     )
     model_options = "".join(
@@ -159,7 +161,7 @@ def build() -> str:
 <style>
 :root {{
   --bg: #fffaf3; --ink: #222; --muted: #6a6157;
-  --old: #c9b89a; --v1: #4a8a66; --v2: #2f6b9a; --v3: #8e4fa3; --v4: #c2410c; --v5: #b91c5c; --v6: #0f766e;
+  --old: #c9b89a; --v1: #4a8a66; --v2: #2f6b9a; --v3: #8e4fa3; --v4: #c2410c; --v5: #b91c5c; --v6: #0f766e; --v7: #db2777;
   --surface: #fff;
   --border: #e0d4bd;
   --border-strong: #c9b89a;
@@ -242,6 +244,7 @@ select.model-focus {{
 .compare-table thead th.col-v4  {{ color: var(--v4); }}
 .compare-table thead th.col-v5  {{ color: var(--v5); }}
 .compare-table thead th.col-v6  {{ color: var(--v6); }}
+.compare-table thead th.col-v7  {{ color: var(--v7); }}
 
 .compare-table td {{ padding: 0; vertical-align: top; }}
 .compare-table .img-btn {{
@@ -268,6 +271,7 @@ body.hide-v3  .col-v3  {{ display: none; }}
 body.hide-v4  .col-v4  {{ display: none; }}
 body.hide-v5  .col-v5  {{ display: none; }}
 body.hide-v6  .col-v6  {{ display: none; }}
+body.hide-v7  .col-v7  {{ display: none; }}
 
 /* Single-model focus */
 body[data-focus]:not([data-focus=""]) tbody tr {{ display: none; }}
@@ -298,7 +302,7 @@ body.size-xl .compare-table thead th:not(.model-label) {{ min-width: 400px; }}
 }}
 .lightbox-prompt {{ color: #ded3c1; margin: 0 0 4px; }}
 .lightbox-model {{ color: #ded3c1; font-size: 0.9rem; margin: 0 0 16px; }}
-.lightbox-grid {{ display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; }}
+.lightbox-grid {{ display: grid; grid-template-columns: repeat(8, 1fr); gap: 12px; }}
 .lightbox-cell {{ background: #2a2015; border-radius: 4px; overflow: hidden; }}
 .lightbox-cell .lb-label {{ padding: 6px 10px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; background: #1a1410; }}
 .lightbox-cell img {{ width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }}
@@ -313,6 +317,7 @@ body.size-xl .compare-table thead th:not(.model-label) {{ min-width: 400px; }}
 .lightbox-cell.lb-v4  .lb-label {{ color: var(--v4); }}
 .lightbox-cell.lb-v5  .lb-label {{ color: var(--v5); }}
 .lightbox-cell.lb-v6  .lb-label {{ color: var(--v6); }}
+.lightbox-cell.lb-v7  .lb-label {{ color: var(--v7); }}
 
 /* Legend */
 .legend {{ display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.85rem; color: var(--muted); margin: 6px 0 8px; }}
@@ -325,6 +330,7 @@ body.size-xl .compare-table thead th:not(.model-label) {{ min-width: 400px; }}
 .legend-dot.v4  {{ background: var(--v4); }}
 .legend-dot.v5  {{ background: var(--v5); }}
 .legend-dot.v6  {{ background: var(--v6); }}
+.legend-dot.v7  {{ background: var(--v7); }}
 
 .footnote {{ color: var(--muted); font-size: 0.85rem; margin-top: 48px; border-top: 1px solid var(--border); padding-top: 16px; }}
 .footnote a {{ color: var(--ink); }}

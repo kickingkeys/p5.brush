@@ -118,4 +118,24 @@ Clearly labeled on the final page as two distinct experiments answering two dist
 
 **Why this combination**: v6 proved that prose bullets only reach Claude. Weaker models pattern-match off code comments. v6 also proved language softening cascades beyond the target sentence. Narrowing the softening to only the simple case + doubling down on code-comment hints should preserve variety where it helped and restore precision where it hurt.
 
+**Observed v6→v7** (60 cells, 5 models × 12 prompts, all 60 rendered after retries):
+
+Structural counts (fills + stroke-family calls + total lines) per targeted cell:
+
+- **p01 watercolor (target: ≥3 fills via PASS 1/2/3 in-code comments)** — Gemma 2→5 fills (+3, the in-code hint reached the weakest model as intended). Claude 12→9 fills (−3, slight loss — prose bullet was already sufficient, adding code comments didn't stack). GPT/Gemini/Qwen unchanged.
+- **p05 pen forest (target: keep v6 win)** — Claude 727→290 lines, 123→35 stroke-calls (major regression, −72% stroke ops). The multi-medium reassertion likely cross-contaminated the population-density framing that made Claude's v6 pen forest rich. GPT actually gained (342→463 lines). Mixed.
+- **p08–p10 multi-medium (target: recover v6 Form-element losses)** — p09 Claude 24→52 fills (+28, strong recovery, more watercolor passes on the desert rocks scene). p10 Claude strokes 12→23 (doubled). GPT p10 fills 5→9 (+4). The tightened "boats in a foggy harbor" guidance + PASS 1/2/3 code comments compounded on multi-medium prompts.
+- **p03 charcoal (target: recover Claude layers via in-code mass-color comment)** — Claude 466→388 lines, 16→9 stroke-calls (continued regression). The `mass color MUST be < #888` comment prevented near-paper colors but didn't prompt more layers. The layer-count issue is separate from the value-floor issue.
+
+**Wins**: Gemma p01 (weak-model in-code hint reach), Claude p09 multi-medium (+28 fills), Claude/GPT p10 multi-medium.
+**Losses**: Claude p05 pen forest (v6 win lost), Claude p03 charcoal (continued simplification).
+**Neutral**: p06 marker, p07 sunset, p12 abstract spray.
+
+**Learning**: Code-comment hints genuinely reach weaker models (Gemma p01 confirms this). But recipe-edit effects aren't localizable — a targeted change to multi-medium Form/Field vocabulary rippled into pen forest. The doc and the model together form the system; you can't tune one rule in isolation.
+
+**Next options** (not yet decided):
+1. **v8 (surgical revert on p05)**: Keep v7's multi-medium tightening, add a pen-density-specific bullet mirroring what v6's soft language accidentally produced on Claude.
+2. **Stop iterating**: v5 was the best-balanced version across models; ship v5 as the canonical recipe and document v6/v7 as exploration.
+3. **Split the recipe**: Move Form/Field watercolor triggers into a sub-recipe that doesn't share vocabulary with the pen Chaos/Form population-density rules.
+
 ---
