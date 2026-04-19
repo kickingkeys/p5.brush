@@ -36,6 +36,7 @@ VERSION_TO_REF = {
     "v3":  "recipes-v3",
     "v4":  "recipes-v4",
     "v5":  "recipes-v5",
+    "v6":  "recipes-v6",
 }
 
 # Where each version's manifest + renders live.
@@ -47,6 +48,7 @@ VERSION_TO_LAYOUT = {
     "v3":  (ROOT / "manifest_v3.json", "v3",  ROOT / "renders" / "v3"),
     "v4":  (ROOT / "manifest_v4.json", "v4",  ROOT / "renders" / "v4"),
     "v5":  (ROOT / "manifest_v5.json", "v5",  ROOT / "renders" / "v5"),
+    "v6":  (ROOT / "manifest_v6.json", "v6",  ROOT / "renders" / "v6"),
 }
 
 MODELS = {
