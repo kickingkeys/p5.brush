@@ -8,59 +8,50 @@ function draw() {
   background("#fffaf3");
   translate(-width/2, -height/2);
 
-  // Body outline - charcoal, slightly wobbly
-  brush.set("charcoal", "#333", 1.2);
-  brush.field("hand");
-  brush.wiggle(2);
-  brush.beginShape(0.3);
-  brush.vertex(0, -100);
-  brush.vertex(50, -150);
-  brush.vertex(150, -100);
-  brush.vertex(100, 50);
-  brush.vertex(-50, 50);
-  brush.vertex(-100, -50);
-  brush.endShape(true);
-  brush.noField();
-  brush.noWiggle();
-  
-  // Leg - charcoal, lighter weight
-  brush.set("charcoal", "#666", 0.8);
-  brush.line(100, 50, 150, 150);
-  
-  // Arm - charcoal
-  brush.set("charcoal", "#444", 1.0);
-  brush.line(0, -100, -50, -50);
-  
+  // Dancer outline (pen)
+  brush.set("pen", "#222", 1.2);
+  brush.beginShape();
+  brush.vertex(100, -50);
+  brush.vertex(150, 50);
+  brush.vertex(250, 50);
+  brush.vertex(300, -50);
+  brush.vertex(250, -150);
+  brush.vertex(150, -150);
+  brush.endShape(CLOSE);
 
-  // Smudge trails - spray, multiple passes for buildup
-  let trailColor = "#333";
-  let trailOpacity = 150;
+  // Charcoal smudges for motion
+  brush.set("charcoal", "#333", 1.0);
+  brush.beginShape();
+  brush.vertex(150, 50);
+  brush.vertex(250, 50);
+  brush.vertex(300, -50);
+  brush.endShape();
 
-  brush.set("spray", trailColor, 0.8);
-  for (let i = 0; i < 30; i++) {
-    brush.line(0, -100, -30, -150); //Arm trail
-  }
-  brush.set("spray", trailColor, 0.6);
-    for (let i = 0; i < 40; i++) {
-    brush.line(100, 50, 120, 170); //Leg trail
-  }
-  
-  brush.set("spray", trailColor, 0.4);
-    for (let i = 0; i < 50; i++) {
-    brush.line(0, -100, -20, -180); //Arm trail
-  }
+  brush.beginShape();
+  brush.vertex(250, -150);
+  brush.vertex(150, -150);
+  brush.vertex(100, -50);
+  brush.endShape();
 
-  // Fill body - pastel, for slight texture
+  // Pastel shading
+  brush.fill("#d8b3a3", 150);
   brush.noStroke();
-  brush.fill("#e0d0c0", 180);
-  brush.beginShape(0.3);
-  brush.vertex(0, -100);
-  brush.vertex(50, -150);
-  brush.vertex(150, -100);
-  brush.vertex(100, 50);
-  brush.vertex(-50, 50);
-  brush.vertex(-100, -50);
-  brush.endShape(true);
-  
+  brush.beginShape();
+  brush.vertex(100, -50);
+  brush.vertex(150, 50);
+  brush.vertex(250, 50);
+  brush.vertex(300, -50);
+  brush.vertex(250, -150);
+  brush.vertex(150, -150);
+  brush.endShape(CLOSE);
+
+  // Highlight with 2B
+  brush.set("2B", "#eee", 0.5);
+  brush.beginShape();
+  brush.vertex(150, 50);
+  brush.vertex(250, 50);
+  brush.vertex(300, -50);
+  brush.endShape();
+
   noLoop();
 }

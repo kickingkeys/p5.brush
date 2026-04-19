@@ -2,51 +2,64 @@ function setup() {
   createCanvas(600, 600, WEBGL);
   angleMode(DEGREES);
   brush.scaleBrushes(3);
+  background("#fffaf3");
 }
 
 function draw() {
-  background("#fffaf3");
-  translate(-width / 2, -height / 2);
+  translate(-width/2, -height/2);
 
   // Tree trunks
-  brush.set("charcoal", "#333", 1.2);
-  brush.line(0, 0, 0, -200);
-  brush.line(100, -50, 100, -250);
-  brush.line(-50, -100, -50, -300);
+  brush.set("charcoal", "#000", 0.8);
+  brush.line(100, 100, 100, 300);
+  brush.line(200, 150, 200, 350);
+  brush.line(300, 80, 300, 280);
+  brush.line(400, 120, 400, 320);
+  brush.line(500, 180, 500, 380);
 
-  // Undergrowth and shadows
-  brush.set("2B", "#555", 0.8);
+  // Tree branches + hatching
+  brush.set("rotring", "#000", 0.5);
+  brush.hatch(2, 45);
+  brush.line(100, 200, 150, 150);
+  brush.line(100, 250, 170, 280);
+  brush.line(200, 250, 250, 200);
+  brush.line(200, 300, 270, 330);
+  brush.line(300, 180, 350, 130);
+  brush.line(300, 230, 370, 260);
+  brush.line(400, 220, 450, 170);
+  brush.line(400, 270, 470, 300);
+  brush.line(500, 280, 550, 230);
+  brush.line(500, 330, 570, 360);
+  brush.noHatch();
+
+  // Undergrowth & Shadows
+  brush.set("2B", "#000", 0.3);
   brush.noStroke();
-  brush.fill("#444", 80);
-  brush.circle(50, -150, 30);
-  brush.circle(-20, -250, 20);
-  brush.circle(150, -100, 40);
+  brush.fill("#000", 80);
+  brush.circle(130, 310, 20);
+  brush.circle(230, 360, 15);
+  brush.circle(320, 290, 25);
+  brush.circle(410, 330, 18);
+  brush.circle(520, 390, 22);
+  brush.noFill();
 
-  // Hatching for texture
-  brush.set("rotring", "#333", 0.6);
-  brush.hatch(5, 45);
-  brush.rect(-30, -50, 60, 50);
-  brush.hatch(3, 135);
-  brush.rect(70, -180, 50, 40);
+  brush.set("pastel", "#000", 0.4);
+  brush.hatch(1.5, 135);
+  brush.rect(50, 300, 100, 50);
+  brush.rect(250, 350, 80, 40);
+  brush.rect(350, 250, 70, 60);
+  brush.rect(450, 300, 90, 50);
+  brush.rect(550, 370, 60, 40);
+  brush.noHatch();
 
-  // Details with different brushes
-  brush.set("cpencil", "#666", 0.5);
-  brush.line(120, -80, 150, -60);
-
-  brush.set("pastel", "#a67e59", 1.0);
+  brush.set("crayon", "#000", 0.2);
   brush.noStroke();
-  brush.fill("#a67e59", 120);
-  brush.circle(-80, -200, 25);
+  brush.fill("#000", 50);
+  brush.circle(180, 380, 30);
+  brush.circle(380, 320, 40);
+  brush.noFill();
 
-  brush.set("crayon", "#996633", 1);
-  brush.noStroke();
-  brush.fill("#996633", 120);
-  brush.rect(-100, -100, 40, 40);
-  
-  brush.set("marker", "#222", 0.9);
-  brush.noStroke();
-  brush.fill("#222", 120);
-  brush.rect(50, -250, 20, 50);
-
+  brush.set("pen", "#000", 0.6);
+  brush.line(50, 400, 550, 400);
+  brush.line(50, 450, 550, 450);
   noLoop();
 }

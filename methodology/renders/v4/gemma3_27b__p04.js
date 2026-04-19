@@ -2,79 +2,61 @@ function setup() {
   createCanvas(600, 600, WEBGL);
   brush.scaleBrushes(3);
   background("#fffaf3");
-  angleMode(DEGREES);
 }
 
 function draw() {
   translate(-width/2, -height/2);
 
   // Face outline
-  brush.set("pen", "#4a4e69", 0.8);
+  brush.set("pen", "#444", 0.8);
   brush.beginShape();
   brush.vertex(0, -150);
-  brush.vertex(150, -200);
-  brush.vertex(250, -150);
-  brush.vertex(200, -50);
-  brush.vertex(-50, -50);
-  brush.endShape(CLOSE);
-  noStroke();
+  brush.vertex(100, -200);
+  brush.vertex(200, -150);
+  brush.vertex(250, -50);
+  brush.vertex(200, 50);
+  brush.vertex(100, 100);
+  brush.vertex(0, 50);
+  brush.vertex(-100, 100);
+  brush.vertex(-200, 50);
+  brush.vertex(-250, -50);
+  brush.vertex(-200, -150);
+  brush.vertex(-100, -200);
+  brush.endShape(false);
 
-  // Cheek - layered cpencil
-  brush.fill("#f28482", 80);
-  brush.beginShape();
-  brush.vertex(50, -80);
-  brush.vertex(180, -130);
-  brush.vertex(220, -80);
-  brush.vertex(100, -50);
-  brush.endShape(CLOSE);
-  brush.fill("#e8a87c", 100);
-  brush.beginShape();
-  brush.vertex(70, -90);
-  brush.vertex(160, -140);
-  brush.vertex(200, -90);
-  brush.vertex(80, -40);
-  brush.endShape(CLOSE);
-  brush.fill("#e07a5f", 120);
-  brush.beginShape();
-  brush.vertex(90, -100);
-  brush.vertex(140, -150);
-  brush.vertex(180, -100);
-  brush.vertex(60, -30);
-  brush.endShape(CLOSE);
+  // Layered strokes - unexpected colors
+  let colors = ["#e6b8af", "#a8d0e6", "#d9ead3", "#f5b7b1", "#c39fd3"];
 
+  for (let i = 0; i < 10; i++) {
+    brush.set("cpencil", random(colors), 0.3 + random(0.2));
+    brush.beginShape();
+    brush.vertex(random(-150, 150), random(-100, 100));
+    brush.vertex(random(-150, 150), random(-100, 100));
+    brush.vertex(random(-150, 150), random(-100, 100));
+    brush.endShape();
+  }
 
-  // Eye - spray and charcoal
-  brush.set("spray", "#81b29a", 0.6);
-  brush.circle(80, -130, 20);
-  brush.set("charcoal", "#2d3e50", 0.3);
-  brush.circle(70, -130, 7);
+  for (let i = 0; i < 5; i++) {
+    brush.set("pastel", random(colors), 0.5 + random(0.3));
+    brush.beginShape();
+    brush.vertex(random(-100, 100), random(-50, 50));
+    brush.vertex(random(-100, 100), random(-50, 50));
+    brush.endShape();
+  }
 
-  // Nose - 2H hatching
-  brush.hatchStyle("2H", "#a98467", 0.5);
-  brush.hatch(3, 45);
+  // Subtle shading with 2B
+  brush.set("2B", "#333", 0.1);
   brush.beginShape();
-  brush.vertex(120, -90);
-  brush.vertex(140, -110);
-  brush.vertex(130, -70);
-  brush.endShape(CLOSE);
-  noHatch();
+  brush.vertex(-100, 50);
+  brush.vertex(-50, 100);
+  brush.vertex(0, 100);
+  brush.vertex(50, 50);
+  brush.endShape(false);
 
-  // Mouth - pastel
-  brush.set("pastel", "#d35400", 0.7);
-  brush.beginShape();
-  brush.vertex(80, -50);
-  brush.vertex(140, -50);
-  brush.vertex(120, -30);
-  brush.endShape(CLOSE);
+    // Eyes
+  brush.set("pen", "#333", 0.5);
+  brush.circle(75, 20, 5);
+  brush.circle(-75, 20, 5);
 
-  // Hair - crayon
-  brush.set("crayon", "#34495e", 1.0);
-  brush.beginShape();
-  brush.vertex(-50, -50);
-  brush.vertex(-80, -150);
-  brush.vertex(30, -200);
-  brush.vertex(50, -100);
-  brush.endShape(CLOSE);
-  
   noLoop();
 }

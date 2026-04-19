@@ -4,69 +4,67 @@ function setup() {
 }
 
 function draw() {
-  background("#fffaf3");
   translate(-width/2, -height/2);
-  
-  brush.noStroke();
-  brush.noFill();
-  brush.noWash();
-  brush.noHatch();
-  brush.noMass();
-  brush.noField();
+  background("#fffaf3");
 
-  // Define a function to draw a hatched rectangle
-  function hatchedRect(x, y, w, h, angle, color, hatchDist, hatchAngle, brushName = "cpencil") {
-    brush.push();
-    brush.translate(x, y);
-    
-    // Fill with wash for base color
-    brush.wash(color, 180);
+  // Set angle mode for consistent angles
+  angleMode(DEGREES);
+
+  // Base layer: large muted earth tone rectangles with crosshatching
+  // Using a palette inspired by Diebenkorn: ochres, siennas, umbers, greys
+  const colors = ["#c8a27a", "#a67c52", "#6b5b4b", "#8c7853", "#b8a594"];
+  
+  // Create several overlapping rectangles
+  const rects = [
+    { x: 100, y: 80, w: 400, h: 200, color: colors[0] },
+    { x: 150, y: 180, w: 300, h: 250, color: colors[1] },
+    { x: 80, y: 200, w: 200, h: 300, color: colors[2] },
+    { x: 200, y: 100, w: 350, h: 180, color: colors[3] },
+    { x: 250, y: 250, w: 220, h: 220, color: colors[4] }
+  ];
+
+  for (let r of rects) {
+    // Use mass fill with crayon for earthy texture
+    brush.mass("crayon", r.color, { precision: 0.6, strength: 0.7, outline: false });
     brush.noStroke();
-    brush.rect(0, 0, w, h, "center");
-    brush.noWash();
-    
-    // Add hatching
-    brush.hatchStyle(brushName, color, 0.8);
-    brush.hatch(hatchDist, hatchAngle, { rand: 0.1 });
-    brush.rect(0, 0, w, h, "center");
+    brush.rect(r.x, r.y, r.w, r.h, "corner");
+    brush.noMass();
+
+    // Add directional hatching with colored pencil at 45 degrees
+    brush.hatchStyle("cpencil", "#5e3e2a", 0.7);
+    brush.hatch(8, 45, { rand: 0.1, continuous: true });
+    brush.noStroke();
+    brush.rect(r.x + 10, r.y + 10, r.w - 20, r.h - 20, "corner");
     brush.noHatch();
-    
-    // Add soft outline
-    brush.set("pen", color, 0.6);
-    brush.noFill();
-    brush.rect(0, 0, w, h, "center");
-    
-    brush.pop();
+
+    // Add crosshatch with pen at -45 degrees for structure
+    brush.hatchStyle("pen", "#333", 0.4);
+    brush.hatch(6, -45, { rand: 0.05, continuous: true });
+    brush.noStroke();
+    brush.rect(r.x + 15, r.y + 15, r.w - 30, r.h - 30, "corner");
+    brush.noHatch();
   }
 
-  // Color palette - muted earth tones
-  const colors = ["#a67c52", "#c49a6c", "#8b636c", "#c9a9a6", "#5f5f5f"];
+  // Add some linear elements with rotring for definition
+  brush.set("rotring", "#5e3e2a", 1.2);
+  brush.line(0, 150, 600, 150);
+  brush.line(0, 300, 600, 300);
+  brush.line(200, 0, 200, 600);
+  brush.line(400, 0, 400, 600);
 
-  // Draw intersecting rectangles
-  hatchedRect(300, 200, 350, 180, 0, colors[0], 6, 15, "cpencil");
-  hatchedRect(250, 300, 280, 220, 0, colors[1], 8, 75, "cpencil");
-  hatchedRect(400, 350, 200, 160, 0, colors[2], 5, 45, "cpencil");
-  hatchedRect(200, 400, 320, 140, 0, colors[3], 7, -30, "cpencil");
-  hatchedRect(320, 250, 240, 180, 0, colors[4], 6, 60, "cpencil");
+  // Subtle spray texture in background areas
+  brush.set("spray", "#c8a27a", 1.5);
+  brush.wiggle(2);
+  for (let i = 0; i < 40; i++) {
+    brush.flowLine(random(0, 600), random(0, 600), random(10, 25), random(360));
+  }
+  brush.noField();
 
-  // Add structural lines with pen
-  brush.set("pen", "#5f5f5f", 1.0);
-  brush.line(100, 180, 500, 180);
-  brush.line(150, 280, 550, 280);
-  brush.line(200, 340, 580, 340);
-  brush.line(120, 390, 520, 390);
-
-  // Add some subtle cross-hatching in one area with 2H
-  brush.hatchStyle("2H", "#8b636c", 0.5);
-  brush.hatch(4, 0, { rand: 0.05 });
-  brush.hatch(4, 90, { rand: 0.05 });
-  brush.rect(350, 250, 100, 100, "center");
-  brush.noHatch();
-
-  // Final outline accents with rotring
-  brush.set("rotring", "#5f5f5f", 0.7);
-  brush.rect(300, 200, 350, 180, "center");
-  brush.rect(250, 300, 280, 220, "center");
+  // Final structural lines with pen
+  brush.set("pen", "#333", 1.5);
+  brush.line(100, 80, 100, 280);
+  brush.line(500, 180, 500, 430);
+  brush.line(80, 200, 80, 500);
 
   noLoop();
 }

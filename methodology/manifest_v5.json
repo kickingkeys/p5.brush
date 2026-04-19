@@ -1,0 +1,1987 @@
+{
+  "claude_sonnet_46__v5__p01": {
+    "generated": true,
+    "lines": 51,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p01.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 30882,
+      "completion_tokens": 383,
+      "total_tokens": 31265,
+      "cost": 0.09740709,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.098391,
+        "upstream_inference_prompt_cost": 0.092646,
+        "upstream_inference_completions_cost": 0.005745
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p01.png",
+    "render_size": 280108
+  },
+  "claude_sonnet_46__v5__p06": {
+    "generated": true,
+    "lines": 68,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p06.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 30878,
+      "completion_tokens": 682,
+      "total_tokens": 31560,
+      "cost": 0.10183536,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.102864,
+        "upstream_inference_prompt_cost": 0.092634,
+        "upstream_inference_completions_cost": 0.01023
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p06.png",
+    "render_size": 39140
+  },
+  "claude_sonnet_46__v5__p07": {
+    "generated": true,
+    "lines": 213,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p07.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 30889,
+      "completion_tokens": 2759,
+      "total_tokens": 33648,
+      "cost": 0.13271148,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.134052,
+        "upstream_inference_prompt_cost": 0.092667,
+        "upstream_inference_completions_cost": 0.041385
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p07.png",
+    "render_size": 958636
+  },
+  "claude_sonnet_46__v5__p02": {
+    "generated": true,
+    "lines": 282,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p02.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 30890,
+      "completion_tokens": 4494,
+      "total_tokens": 35384,
+      "cost": 0.1584792,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.16008,
+        "upstream_inference_prompt_cost": 0.09267,
+        "upstream_inference_completions_cost": 0.06741
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p02.png",
+    "render_size": 186045
+  },
+  "claude_sonnet_46__v5__p05": {
+    "generated": true,
+    "lines": 309,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p05.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 30891,
+      "completion_tokens": 4262,
+      "total_tokens": 35153,
+      "cost": 0.15503697,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.156603,
+        "upstream_inference_prompt_cost": 0.092673,
+        "upstream_inference_completions_cost": 0.06393
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p05.png",
+    "render_size": 735650
+  },
+  "claude_sonnet_46__v5__p03": {
+    "generated": true,
+    "lines": 331,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p03.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 30880,
+      "completion_tokens": 4046,
+      "total_tokens": 34926,
+      "cost": 0.1517967,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.15333,
+        "upstream_inference_prompt_cost": 0.09264,
+        "upstream_inference_completions_cost": 0.06069
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p03.png",
+    "render_size": 263072
+  },
+  "claude_sonnet_46__v5__p08": {
+    "generated": true,
+    "lines": 343,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p08.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 30886,
+      "completion_tokens": 3954,
+      "total_tokens": 34840,
+      "cost": 0.15044832,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.151968,
+        "upstream_inference_prompt_cost": 0.092658,
+        "upstream_inference_completions_cost": 0.05931
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p08.png",
+    "render_size": 324401
+  },
+  "gpt_54__v5__p01": {
+    "generated": true,
+    "lines": 60,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p01.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 26723,
+      "completion_tokens": 442,
+      "total_tokens": 27165,
+      "cost": 0,
+      "is_byok": true,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0734375,
+        "upstream_inference_prompt_cost": 0.0668075,
+        "upstream_inference_completions_cost": 0.00663
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p01.png",
+    "render_size": 256903
+  },
+  "claude_sonnet_46__v5__p12": {
+    "generated": true,
+    "lines": 131,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p12.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 30880,
+      "completion_tokens": 1467,
+      "total_tokens": 32347,
+      "cost": 0.11349855,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.114645,
+        "upstream_inference_prompt_cost": 0.09264,
+        "upstream_inference_completions_cost": 0.022005
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p12.png",
+    "render_size": 590296
+  },
+  "claude_sonnet_46__v5__p11": {
+    "generated": true,
+    "lines": 151,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p11.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 30885,
+      "completion_tokens": 2182,
+      "total_tokens": 33067,
+      "cost": 0.12413115,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.125385,
+        "upstream_inference_prompt_cost": 0.092655,
+        "upstream_inference_completions_cost": 0.03273
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p11.png",
+    "render_size": 987812
+  },
+  "claude_sonnet_46__v5__p04": {
+    "generated": true,
+    "lines": 657,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p04.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 30889,
+      "completion_tokens": 9908,
+      "total_tokens": 40797,
+      "cost": 0.23887413,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.241287,
+        "upstream_inference_prompt_cost": 0.092667,
+        "upstream_inference_completions_cost": 0.14862
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p04.png",
+    "render_size": 389693
+  },
+  "claude_sonnet_46__v5__p10": {
+    "generated": true,
+    "lines": 381,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p10.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 30888,
+      "completion_tokens": 4421,
+      "total_tokens": 35309,
+      "cost": 0.15738921,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.158979,
+        "upstream_inference_prompt_cost": 0.092664,
+        "upstream_inference_completions_cost": 0.066315
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p10.png",
+    "render_size": 387378
+  },
+  "gpt_54__v5__p03": {
+    "generated": true,
+    "lines": 239,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p03.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 26723,
+      "completion_tokens": 2356,
+      "total_tokens": 29079,
+      "cost": 0,
+      "is_byok": true,
+      "prompt_tokens_details": {
+        "cached_tokens": 26368,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0428195,
+        "upstream_inference_prompt_cost": 0.0074795,
+        "upstream_inference_completions_cost": 0.03534
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p03.png",
+    "render_size": 141907
+  },
+  "gpt_54__v5__p06": {
+    "generated": true,
+    "lines": 103,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p06.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 26719,
+      "completion_tokens": 823,
+      "total_tokens": 27542,
+      "cost": 0,
+      "is_byok": true,
+      "prompt_tokens_details": {
+        "cached_tokens": 26368,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0198145,
+        "upstream_inference_prompt_cost": 0.0074695,
+        "upstream_inference_completions_cost": 0.012345
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p06.png",
+    "render_size": 71685
+  },
+  "claude_sonnet_46__v5__p09": {
+    "generated": true,
+    "lines": 522,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p09.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 30889,
+      "completion_tokens": 6278,
+      "total_tokens": 37167,
+      "cost": 0.18496863,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.186837,
+        "upstream_inference_prompt_cost": 0.092667,
+        "upstream_inference_completions_cost": 0.09417
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/claude_sonnet_46__p09.png",
+    "render_size": 250283
+  },
+  "gpt_54__v5__p04": {
+    "generated": true,
+    "lines": 355,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p04.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 26728,
+      "completion_tokens": 4761,
+      "total_tokens": 31489,
+      "cost": 0,
+      "is_byok": true,
+      "prompt_tokens_details": {
+        "cached_tokens": 26368,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.078907,
+        "upstream_inference_prompt_cost": 0.007492,
+        "upstream_inference_completions_cost": 0.071415
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p04.png",
+    "render_size": 472300
+  },
+  "gpt_54__v5__p05": {
+    "generated": true,
+    "lines": 285,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p05.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 26730,
+      "completion_tokens": 3417,
+      "total_tokens": 30147,
+      "cost": 0,
+      "is_byok": true,
+      "prompt_tokens_details": {
+        "cached_tokens": 26368,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.058752,
+        "upstream_inference_prompt_cost": 0.007497,
+        "upstream_inference_completions_cost": 0.051255
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p05.png",
+    "render_size": 545890
+  },
+  "gpt_54__v5__p02": {
+    "generated": true,
+    "lines": 586,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p02.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 26727,
+      "completion_tokens": 6265,
+      "total_tokens": 32992,
+      "cost": 0,
+      "is_byok": true,
+      "prompt_tokens_details": {
+        "cached_tokens": 26368,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.1014645,
+        "upstream_inference_prompt_cost": 0.0074895,
+        "upstream_inference_completions_cost": 0.093975
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p02.png",
+    "render_size": 130159
+  },
+  "gpt_54__v5__p08": {
+    "generated": true,
+    "lines": 244,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p08.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 26724,
+      "completion_tokens": 3073,
+      "total_tokens": 29797,
+      "cost": 0,
+      "is_byok": true,
+      "prompt_tokens_details": {
+        "cached_tokens": 26368,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.053577,
+        "upstream_inference_prompt_cost": 0.007482,
+        "upstream_inference_completions_cost": 0.046095
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p08.png",
+    "render_size": 455826
+  },
+  "gpt_54__v5__p12": {
+    "generated": true,
+    "lines": 93,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p12.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 26724,
+      "completion_tokens": 856,
+      "total_tokens": 27580,
+      "cost": 0,
+      "is_byok": true,
+      "prompt_tokens_details": {
+        "cached_tokens": 26624,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.019746,
+        "upstream_inference_prompt_cost": 0.006906,
+        "upstream_inference_completions_cost": 0.01284
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p12.png",
+    "render_size": 778082
+  },
+  "gpt_54__v5__p09": {
+    "generated": true,
+    "lines": 334,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p09.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 26728,
+      "completion_tokens": 3808,
+      "total_tokens": 30536,
+      "cost": 0,
+      "is_byok": true,
+      "prompt_tokens_details": {
+        "cached_tokens": 26368,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.064612,
+        "upstream_inference_prompt_cost": 0.007492,
+        "upstream_inference_completions_cost": 0.05712
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p09.png",
+    "render_size": 602527
+  },
+  "gpt_54__v5__p10": {
+    "generated": true,
+    "lines": 221,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p10.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 26728,
+      "completion_tokens": 2401,
+      "total_tokens": 29129,
+      "cost": 0,
+      "is_byok": true,
+      "prompt_tokens_details": {
+        "cached_tokens": 26368,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.043507,
+        "upstream_inference_prompt_cost": 0.007492,
+        "upstream_inference_completions_cost": 0.036015
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p10.png",
+    "render_size": 334340
+  },
+  "gpt_54__v5__p11": {
+    "generated": true,
+    "lines": 163,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p11.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 26725,
+      "completion_tokens": 2148,
+      "total_tokens": 28873,
+      "cost": 0,
+      "is_byok": true,
+      "prompt_tokens_details": {
+        "cached_tokens": 26368,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0397045,
+        "upstream_inference_prompt_cost": 0.0074845,
+        "upstream_inference_completions_cost": 0.03222
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p11.png",
+    "render_size": 495168
+  },
+  "gemini_31_pro__v5__p01": {
+    "generated": true,
+    "lines": 40,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p01.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29463,
+      "completion_tokens": 2005,
+      "total_tokens": 31468,
+      "cost": 0.08215614,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.082986,
+        "upstream_inference_prompt_cost": 0.058926,
+        "upstream_inference_completions_cost": 0.02406
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1672,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p01.png",
+    "render_size": 324136
+  },
+  "gemini_31_pro__v5__p06": {
+    "generated": true,
+    "lines": 64,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p06.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29459,
+      "completion_tokens": 6028,
+      "total_tokens": 35487,
+      "cost": 0.12994146,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.131254,
+        "upstream_inference_prompt_cost": 0.058918,
+        "upstream_inference_completions_cost": 0.072336
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 5328,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p06.png",
+    "render_size": 73786
+  },
+  "gemini_31_pro__v5__p05": {
+    "generated": true,
+    "lines": 150,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p05.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29471,
+      "completion_tokens": 4805,
+      "total_tokens": 34276,
+      "cost": 0.11543598,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.116602,
+        "upstream_inference_prompt_cost": 0.058942,
+        "upstream_inference_completions_cost": 0.05766
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 3002,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p05.png",
+    "render_size": 372530
+  },
+  "gemini_31_pro__v5__p04": {
+    "generated": true,
+    "lines": 154,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p04.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29469,
+      "completion_tokens": 6172,
+      "total_tokens": 35641,
+      "cost": 0.13167198,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.133002,
+        "upstream_inference_prompt_cost": 0.058938,
+        "upstream_inference_completions_cost": 0.074064
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 3970,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p04.png",
+    "render_size": 288729
+  },
+  "gemini_31_pro__v5__p02": {
+    "generated": true,
+    "lines": 221,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p02.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29466,
+      "completion_tokens": 11531,
+      "total_tokens": 40997,
+      "cost": 0.19533096,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.197304,
+        "upstream_inference_prompt_cost": 0.058932,
+        "upstream_inference_completions_cost": 0.138372
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 8297,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p02.png",
+    "render_size": 407003
+  },
+  "gemini_31_pro__v5__p03": {
+    "generated": true,
+    "lines": 134,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p03.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29462,
+      "completion_tokens": 7201,
+      "total_tokens": 36663,
+      "cost": 0.14388264,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.145336,
+        "upstream_inference_prompt_cost": 0.058924,
+        "upstream_inference_completions_cost": 0.086412
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 5559,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p03.png",
+    "render_size": 133164
+  },
+  "gemini_31_pro__v5__p07": {
+    "generated": true,
+    "lines": 84,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p07.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29469,
+      "completion_tokens": 4659,
+      "total_tokens": 34128,
+      "cost": 0.062653932,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 28644,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0632868,
+        "upstream_inference_prompt_cost": 0.0073788,
+        "upstream_inference_completions_cost": 0.055908
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 3539,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p07.png",
+    "render_size": 710135
+  },
+  "gemini_31_pro__v5__p10": {
+    "generated": true,
+    "lines": 141,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p10.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29468,
+      "completion_tokens": 6507,
+      "total_tokens": 35975,
+      "cost": 0.1356498,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.13702,
+        "upstream_inference_prompt_cost": 0.058936,
+        "upstream_inference_completions_cost": 0.078084
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 4634,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p10.png",
+    "render_size": 423004
+  },
+  "qwen3_235b__v5__p01": {
+    "generated": true,
+    "lines": 25,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p01.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 27448,
+      "completion_tokens": 232,
+      "total_tokens": 27680,
+      "cost": 0.00419978988,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.004242212,
+        "upstream_inference_prompt_cost": 0.004103476,
+        "upstream_inference_completions_cost": 0.000138736
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p01.png",
+    "render_size": 240038
+  },
+  "gemini_31_pro__v5__p09": {
+    "generated": true,
+    "lines": 176,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p09.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29466,
+      "completion_tokens": 5403,
+      "total_tokens": 34869,
+      "cost": 0.12253032,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.123768,
+        "upstream_inference_prompt_cost": 0.058932,
+        "upstream_inference_completions_cost": 0.064836
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 3028,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p09.png",
+    "render_size": 643475
+  },
+  "qwen3_235b__v5__p02": {
+    "generated": true,
+    "lines": 105,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p02.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 27453,
+      "completion_tokens": 1302,
+      "total_tokens": 28755,
+      "cost": 0.002846745,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0028755,
+        "upstream_inference_prompt_cost": 0.0027453,
+        "upstream_inference_completions_cost": 0.0001302
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p02.png",
+    "render_size": 212311
+  },
+  "gemini_31_pro__v5__p08": {
+    "generated": true,
+    "lines": 167,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p08.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29462,
+      "completion_tokens": 7297,
+      "total_tokens": 36759,
+      "cost": 0.093979512,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 28644,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0949288,
+        "upstream_inference_prompt_cost": 0.0073648,
+        "upstream_inference_completions_cost": 0.087564
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 4620,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p08.png",
+    "render_size": 253672
+  },
+  "gemini_31_pro__v5__p12": {
+    "generated": true,
+    "lines": 74,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p12.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29463,
+      "completion_tokens": 3736,
+      "total_tokens": 33199,
+      "cost": 0.10272042,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.103758,
+        "upstream_inference_prompt_cost": 0.058926,
+        "upstream_inference_completions_cost": 0.044832
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 2937,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p12.png",
+    "render_size": 432515
+  },
+  "qwen3_235b__v5__p03": {
+    "generated": true,
+    "lines": 97,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p03.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 27447,
+      "completion_tokens": 889,
+      "total_tokens": 28336,
+      "cost": 0.003245319,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0032781,
+        "upstream_inference_prompt_cost": 0.0027447,
+        "upstream_inference_completions_cost": 0.0005334
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p03.png",
+    "render_size": 59687
+  },
+  "qwen3_235b__v5__p06": {
+    "generated": true,
+    "lines": 24,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p06.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 27443,
+      "completion_tokens": 183,
+      "total_tokens": 27626,
+      "cost": 0.0025502499,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.00257601,
+        "upstream_inference_prompt_cost": 0.00246987,
+        "upstream_inference_completions_cost": 0.00010614
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p06.png",
+    "render_size": 29431
+  },
+  "qwen3_235b__v5__p04": {
+    "generated": true,
+    "lines": 76,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p04.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 27452,
+      "completion_tokens": 972,
+      "total_tokens": 28424,
+      "cost": 0.001947924,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 27216,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0019676,
+        "upstream_inference_prompt_cost": 0.0013844,
+        "upstream_inference_completions_cost": 0.0005832
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p04.png",
+    "render_size": 14863
+  },
+  "qwen3_235b__v5__p08": {
+    "generated": true,
+    "lines": 74,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p08.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 27450,
+      "completion_tokens": 782,
+      "total_tokens": 28232,
+      "cost": 0.002794968,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0028232,
+        "upstream_inference_prompt_cost": 0.002745,
+        "upstream_inference_completions_cost": 7.82e-05
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p08.png",
+    "render_size": 216682
+  },
+  "gemini_31_pro__v5__p11": {
+    "generated": true,
+    "lines": 114,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p11.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29462,
+      "completion_tokens": 7495,
+      "total_tokens": 36957,
+      "cost": 0.14737536,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.148864,
+        "upstream_inference_prompt_cost": 0.058924,
+        "upstream_inference_completions_cost": 0.08994
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 5866,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemini_31_pro__p11.png",
+    "render_size": 639865
+  },
+  "qwen3_235b__v5__p10": {
+    "generated": true,
+    "lines": 92,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p10.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 27453,
+      "completion_tokens": 1032,
+      "total_tokens": 28485,
+      "cost": 0.002820015,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0028485,
+        "upstream_inference_prompt_cost": 0.0027453,
+        "upstream_inference_completions_cost": 0.0001032
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p10.png",
+    "render_size": 248324
+  },
+  "qwen3_235b__v5__p12": {
+    "generated": true,
+    "lines": 37,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p12.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 27448,
+      "completion_tokens": 355,
+      "total_tokens": 27803,
+      "cost": 0.002752497,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0027803,
+        "upstream_inference_prompt_cost": 0.0027448,
+        "upstream_inference_completions_cost": 3.55e-05
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p12.png",
+    "render_size": 443365
+  },
+  "qwen3_235b__v5__p09": {
+    "generated": true,
+    "lines": 58,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p09.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 27455,
+      "completion_tokens": 624,
+      "total_tokens": 28079,
+      "cost": 0.0028168965,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.00284535,
+        "upstream_inference_prompt_cost": 0.00247095,
+        "upstream_inference_completions_cost": 0.0003744
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p09.png",
+    "render_size": 242554
+  },
+  "gemma3_27b__v5__p01": {
+    "generated": true,
+    "lines": 34,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p01.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29476,
+      "completion_tokens": 350,
+      "total_tokens": 29826,
+      "cost": 0.00354186756,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.003577644,
+        "upstream_inference_prompt_cost": 0.003507644,
+        "upstream_inference_completions_cost": 7e-05
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p01.png",
+    "render_size": 283019
+  },
+  "qwen3_235b__v5__p11": {
+    "generated": true,
+    "lines": 81,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p11.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 27449,
+      "completion_tokens": 889,
+      "total_tokens": 28338,
+      "cost": 0.0029737719,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.00300381,
+        "upstream_inference_prompt_cost": 0.00247041,
+        "upstream_inference_completions_cost": 0.0005334
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p11.png",
+    "render_size": 691451
+  },
+  "gemma3_27b__v5__p03": {
+    "generated": true,
+    "lines": 54,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p03.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29471,
+      "completion_tokens": 545,
+      "total_tokens": 30016,
+      "cost": 0.0024204312,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.00244488,
+        "upstream_inference_prompt_cost": 0.00235768,
+        "upstream_inference_completions_cost": 8.72e-05
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p03.png",
+    "render_size": 23432
+  },
+  "gemma3_27b__v5__p02": {
+    "generated": true,
+    "lines": 52,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p02.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29475,
+      "completion_tokens": 576,
+      "total_tokens": 30051,
+      "cost": 0.0024256584,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.00245016,
+        "upstream_inference_prompt_cost": 0.002358,
+        "upstream_inference_completions_cost": 9.216e-05
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p02.png",
+    "render_size": 8634
+  },
+  "gemma3_27b__v5__p06": {
+    "generated": true,
+    "lines": 32,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p06.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29468,
+      "completion_tokens": 289,
+      "total_tokens": 29757,
+      "cost": 0.003003165,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0030335,
+        "upstream_inference_prompt_cost": 0.0029468,
+        "upstream_inference_completions_cost": 8.67e-05
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "brush.noWiggle is not a function\ndraw (file:///Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/scripts/_tmp_3245_1776615887002.html:39:9)",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p06.png",
+    "render_size": 39541
+  },
+  "gemma3_27b__v5__p05": {
+    "generated": true,
+    "lines": 54,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p05.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29480,
+      "completion_tokens": 597,
+      "total_tokens": 30077,
+      "cost": 0.0024293808,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.00245392,
+        "upstream_inference_prompt_cost": 0.0023584,
+        "upstream_inference_completions_cost": 9.552e-05
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p05.png",
+    "render_size": 271742
+  },
+  "gemma3_27b__v5__p04": {
+    "generated": true,
+    "lines": 80,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p04.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29478,
+      "completion_tokens": 858,
+      "total_tokens": 30336,
+      "cost": 0.0024705648,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.00249552,
+        "upstream_inference_prompt_cost": 0.00235824,
+        "upstream_inference_completions_cost": 0.00013728
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p04.png",
+    "render_size": 9047
+  },
+  "gemma3_27b__v5__p07": {
+    "generated": true,
+    "lines": 46,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p07.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29478,
+      "completion_tokens": 628,
+      "total_tokens": 30106,
+      "cost": 0.0024341328,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.00245872,
+        "upstream_inference_prompt_cost": 0.00235824,
+        "upstream_inference_completions_cost": 0.00010048
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p07.png",
+    "render_size": 157124
+  },
+  "gemma3_27b__v5__p09": {
+    "generated": true,
+    "lines": 69,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p09.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29475,
+      "completion_tokens": 637,
+      "total_tokens": 30112,
+      "cost": 0.0024353208,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.00245992,
+        "upstream_inference_prompt_cost": 0.002358,
+        "upstream_inference_completions_cost": 0.00010192
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p09.png",
+    "render_size": 4201
+  },
+  "gemma3_27b__v5__p08": {
+    "generated": true,
+    "lines": 76,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p08.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29475,
+      "completion_tokens": 727,
+      "total_tokens": 30202,
+      "cost": 0.00361639575,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.003652925,
+        "upstream_inference_prompt_cost": 0.003507525,
+        "upstream_inference_completions_cost": 0.0001454
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p08.png",
+    "render_size": 129788
+  },
+  "gemma3_27b__v5__p10": {
+    "generated": true,
+    "lines": 61,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p10.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29477,
+      "completion_tokens": 615,
+      "total_tokens": 30092,
+      "cost": 0.003100878,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0031322,
+        "upstream_inference_prompt_cost": 0.0029477,
+        "upstream_inference_completions_cost": 0.0001845
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p10.png",
+    "render_size": 366233
+  },
+  "gemma3_27b__v5__p12": {
+    "generated": true,
+    "lines": 41,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p12.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29472,
+      "completion_tokens": 425,
+      "total_tokens": 29897,
+      "cost": 0.003043953,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0030747,
+        "upstream_inference_prompt_cost": 0.0029472,
+        "upstream_inference_completions_cost": 0.0001275
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "retry": true,
+    "rendered": true,
+    "render_note": "brush.noWiggle is not a function\ndraw (file:///Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/scripts/_tmp_4644_1776616192036.html:47:9)",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p12.png",
+    "render_size": 75622
+  },
+  "qwen3_235b__v5__p05": {
+    "generated": true,
+    "lines": 91,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p05.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 27455,
+      "completion_tokens": 959,
+      "total_tokens": 28414,
+      "cost": 0.00202475295,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.002045205,
+        "upstream_inference_prompt_cost": 0.001949305,
+        "upstream_inference_completions_cost": 9.59e-05
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p05.png",
+    "render_size": 268391
+  },
+  "gemma3_27b__v5__p11": {
+    "generated": true,
+    "lines": 67,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p11.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29471,
+      "completion_tokens": 760,
+      "total_tokens": 30231,
+      "cost": 0.0024544872,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.00247928,
+        "upstream_inference_prompt_cost": 0.00235768,
+        "upstream_inference_completions_cost": 0.0001216
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gemma3_27b__p11.png",
+    "render_size": 66617
+  },
+  "qwen3_235b__v5__p07": {
+    "generated": true,
+    "lines": 63,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p07.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 27454,
+      "completion_tokens": 882,
+      "total_tokens": 28336,
+      "cost": 0.00201705966,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.002037434,
+        "upstream_inference_prompt_cost": 0.001949234,
+        "upstream_inference_completions_cost": 8.82e-05
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/qwen3_235b__p07.png",
+    "render_size": 80571
+  },
+  "gpt_54__v5__p07": {
+    "generated": true,
+    "lines": 208,
+    "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p07.js",
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 26729,
+      "completion_tokens": 2587,
+      "total_tokens": 29316,
+      "cost": 0,
+      "is_byok": true,
+      "prompt_tokens_details": {
+        "cached_tokens": 26368,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.0462995,
+        "upstream_inference_prompt_cost": 0.0074945,
+        "upstream_inference_completions_cost": 0.038805
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v5/gpt_54__p07.png",
+    "render_size": 575920
+  }
+}

@@ -1,49 +1,48 @@
 function setup() {
   createCanvas(600, 600, WEBGL);
-  brush.scaleBrushes(3);
   angleMode(DEGREES);
+  brush.scaleBrushes(3);
 }
 
 function draw() {
   background("#fffaf3");
   translate(-width/2, -height/2);
 
-  // Create a vector field
-  brush.addField("swarmFlow", (t, field) => {
-    for (let c = 0; c < field.length; c++) {
-      for (let r = 0; r < field[0].length; r++) {
-        field[c][r] = noise(c * 0.04, r * 0.04) * 360;
+  // Custom vector field for swirling motion
+  brush.addField("swirlField", (t, field) => {
+    for (let col = 0; col < field.length; col++) {
+      for (let row = 0; row < field[0].length; row++) {
+        const distX = col - field.length / 2;
+        const distY = row - field[0].length / 2;
+        const angle = Math.atan2(distY, distX) * 180 / Math.PI + t * 2;
+        field[col][row] = angle;
       }
     }
     return field;
   });
-  brush.field("swarmFlow");
-  brush.wiggle(2);
+  brush.field("swirlField");
 
-  // Spawn points
+  // Particle trails with spray
   const numParticles = 100;
-  const spawnPoints = [];
   for (let i = 0; i < numParticles; i++) {
-    spawnPoints.push([random(-300, 300), random(-300, 300)]);
+    const x = random(-200, 200);
+    const y = random(-200, 200);
+
+    brush.set("spray", "#2a3860", 1.5);
+    brush.flowLine(x, y, random(10, 25), 0);
   }
 
-  // Draw particles with spray trails
-  brush.set("spray", "#2a3860", 1.5);
-  for (const [x, y] of spawnPoints) {
-    brush.flowLine(x, y, random(20, 40), 0);
-  }
-  brush.noField();
-  brush.noWiggle();
-
-  // Add some charcoal strokes for highlights
-  brush.set("charcoal", "#ddd", 0.8);
-  for (let i = 0; i < 20; i++) {
-    const x = random(-300, 300);
-    const y = random(-300, 300);
-    brush.beginShape();
+  // Charcoal outline for structure
+  brush.set("charcoal", "#333", 0.5);
+  brush.beginShape();
+  for (let i = 0; i < 360; i += 10) {
+    const angle = i;
+    const radius = random(50, 150);
+    const x = radius * Math.cos(angle);
+    const y = radius * Math.sin(angle);
     brush.vertex(x, y);
-    brush.endShape();
   }
+  brush.endShape(CLOSE);
 
   noLoop();
 }

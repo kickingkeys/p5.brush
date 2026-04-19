@@ -1,62 +1,61 @@
 function setup() {
   createCanvas(600, 600, WEBGL);
   brush.scaleBrushes(3);
-  angleMode(DEGREES);
 }
 
 function draw() {
   background("#fffaf3");
   translate(-width/2, -height/2);
 
-  // Pavement
-  brush.fill("#5f6f7b", 150);
-  brush.rect(0, -150, 600, 150, "center");
-
-  // Neon marker streaks (red)
-  brush.set("marker", "#ff4136", 2);
-  brush.noStroke();
-  brush.beginShape();
-  brush.vertex(150, 50);
-  brush.vertex(200, 100);
-  brush.vertex(250, 50);
-  brush.endShape(CLOSE);
-
-  brush.beginShape();
-  brush.vertex(-150, -50);
-  brush.vertex(-200, -100);
-  brush.vertex(-250, -50);
-  brush.endShape(CLOSE);
-
-  // Watercolor rain (blue)
-  brush.set("spray", "#4fc3f7", 0.4);
-  for (let i = 0; i < 200; i++) {
-    const x = random(-300, 300);
-    const y = random(-100, 100);
-    brush.flowLine(x, y, random(10, 30), 90);
-  }
-
-  // Charcoal silhouettes
-  brush.set("charcoal", "#222", 0.8);
-  brush.noFill();
-  brush.strokeWeight(1);
-  brush.beginShape();
-  brush.vertex(100, -100);
-  brush.vertex(150, -150);
-  brush.vertex(200, -100);
-  brush.endShape();
-
-  brush.beginShape();
-  brush.vertex(-100, -100);
-  brush.vertex(-150, -150);
-  brush.vertex(-200, -100);
-  brush.endShape();
-  
-  brush.set("spray", "#4fc3f7", 0.1);
+  // Watercolor bleeds (rain)
+  brush.fill("#4682b4", 40);
+  brush.fillBleed(0.4, "out");
   for (let i = 0; i < 50; i++) {
-    const x = random(-300, 300);
-    const y = random(-100, 100);
-    brush.flowLine(x, y, random(10, 30), 90);
+    let x = random(0, 600);
+    let y = random(0, 600);
+    brush.circle(x, y, random(5, 15));
   }
+  brush.noFill();
+
+  // Neon marker smears (reflections)
+  brush.set("marker", "#ff4500", 1.2);
+  for (let i = 0; i < 20; i++) {
+    let x1 = random(0, 600);
+    let y1 = random(0, 200);
+    let x2 = random(0, 600);
+    let y2 = random(0, 200);
+    brush.line(x1, y1, x2, y2);
+  }
+
+  brush.set("marker", "#00ffff", 0.8);
+  for (let i = 0; i < 15; i++) {
+    let x1 = random(0, 600);
+    let y1 = random(200, 400);
+    let x2 = random(0, 600);
+    let y2 = random(200, 400);
+    brush.line(x1, y1, x2, y2);
+  }
+
+  // Ink silhouettes (passersby)
+  brush.set("2B", "#333", 0.5);
+  brush.noFill();
+  brush.beginShape();
+  brush.vertex(100, 500);
+  brush.vertex(120, 550);
+  brush.vertex(150, 500);
+  brush.endShape(CLOSE);
+
+  brush.beginShape();
+  brush.vertex(400, 520);
+  brush.vertex(420, 570);
+  brush.vertex(450, 520);
+  brush.endShape(CLOSE);
+
+  brush.beginShape();
+  brush.vertex(550, 480);
+  brush.vertex(570, 530);
+  brush.vertex(600, 480);
+  brush.endShape(CLOSE);
 
   noLoop();
 }

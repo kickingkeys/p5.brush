@@ -9,77 +9,77 @@ function draw() {
   
   brush.noFill();
   
-  // Distant trees - sparse and light
-  brush.hatchStyle("2H", "#000", 0.6);
-  brush.hatch(12, -15, { rand: 0.08, continuous: true });
-  for (let x = 20; x < width; x += 80) {
-    brush.line(x, 100, x, 250);
-  }
-  brush.noHatch();
+  // Define forest zones with varying hatch density
+  const zones = [
+    { x: 100, y: 100, w: 150, h: 150, type: 'trunk', angle: 45 },
+    { x: 300, y: 120, w: 180, h: 130, type: 'shadow', angle: 120 },
+    { x: 200, y: 300, w: 220, h: 180, type: 'undergrowth', angle: 75 },
+    { x: 50, y: 350, w: 120, h: 100, type: 'trunk', angle: 135 },
+    { x: 400, y: 380, w: 140, h: 110, type: 'shadow', angle: 30 }
+  ];
   
-  // Midground trunks - medium density
-  brush.hatchStyle("HB", "#000", 0.8);
-  brush.hatch(7, -30, { rand: 0.12, continuous: true });
-  for (let x = 40; x < width; x += 60) {
-    brush.line(x, 80, x, 320);
-  }
-  brush.noHatch();
-  
-  // Foreground trunks and thick branches - dense
-  brush.hatchStyle("2B", "#000", 1.2);
-  brush.hatch(4, -45, { rand: 0.15, continuous: true });
-  for (let x = 60; x < width; x += 40) {
-    brush.line(x, 60, x, 400);
-  }
-  brush.noHatch();
-  
-  // Undergrowth layer - cross hatching at different angles
-  brush.hatchStyle("2B", "#000", 1.0);
-  brush.hatch(5, 15, { rand: 0.18, continuous: true });
-  for (let y = 350; y < height; y += 10) {
-    for (let x = 0; x < width; x += 30) {
-      if (random() > 0.3) {
-        brush.line(x, y, x + random(15, 40), y + random(5, 15));
-      }
+  // Draw each zone with appropriate hatching
+  for (let zone of zones) {
+    if (zone.type === 'trunk') {
+      // Trunks - medium density vertical rhythm
+      brush.hatchStyle("rotring", "#000", 0.4);
+      brush.hatch(6, zone.angle, { rand: 0.1, continuous: true });
+      brush.rect(zone.x, zone.y, zone.w, zone.h, "corner");
+      
+      // Add secondary cross-hatch for bark texture
+      brush.hatch(8, (zone.angle + 90) % 180, { rand: 0.08, continuous: true });
+      brush.rect(zone.x + 20, zone.y + 20, zone.w - 40, zone.h - 40, "corner");
+      
+    } else if (zone.type === 'shadow') {
+      // Deep shadows - dense crosshatching
+      brush.hatchStyle("2B", "#000", 0.8);
+      brush.hatch(3, zone.angle, { rand: 0.15, continuous: true });
+      brush.rect(zone.x, zone.y, zone.w, zone.h, "corner");
+      
+      brush.hatch(4, (zone.angle + 90) % 180, { rand: 0.12, continuous: true });
+      brush.rect(zone.x + 15, zone.y + 15, zone.w - 30, zone.h - 30, "corner");
+      
+    } else if (zone.type === 'undergrowth') {
+      // Undergrowth - complex layered hatching
+      brush.hatchStyle("HB", "#000", 0.5);
+      brush.hatch(5, zone.angle, { rand: 0.1, continuous: true });
+      brush.rect(zone.x, zone.y, zone.w, zone.h, "corner");
+      
+      brush.hatch(7, (zone.angle + 60) % 180, { rand: 0.08, continuous: true });
+      brush.rect(zone.x + 10, zone.y + 10, zone.w - 20, zone.h - 20, "corner");
+      
+      brush.hatch(9, (zone.angle + 120) % 180, { rand: 0.06, continuous: true });
+      brush.rect(zone.x + 20, zone.y + 20, zone.w - 40, zone.h - 40, "corner");
     }
   }
-  brush.noHatch();
   
-  // Secondary cross hatch for depth
-  brush.hatchStyle("HB", "#000", 0.9);
-  brush.hatch(6, 75, { rand: 0.14, continuous: true });
-  for (let y = 370; y < height; y += 12) {
-    for (let x = 15; x < width; x += 35) {
-      if (random() > 0.4) {
-        brush.line(x, y, x + random(10, 30), y + random(8, 20));
-      }
-    }
+  // Add random individual trunks as vertical hatch marks
+  brush.hatchStyle("pen", "#000", 0.6);
+  for (let i = 0; i < 25; i++) {
+    const x = random(20, 580);
+    const y = random(20, 580);
+    const h = random(40, 120);
+    
+    brush.hatch(4, 90, { rand: 0.05 });
+    brush.rect(x - 15, y, 30, h, "center");
   }
-  brush.noHatch();
   
-  // Dark shadow zones - very dense 2B
-  brush.hatchStyle("2B", "#000", 1.4);
-  brush.hatch(3, -60, { rand: 0.2, continuous: true });
-  for (let x = 100; x < width - 100; x += 5) {
-    if (random() > 0.7) {
-      const y = 300 + random(50, 120);
-      brush.line(x, y, x + random(2, 8), y + random(2, 10));
-    }
-  }
-  brush.noHatch();
+  // Add fine detail with 2H for distant texture
+  brush.hatchStyle("2H", "#000", 0.3);
+  brush.hatch(10, 45, { rand: 0.05, continuous: true });
+  brush.rect(0, 0, width, height, "corner");
   
-  // Final structural elements with pen
-  brush.set("pen", "#000", 1.1);
-  for (let i = 0; i < 8; i++) {
-    const x = random(50, width - 50);
-    brush.spline([
-      [x, 50],
-      [x + random(-20, 20), 150],
-      [x + random(-30, 30), 250],
-      [x + random(-25, 25), 350],
-      [x + random(-15, 15), 450]
-    ], 0.2);
-  }
+  // Final chaotic layer with cpencil at slight angle for organic feel
+  brush.field("hand");
+  brush.wiggle(2);
+  brush.hatchStyle("cpencil", "#000", 0.4);
+  brush.hatch(8, 65, { rand: 0.1 });
+  brush.rect(20, 20, width - 40, height - 40, "corner");
+  brush.noField();
+  
+  // Clean up states
+  brush.noHatch();
+  brush.noFill();
   
   noLoop();
 }

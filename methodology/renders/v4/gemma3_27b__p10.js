@@ -1,53 +1,68 @@
 function setup() {
   createCanvas(600, 600, WEBGL);
-  brush.scaleBrushes(3);
   angleMode(DEGREES);
+  brush.scaleBrushes(3);
+  background("#fffaf3");
 }
 
 function draw() {
-  background("#fffaf3");
   translate(-width/2, -height/2);
 
-  // Sand dunes - watercolor washes
-  brush.fill("#d4a373", 80);
+  // Sand washes
+  brush.fill("#d8c3a5", 120);
+  brush.fillBleed(0.3, "out");
   brush.beginShape();
-  vertex(0, 0);
-  vertex(300, -100);
-  vertex(600, 0);
-  vertex(300, 100);
+  brush.vertex(0, 0);
+  brush.vertex(width, 0);
+  brush.vertex(width, height * 0.6);
+  brush.vertex(0, height * 0.6);
   brush.endShape(CLOSE);
 
-  brush.fill("#c69b6a", 60);
+  brush.fill("#e0d5c0", 80);
+  brush.fillBleed(0.2, "out");
   brush.beginShape();
-  vertex(0, 0);
-  vertex(300, -150);
-  vertex(600, 0);
-  vertex(300, 150);
+  brush.vertex(0, 0);
+  brush.vertex(width, 0);
+  brush.vertex(width, height * 0.4);
+  brush.vertex(0, height * 0.4);
   brush.endShape(CLOSE);
 
-  // Rock formations - charcoal + pastel mass
-  brush.mass("crayon", "#333", {strength: 0.8, precision: 0.3});
+  brush.fill("#f0e6d2", 50);
+  brush.fillBleed(0.1, "out");
   brush.beginShape();
-  vertex(100, -50);
-  vertex(150, -150);
-  vertex(250, -100);
-  vertex(200, 0);
+  brush.vertex(0, 0);
+  brush.vertex(width, 0);
+  brush.vertex(width, height * 0.3);
+  brush.vertex(0, height * 0.3);
   brush.endShape(CLOSE);
-  brush.noMass();
 
-  brush.mass("pastel", "#555", {strength: 0.6, precision: 0.4});
-  brush.beginShape();
-  vertex(350, -100);
-  vertex(400, -200);
-  vertex(500, -50);
-  vertex(450, 50);
-  brush.endShape(CLOSE);
-  brush.noMass();
-
-  // Horizon line - pen
-  brush.set("pen", "#000", 1.2);
-  brush.line(0, 250, 600, 250);
+  // Charcoal rocks
   brush.noStroke();
-  
+  brush.set("charcoal", "#333", 1.2);
+  brush.beginShape();
+  brush.vertex(100, 150);
+  brush.vertex(200, 250);
+  brush.vertex(150, 300);
+  brush.vertex(50, 200);
+  brush.endShape(CLOSE);
+
+  brush.beginShape();
+  brush.vertex(350, 100);
+  brush.vertex(450, 180);
+  brush.vertex(400, 230);
+  brush.vertex(300, 150);
+  brush.endShape(CLOSE);
+
+  brush.beginShape();
+  brush.vertex(500, 300);
+  brush.vertex(580, 350);
+  brush.vertex(550, 400);
+  brush.vertex(470, 330);
+  brush.endShape(CLOSE);
+
+  // Horizon line
+  brush.set("pen", "#000", 0.5);
+  brush.line(0, height/2, width, height/2);
+
   noLoop();
 }

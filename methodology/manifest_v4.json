@@ -924,22 +924,106 @@
     "render_size": 94019
   },
   "gemini_31_pro__v4__p04": {
-    "generated": false,
-    "error": "Empty/short response",
+    "generated": true,
+    "lines": 116,
     "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v4/gemini_31_pro__p04.js",
-    "js_exists": false
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29281,
+      "completion_tokens": 7171,
+      "total_tokens": 36452,
+      "cost": 0.14316786,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.144614,
+        "upstream_inference_prompt_cost": 0.058562,
+        "upstream_inference_completions_cost": 0.086052
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 5251,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v4/gemini_31_pro__p04.png",
+    "render_size": 331222
   },
   "gemini_31_pro__v4__p03": {
-    "generated": false,
-    "error": "Empty/short response",
+    "generated": true,
+    "lines": 166,
     "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v4/gemini_31_pro__p03.js",
-    "js_exists": false
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29274,
+      "completion_tokens": 5409,
+      "total_tokens": 34683,
+      "cost": 0.12222144,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.123456,
+        "upstream_inference_prompt_cost": 0.058548,
+        "upstream_inference_completions_cost": 0.064908
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 3228,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v4/gemini_31_pro__p03.png",
+    "render_size": 207089
   },
   "gemini_31_pro__v4__p07": {
-    "generated": false,
-    "error": "Empty/short response",
+    "generated": true,
+    "lines": 94,
     "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v4/gemini_31_pro__p07.js",
-    "js_exists": false
+    "js_exists": true,
+    "usage": {
+      "prompt_tokens": 29281,
+      "completion_tokens": 5027,
+      "total_tokens": 34308,
+      "cost": 0.11769714,
+      "is_byok": false,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "cost_details": {
+        "upstream_inference_cost": 0.118886,
+        "upstream_inference_prompt_cost": 0.058562,
+        "upstream_inference_completions_cost": 0.060324
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 3643,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    },
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v4/gemini_31_pro__p07.png",
+    "render_size": 724192
   },
   "qwen3_235b__v4__p01": {
     "generated": true,
@@ -1278,9 +1362,9 @@
     "js_exists": true,
     "usage": {
       "prompt_tokens": 27261,
-      "completion_tokens": 960,
-      "total_tokens": 28221,
-      "cost": 0.0029991951,
+      "completion_tokens": 1173,
+      "total_tokens": 28434,
+      "cost": 0.0031257171,
       "is_byok": false,
       "prompt_tokens_details": {
         "cached_tokens": 0,
@@ -1289,9 +1373,9 @@
         "video_tokens": 0
       },
       "cost_details": {
-        "upstream_inference_cost": 0.00302949,
+        "upstream_inference_cost": 0.00315729,
         "upstream_inference_prompt_cost": 0.00245349,
-        "upstream_inference_completions_cost": 0.000576
+        "upstream_inference_completions_cost": 0.0007038
       },
       "completion_tokens_details": {
         "reasoning_tokens": 0,
@@ -1299,10 +1383,11 @@
         "audio_tokens": 0
       }
     },
-    "rendered": false,
-    "render_note": "Uncaught (in promise) Error: No brush or color set. Call brush.set('brushName', color) before drawing.",
-    "png_path": null,
-    "render_size": 2279
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v4/qwen3_235b__p05.png",
+    "render_size": 585116
   },
   "qwen3_235b__v4__p12": {
     "generated": true,
@@ -1603,14 +1688,14 @@
   },
   "gemma3_27b__v4__p04": {
     "generated": true,
-    "lines": 80,
+    "lines": 62,
     "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v4/gemma3_27b__p04.js",
     "js_exists": true,
     "usage": {
       "prompt_tokens": 29294,
-      "completion_tokens": 852,
-      "total_tokens": 30146,
-      "cost": 0.00361982214,
+      "completion_tokens": 735,
+      "total_tokens": 30029,
+      "cost": 0.00359665614,
       "is_byok": false,
       "prompt_tokens_details": {
         "cached_tokens": 0,
@@ -1619,9 +1704,9 @@
         "video_tokens": 0
       },
       "cost_details": {
-        "upstream_inference_cost": 0.003656386,
+        "upstream_inference_cost": 0.003632986,
         "upstream_inference_prompt_cost": 0.003485986,
-        "upstream_inference_completions_cost": 0.0001704
+        "upstream_inference_completions_cost": 0.000147
       },
       "completion_tokens_details": {
         "reasoning_tokens": 0,
@@ -1629,21 +1714,22 @@
         "audio_tokens": 0
       }
     },
-    "rendered": false,
-    "render_note": "noHatch is not defined\ndraw (file:///Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/scripts/_tmp_62811_1776611983710.html:69:3)",
-    "png_path": null,
-    "render_size": 2279
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v4/gemma3_27b__p04.png",
+    "render_size": 10495
   },
   "gemma3_27b__v4__p09": {
     "generated": true,
-    "lines": 62,
+    "lines": 61,
     "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v4/gemma3_27b__p09.js",
     "js_exists": true,
     "usage": {
-      "prompt_tokens": 29287,
-      "completion_tokens": 646,
-      "total_tokens": 29933,
-      "cost": 0.003091275,
+      "prompt_tokens": 29291,
+      "completion_tokens": 656,
+      "total_tokens": 29947,
+      "cost": 0.0026120952,
       "is_byok": false,
       "prompt_tokens_details": {
         "cached_tokens": 0,
@@ -1652,9 +1738,9 @@
         "video_tokens": 0
       },
       "cost_details": {
-        "upstream_inference_cost": 0.0031225,
-        "upstream_inference_prompt_cost": 0.0029287,
-        "upstream_inference_completions_cost": 0.0001938
+        "upstream_inference_cost": 0.00263848,
+        "upstream_inference_prompt_cost": 0.00234328,
+        "upstream_inference_completions_cost": 0.0002952
       },
       "completion_tokens_details": {
         "reasoning_tokens": 0,
@@ -1662,21 +1748,22 @@
         "audio_tokens": 0
       }
     },
-    "rendered": false,
-    "render_note": "Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'x')",
-    "png_path": null,
-    "render_size": 2279
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v4/gemma3_27b__p09.png",
+    "render_size": 111911
   },
   "gemma3_27b__v4__p10": {
     "generated": true,
-    "lines": 53,
+    "lines": 68,
     "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v4/gemma3_27b__p10.js",
     "js_exists": true,
     "usage": {
-      "prompt_tokens": 29289,
-      "completion_tokens": 514,
-      "total_tokens": 29803,
-      "cost": 0.0024011064,
+      "prompt_tokens": 29292,
+      "completion_tokens": 682,
+      "total_tokens": 29974,
+      "cost": 0.00358592652,
       "is_byok": false,
       "prompt_tokens_details": {
         "cached_tokens": 0,
@@ -1685,9 +1772,9 @@
         "video_tokens": 0
       },
       "cost_details": {
-        "upstream_inference_cost": 0.00242536,
-        "upstream_inference_prompt_cost": 0.00234312,
-        "upstream_inference_completions_cost": 8.224e-05
+        "upstream_inference_cost": 0.003622148,
+        "upstream_inference_prompt_cost": 0.003485748,
+        "upstream_inference_completions_cost": 0.0001364
       },
       "completion_tokens_details": {
         "reasoning_tokens": 0,
@@ -1695,10 +1782,11 @@
         "audio_tokens": 0
       }
     },
-    "rendered": false,
-    "render_note": "Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'kind')",
-    "png_path": null,
-    "render_size": 2279
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v4/gemma3_27b__p10.png",
+    "render_size": 210525
   },
   "qwen3_235b__v4__p04": {
     "generated": true,
@@ -1768,14 +1856,14 @@
   },
   "gemma3_27b__v4__p12": {
     "generated": true,
-    "lines": 49,
+    "lines": 48,
     "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v4/gemma3_27b__p12.js",
     "js_exists": true,
     "usage": {
       "prompt_tokens": 29284,
-      "completion_tokens": 470,
-      "total_tokens": 29754,
-      "cost": 0.003038706,
+      "completion_tokens": 486,
+      "total_tokens": 29770,
+      "cost": 0.003043458,
       "is_byok": false,
       "prompt_tokens_details": {
         "cached_tokens": 0,
@@ -1784,9 +1872,9 @@
         "video_tokens": 0
       },
       "cost_details": {
-        "upstream_inference_cost": 0.0030694,
+        "upstream_inference_cost": 0.0030742,
         "upstream_inference_prompt_cost": 0.0029284,
-        "upstream_inference_completions_cost": 0.000141
+        "upstream_inference_completions_cost": 0.0001458
       },
       "completion_tokens_details": {
         "reasoning_tokens": 0,
@@ -1794,10 +1882,11 @@
         "audio_tokens": 0
       }
     },
-    "rendered": false,
-    "render_note": "brush.noWiggle is not a function\ndraw (file:///Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/scripts/_tmp_63841_1776612016450.html:45:9)",
-    "png_path": null,
-    "render_size": 2279
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v4/gemma3_27b__p12.png",
+    "render_size": 112102
   },
   "gemma3_27b__v4__p07": {
     "generated": true,

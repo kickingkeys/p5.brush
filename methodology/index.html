@@ -7,65 +7,188 @@
 <style>
 :root {
   --bg: #fffaf3; --ink: #222; --muted: #6a6157;
-  --old: #c9b89a; --new: #4a8a66;
+  --old: #c9b89a; --v1: #4a8a66; --v2: #2f6b9a; --v3: #8e4fa3; --v4: #c2410c; --v5: #b91c5c;
+  --surface: #fff;
+  --border: #e0d4bd;
+  --border-strong: #c9b89a;
 }
-* { box-sizing: border-box }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 180px; }
 body {
-  font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   background: var(--bg); color: var(--ink); margin: 0;
-  padding: 0;
 }
-main { max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px }
-h1 { font-size: 2.2rem; line-height: 1.15; margin: 0 0 12px }
-h2 { font-size: 1.5rem; margin: 48px 0 16px; border-bottom: 1px solid #e0d4bd; padding-bottom: 6px }
-h3 { font-size: 1.05rem; margin: 0 0 4px }
-.lede { font-size: 1.1rem; color: var(--muted); max-width: 72ch; margin: 0 0 16px }
-nav a { margin-right: 16px; color: var(--ink); text-decoration: underline }
-.prompt-text { color: var(--muted); font-size: 0.95rem; margin: 0 0 12px; max-width: 80ch }
-.prompt-row { margin: 36px 0 }
-.prompt-row header { margin-bottom: 12px }
-.models-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
+main { max-width: 1400px; margin: 0 auto; padding: 32px 24px 80px; }
+h1 { font-size: 2rem; line-height: 1.15; margin: 0 0 12px; }
+h2 { font-size: 1.4rem; margin: 48px 0 12px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+.lede { font-size: 1.05rem; color: var(--muted); max-width: 72ch; margin: 0 0 16px; }
+nav.top { margin: 0 0 20px; }
+nav.top a { margin-right: 16px; color: var(--ink); text-decoration: underline; }
+code { background: #f0e6d0; padding: 1px 4px; border-radius: 2px; font-size: 0.9em; }
+
+/* Prompt index (chips) */
+.prompt-index {
+  display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 24px;
 }
-.cell-label { font-size: 0.78rem; color: var(--muted); margin-bottom: 4px; font-variant: all-small-caps; letter-spacing: 0.06em }
-.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 4px }
-.pair.triple { grid-template-columns: 1fr 1fr 1fr }
-.pair.quad { grid-template-columns: 1fr 1fr 1fr 1fr }
-.pair.quint { grid-template-columns: 1fr 1fr 1fr 1fr 1fr }
-.half { position: relative; background: #eee1c6; aspect-ratio: 1/1; overflow: hidden; border-radius: 4px }
-.half img { width: 100%; height: 100%; object-fit: cover; display: block }
-.badge {
-  position: absolute; top: 4px; left: 4px;
-  font-size: 0.7rem; padding: 2px 6px; border-radius: 3px;
-  font-weight: 600; background: rgba(255,250,243,0.9);
-  z-index: 2;
+.idx-card {
+  display: inline-flex; flex-direction: column; align-items: center;
+  padding: 6px 10px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 6px; text-decoration: none; color: var(--ink);
+  font-size: 0.82rem; min-width: 72px;
 }
-.badge.old { color: #8a6f38 }
-.badge.new { color: var(--new) }
-.badge.v2 { color: #2f6b9a }
-.badge.v3 { color: #8e4fa3 }
-.badge.v4 { color: #c2410c }
-.fail { padding: 8px; font-size: 0.75rem; color: #c03; background: #ffeeea; height: 100%; display: flex; align-items: center }
-.model-heads { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 8px; position: sticky; top: 0; background: var(--bg); padding: 10px 0; z-index: 5; border-bottom: 1px solid #e0d4bd }
-.model-head { font-size: 0.9rem; font-weight: 600; text-align: center }
-.limitations, .methodology { max-width: 80ch }
-.limitations li, .methodology li { margin: 6px 0 }
-code { background: #f0e6d0; padding: 1px 4px; border-radius: 2px; font-size: 0.9em }
-.footnote { color: var(--muted); font-size: 0.85rem; margin-top: 48px; border-top: 1px solid #e0d4bd; padding-top: 16px }
+.idx-card:hover { border-color: var(--border-strong); background: #fff; }
+.idx-id { font-weight: 600; }
+.idx-medium { color: var(--muted); font-size: 0.75rem; }
+
+/* Sticky filter bar */
+.filter-bar {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--bg); padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex; flex-wrap: wrap; gap: 18px; align-items: center;
+  margin-bottom: 24px;
+}
+.filter-bar strong { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.filter-group { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.chk { display: inline-flex; align-items: center; gap: 4px; font-size: 0.9rem; cursor: pointer; user-select: none; }
+.chk input { cursor: pointer; }
+select.model-focus {
+  font-size: 0.9rem; padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px;
+  background: var(--surface);
+}
+.size-btns button {
+  font-size: 0.85rem; padding: 4px 10px; border: 1px solid var(--border); background: var(--surface);
+  border-radius: 4px; cursor: pointer;
+}
+.size-btns button.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+/* Prompt block */
+.prompt-block { margin: 40px 0; }
+.prompt-header { margin-bottom: 12px; }
+.prompt-meta { display: flex; gap: 10px; align-items: baseline; }
+.prompt-id { font-weight: 700; font-size: 1.1rem; }
+.prompt-medium { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); background: var(--surface); padding: 2px 8px; border-radius: 3px; border: 1px solid var(--border); }
+.prompt-text { color: var(--muted); margin: 6px 0 0; max-width: 80ch; }
+
+/* Compare table */
+.compare-wrap { overflow-x: auto; }
+.compare-table { border-collapse: separate; border-spacing: 6px; width: 100%; }
+.compare-table th.model-label {
+  text-align: left; font-size: 0.85rem; font-weight: 600; color: var(--muted);
+  padding-right: 10px; width: 120px; vertical-align: middle;
+  white-space: nowrap;
+}
+.compare-table thead th {
+  font-size: 0.78rem; color: var(--muted); font-weight: 600;
+  text-align: center; padding-bottom: 4px;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.compare-table thead th.col-old { color: var(--old); }
+.compare-table thead th.col-v1  { color: var(--v1); }
+.compare-table thead th.col-v2  { color: var(--v2); }
+.compare-table thead th.col-v3  { color: var(--v3); }
+.compare-table thead th.col-v4  { color: var(--v4); }
+.compare-table thead th.col-v5  { color: var(--v5); }
+
+.compare-table td { padding: 0; vertical-align: top; }
+.compare-table .img-btn {
+  display: block; width: 100%; aspect-ratio: 1/1; padding: 0; margin: 0; border: 2px solid transparent;
+  background: #eee1c6; cursor: zoom-in; border-radius: 4px; overflow: hidden;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.compare-table .img-btn:hover { border-color: var(--ink); transform: scale(1.02); }
+.compare-table .img-btn img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.compare-table td.col-old .img-btn { border-color: rgba(201,184,154,0.5); }
+.compare-table td.col-v4  .img-btn { border-color: rgba(194,65,12,0.5); }
+
+.compare-table .fail {
+  aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center;
+  background: #ffeeea; color: #c03; font-size: 0.7rem; border-radius: 4px;
+  padding: 8px; text-align: center;
+}
+
+/* Column visibility toggles */
+body.hide-old .col-old { display: none; }
+body.hide-v1  .col-v1  { display: none; }
+body.hide-v2  .col-v2  { display: none; }
+body.hide-v3  .col-v3  { display: none; }
+body.hide-v4  .col-v4  { display: none; }
+body.hide-v5  .col-v5  { display: none; }
+
+/* Single-model focus */
+body[data-focus]:not([data-focus=""]) tbody tr { display: none; }
+body[data-focus="claude_sonnet_46"] tbody tr.row-claude_sonnet_46 { display: table-row; }
+body[data-focus="gpt_54"] tbody tr.row-gpt_54 { display: table-row; }
+body[data-focus="gemini_31_pro"] tbody tr.row-gemini_31_pro { display: table-row; }
+body[data-focus="qwen3_235b"] tbody tr.row-qwen3_235b { display: table-row; }
+body[data-focus="gemma3_27b"] tbody tr.row-gemma3_27b { display: table-row; }
+
+/* Size modes */
+body.size-md .compare-table { max-width: 100%; }
+body.size-md .compare-table thead th:not(.model-label) { min-width: 160px; }
+body.size-lg .compare-table thead th:not(.model-label) { min-width: 260px; }
+body.size-xl .compare-table thead th:not(.model-label) { min-width: 400px; }
+
+/* Lightbox */
+.lightbox {
+  display: none; position: fixed; inset: 0; background: rgba(34,28,16,0.92);
+  z-index: 1000; padding: 24px; overflow-y: auto;
+}
+.lightbox.open { display: block; }
+.lightbox-inner { max-width: 1400px; margin: 0 auto; color: var(--bg); }
+.lightbox-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.lightbox-header h3 { margin: 0; color: var(--bg); font-size: 1.3rem; }
+.lightbox-header .close {
+  background: none; border: 1px solid var(--bg); color: var(--bg);
+  padding: 4px 12px; border-radius: 3px; cursor: pointer; font-size: 0.9rem;
+}
+.lightbox-prompt { color: #ded3c1; margin: 0 0 4px; }
+.lightbox-model { color: #ded3c1; font-size: 0.9rem; margin: 0 0 16px; }
+.lightbox-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.lightbox-cell { background: #2a2015; border-radius: 4px; overflow: hidden; }
+.lightbox-cell .lb-label { padding: 6px 10px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; background: #1a1410; }
+.lightbox-cell img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+.lightbox-cell .lb-missing {
+  aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center;
+  background: #3a2f22; color: #a89783; font-size: 0.8rem;
+}
+.lightbox-cell.lb-old .lb-label { color: var(--old); }
+.lightbox-cell.lb-v1  .lb-label { color: var(--v1); }
+.lightbox-cell.lb-v2  .lb-label { color: var(--v2); }
+.lightbox-cell.lb-v3  .lb-label { color: var(--v3); }
+.lightbox-cell.lb-v4  .lb-label { color: var(--v4); }
+.lightbox-cell.lb-v5  .lb-label { color: var(--v5); }
+
+/* Legend */
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.85rem; color: var(--muted); margin: 6px 0 8px; }
+.legend-item { display: inline-flex; align-items: center; gap: 5px; }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.legend-dot.old { background: var(--old); }
+.legend-dot.v1  { background: var(--v1); }
+.legend-dot.v2  { background: var(--v2); }
+.legend-dot.v3  { background: var(--v3); }
+.legend-dot.v4  { background: var(--v4); }
+.legend-dot.v5  { background: var(--v5); }
+
+.footnote { color: var(--muted); font-size: 0.85rem; margin-top: 48px; border-top: 1px solid var(--border); padding-top: 16px; }
+.footnote a { color: var(--ink); }
+
+@media (max-width: 900px) {
+  .compare-table th.model-label { width: 90px; font-size: 0.75rem; }
+  body.size-md .compare-table thead th:not(.model-label) { min-width: 100px; }
+  .lightbox-grid { grid-template-columns: repeat(2, 1fr); }
+}
 </style>
 </head>
-<body>
+<body class="size-md" data-focus="">
 <main>
 
 <h1>p5.brush Recipes — before / after</h1>
 <p class="lede">
-An additive <code>## Recipes</code> section for p5.brush's <code>llms.txt</code>, evaluated by running the same 12 prompts through 5 models in two conditions: the upstream docs alone, vs the upstream docs with our Recipes section appended.
+An additive <code>## Recipes</code> section for p5.brush's <code>llms.txt</code>, evaluated by running 12 prompts through 5 models across 5 successive versions of the Recipes text. Each cell is one seed; failures stay visible.
 </p>
-<nav>
-  <a href="#grid">Comparison grid</a>
-  <a href="#clips">Live sessions</a>
+<nav class="top">
+  <a href="#grid">Comparison</a>
   <a href="#limits">Limitations</a>
   <a href="#method">Methodology</a>
   <a href="https://github.com/acamposuribe/p5.brush">Upstream</a>
@@ -73,785 +196,342 @@ An additive <code>## Recipes</code> section for p5.brush's <code>llms.txt</code>
 </nav>
 
 <h2 id="grid">Controlled comparison</h2>
-<p class="lede">
-For each prompt, each model generates a sketch in five conditions: <span style="color:var(--old)">old</span> (upstream docs only), <span style="color:var(--new)">v1</span> (upstream + our Recipes), <span style="color:#2f6b9a">v2</span> (Recipes + Particle Fields, Gestural marker, tighter Pen), <span style="color:#8e4fa3">v3</span> (v2 + Watercolor Form/Field split), and <span style="color:#c2410c">v4</span> (v3 + Spray Chaos mode, cpencil color cap, pen per-zone cap, narrowed Particle Fields anchor rule). One seed per cell. Failures stay visible — blank/error canvases are data.
-</p>
-<div class="model-heads"><div class="model-head">Claude Sonnet 4.6</div><div class="model-head">GPT-5.4</div><div class="model-head">Gemini 3.1 Pro</div><div class="model-head">Qwen3-235B</div><div class="model-head">Gemma 3 27B</div></div>
 
-      <section class="prompt-row" data-prompt="p01">
-        <header>
-          <h3>p01 — watercolor</h3>
-          <p class="prompt-text">An abstract field of overlapping circular watercolor blooms in dusty pinks and ochres, their edges bleeding into each other on warm paper.</p>
-        </header>
-        <div class="models-grid">
-        <div class="cell">
-          <div class="cell-label">p01</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p01.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p01.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p01.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p01.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/claude_sonnet_46__p01.png" alt="v4" loading="lazy"></div>
-          </div>
+<div class="legend">
+  <span class="legend-item"><span class="legend-dot old"></span> old — upstream docs only</span>
+  <span class="legend-item"><span class="legend-dot v1"></span> v1 — + Recipes draft</span>
+  <span class="legend-item"><span class="legend-dot v2"></span> v2 — + Particle Fields, Gestural marker</span>
+  <span class="legend-item"><span class="legend-dot v3"></span> v3 — + Watercolor Form/Field</span>
+  <span class="legend-item"><span class="legend-dot v4"></span> v4 — + Spray Chaos, cpencil cap, anchor narrowing</span>
+</div>
+
+<nav class="prompt-index"><a href="#p01" class="idx-card"><span class="idx-id">p01</span><span class="idx-medium">watercolor</span></a><a href="#p02" class="idx-card"><span class="idx-id">p02</span><span class="idx-medium">pencil</span></a><a href="#p03" class="idx-card"><span class="idx-id">p03</span><span class="idx-medium">charcoal</span></a><a href="#p04" class="idx-card"><span class="idx-id">p04</span><span class="idx-medium">cpencil</span></a><a href="#p05" class="idx-card"><span class="idx-id">p05</span><span class="idx-medium">pen</span></a><a href="#p06" class="idx-card"><span class="idx-id">p06</span><span class="idx-medium">marker</span></a><a href="#p07" class="idx-card"><span class="idx-id">p07</span><span class="idx-medium">spray</span></a><a href="#p08" class="idx-card"><span class="idx-id">p08</span><span class="idx-medium">multi (watercolor + pencil)</span></a><a href="#p09" class="idx-card"><span class="idx-id">p09</span><span class="idx-medium">multi (watercolor + marker + pen)</span></a><a href="#p10" class="idx-card"><span class="idx-id">p10</span><span class="idx-medium">multi (watercolor + charcoal + pen)</span></a><a href="#p11" class="idx-card"><span class="idx-id">p11</span><span class="idx-medium">abstract (pen + cpencil)</span></a><a href="#p12" class="idx-card"><span class="idx-id">p12</span><span class="idx-medium">abstract (spray, atmospheric)</span></a></nav>
+
+<div class="filter-bar">
+  <div class="filter-group">
+    <strong>Show versions</strong>
+    <label class="chk"><input type="checkbox" class="ver-chk" data-ver="old" checked> old</label><label class="chk"><input type="checkbox" class="ver-chk" data-ver="v1" > v1</label><label class="chk"><input type="checkbox" class="ver-chk" data-ver="v2" > v2</label><label class="chk"><input type="checkbox" class="ver-chk" data-ver="v3" > v3</label><label class="chk"><input type="checkbox" class="ver-chk" data-ver="v4" > v4</label><label class="chk"><input type="checkbox" class="ver-chk" data-ver="v5" checked> v5</label>
+  </div>
+  <div class="filter-group">
+    <strong>Focus model</strong>
+    <select class="model-focus">
+      <option value="">All models</option>
+      <option value="claude_sonnet_46">Claude Sonnet 4.6</option><option value="gpt_54">GPT-5.4</option><option value="gemini_31_pro">Gemini 3.1 Pro</option><option value="qwen3_235b">Qwen3-235B</option><option value="gemma3_27b">Gemma 3 27B</option>
+    </select>
+  </div>
+  <div class="filter-group size-btns">
+    <strong>Size</strong>
+    <button data-size="md" class="active">Medium</button>
+    <button data-size="lg">Large</button>
+    <button data-size="xl">X-Large</button>
+  </div>
+</div>
+
+
+    <section class="prompt-block" id="p01" data-prompt="p01">
+      <header class="prompt-header">
+        <div class="prompt-meta">
+          <span class="prompt-id">p01</span>
+          <span class="prompt-medium">watercolor</span>
         </div>
+        <p class="prompt-text">An abstract field of overlapping circular watercolor blooms in dusty pinks and ochres, their edges bleeding into each other on warm paper.</p>
+      </header>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr><th class="model-label"></th><th class="col-old v-old">old</th><th class="col-v1 v-v1">v1</th><th class="col-v2 v-v2">v2</th><th class="col-v3 v-v3">v3</th><th class="col-v4 v-v4">v4</th><th class="col-v5 v-v5">v5</th></tr>
+          </thead>
+          <tbody>
+            <tr class="row-claude_sonnet_46"><th class="model-label">Claude Sonnet 4.6</th><td class="col-old v-old"><button class="img-btn" data-model="claude_sonnet_46" data-ver="old" data-pid="p01"><img src="renders/old/claude_sonnet_46__p01.png" alt="claude_sonnet_46 old p01" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v1" data-pid="p01"><img src="renders/new/claude_sonnet_46__p01.png" alt="claude_sonnet_46 v1 p01" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v2" data-pid="p01"><img src="renders/v2/claude_sonnet_46__p01.png" alt="claude_sonnet_46 v2 p01" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v3" data-pid="p01"><img src="renders/v3/claude_sonnet_46__p01.png" alt="claude_sonnet_46 v3 p01" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v4" data-pid="p01"><img src="renders/v4/claude_sonnet_46__p01.png" alt="claude_sonnet_46 v4 p01" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v5" data-pid="p01"><img src="renders/v5/claude_sonnet_46__p01.png" alt="claude_sonnet_46 v5 p01" loading="lazy"></button></td></tr>
+<tr class="row-gpt_54"><th class="model-label">GPT-5.4</th><td class="col-old v-old"><button class="img-btn" data-model="gpt_54" data-ver="old" data-pid="p01"><img src="renders/old/gpt_54__p01.png" alt="gpt_54 old p01" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gpt_54" data-ver="v1" data-pid="p01"><img src="renders/new/gpt_54__p01.png" alt="gpt_54 v1 p01" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gpt_54" data-ver="v2" data-pid="p01"><img src="renders/v2/gpt_54__p01.png" alt="gpt_54 v2 p01" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gpt_54" data-ver="v3" data-pid="p01"><img src="renders/v3/gpt_54__p01.png" alt="gpt_54 v3 p01" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gpt_54" data-ver="v4" data-pid="p01"><img src="renders/v4/gpt_54__p01.png" alt="gpt_54 v4 p01" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gpt_54" data-ver="v5" data-pid="p01"><img src="renders/v5/gpt_54__p01.png" alt="gpt_54 v5 p01" loading="lazy"></button></td></tr>
+<tr class="row-gemini_31_pro"><th class="model-label">Gemini 3.1 Pro</th><td class="col-old v-old"><button class="img-btn" data-model="gemini_31_pro" data-ver="old" data-pid="p01"><img src="renders/old/gemini_31_pro__p01.png" alt="gemini_31_pro old p01" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemini_31_pro" data-ver="v1" data-pid="p01"><img src="renders/new/gemini_31_pro__p01.png" alt="gemini_31_pro v1 p01" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemini_31_pro" data-ver="v2" data-pid="p01"><img src="renders/v2/gemini_31_pro__p01.png" alt="gemini_31_pro v2 p01" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemini_31_pro" data-ver="v3" data-pid="p01"><img src="renders/v3/gemini_31_pro__p01.png" alt="gemini_31_pro v3 p01" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemini_31_pro" data-ver="v4" data-pid="p01"><img src="renders/v4/gemini_31_pro__p01.png" alt="gemini_31_pro v4 p01" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemini_31_pro" data-ver="v5" data-pid="p01"><img src="renders/v5/gemini_31_pro__p01.png" alt="gemini_31_pro v5 p01" loading="lazy"></button></td></tr>
+<tr class="row-qwen3_235b"><th class="model-label">Qwen3-235B</th><td class="col-old v-old"><button class="img-btn" data-model="qwen3_235b" data-ver="old" data-pid="p01"><img src="renders/old/qwen3_235b__p01.png" alt="qwen3_235b old p01" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="qwen3_235b" data-ver="v1" data-pid="p01"><img src="renders/new/qwen3_235b__p01.png" alt="qwen3_235b v1 p01" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="qwen3_235b" data-ver="v2" data-pid="p01"><img src="renders/v2/qwen3_235b__p01.png" alt="qwen3_235b v2 p01" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="qwen3_235b" data-ver="v3" data-pid="p01"><img src="renders/v3/qwen3_235b__p01.png" alt="qwen3_235b v3 p01" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="qwen3_235b" data-ver="v4" data-pid="p01"><img src="renders/v4/qwen3_235b__p01.png" alt="qwen3_235b v4 p01" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="qwen3_235b" data-ver="v5" data-pid="p01"><img src="renders/v5/qwen3_235b__p01.png" alt="qwen3_235b v5 p01" loading="lazy"></button></td></tr>
+<tr class="row-gemma3_27b"><th class="model-label">Gemma 3 27B</th><td class="col-old v-old"><button class="img-btn" data-model="gemma3_27b" data-ver="old" data-pid="p01"><img src="renders/old/gemma3_27b__p01.png" alt="gemma3_27b old p01" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemma3_27b" data-ver="v1" data-pid="p01"><img src="renders/new/gemma3_27b__p01.png" alt="gemma3_27b v1 p01" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemma3_27b" data-ver="v2" data-pid="p01"><img src="renders/v2/gemma3_27b__p01.png" alt="gemma3_27b v2 p01" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemma3_27b" data-ver="v3" data-pid="p01"><img src="renders/v3/gemma3_27b__p01.png" alt="gemma3_27b v3 p01" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemma3_27b" data-ver="v4" data-pid="p01"><img src="renders/v4/gemma3_27b__p01.png" alt="gemma3_27b v4 p01" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemma3_27b" data-ver="v5" data-pid="p01"><img src="renders/v5/gemma3_27b__p01.png" alt="gemma3_27b v5 p01" loading="lazy"></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div class="cell">
-          <div class="cell-label">p01</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p01.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p01.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p01.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p01.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gpt_54__p01.png" alt="v4" loading="lazy"></div>
-          </div>
+    <section class="prompt-block" id="p02" data-prompt="p02">
+      <header class="prompt-header">
+        <div class="prompt-meta">
+          <span class="prompt-id">p02</span>
+          <span class="prompt-medium">pencil</span>
         </div>
+        <p class="prompt-text">A botanical study of wild grasses and seed heads in graphite pencil only — fine outlines, hatching, and tonal shading, no color, unfinished edges.</p>
+      </header>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr><th class="model-label"></th><th class="col-old v-old">old</th><th class="col-v1 v-v1">v1</th><th class="col-v2 v-v2">v2</th><th class="col-v3 v-v3">v3</th><th class="col-v4 v-v4">v4</th><th class="col-v5 v-v5">v5</th></tr>
+          </thead>
+          <tbody>
+            <tr class="row-claude_sonnet_46"><th class="model-label">Claude Sonnet 4.6</th><td class="col-old v-old"><button class="img-btn" data-model="claude_sonnet_46" data-ver="old" data-pid="p02"><img src="renders/old/claude_sonnet_46__p02.png" alt="claude_sonnet_46 old p02" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v1" data-pid="p02"><img src="renders/new/claude_sonnet_46__p02.png" alt="claude_sonnet_46 v1 p02" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v2" data-pid="p02"><img src="renders/v2/claude_sonnet_46__p02.png" alt="claude_sonnet_46 v2 p02" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v3" data-pid="p02"><img src="renders/v3/claude_sonnet_46__p02.png" alt="claude_sonnet_46 v3 p02" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v4" data-pid="p02"><img src="renders/v4/claude_sonnet_46__p02.png" alt="claude_sonnet_46 v4 p02" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v5" data-pid="p02"><img src="renders/v5/claude_sonnet_46__p02.png" alt="claude_sonnet_46 v5 p02" loading="lazy"></button></td></tr>
+<tr class="row-gpt_54"><th class="model-label">GPT-5.4</th><td class="col-old v-old"><button class="img-btn" data-model="gpt_54" data-ver="old" data-pid="p02"><img src="renders/old/gpt_54__p02.png" alt="gpt_54 old p02" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gpt_54" data-ver="v1" data-pid="p02"><img src="renders/new/gpt_54__p02.png" alt="gpt_54 v1 p02" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gpt_54" data-ver="v2" data-pid="p02"><img src="renders/v2/gpt_54__p02.png" alt="gpt_54 v2 p02" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gpt_54" data-ver="v3" data-pid="p02"><img src="renders/v3/gpt_54__p02.png" alt="gpt_54 v3 p02" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gpt_54" data-ver="v4" data-pid="p02"><img src="renders/v4/gpt_54__p02.png" alt="gpt_54 v4 p02" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gpt_54" data-ver="v5" data-pid="p02"><img src="renders/v5/gpt_54__p02.png" alt="gpt_54 v5 p02" loading="lazy"></button></td></tr>
+<tr class="row-gemini_31_pro"><th class="model-label">Gemini 3.1 Pro</th><td class="col-old v-old"><button class="img-btn" data-model="gemini_31_pro" data-ver="old" data-pid="p02"><img src="renders/old/gemini_31_pro__p02.png" alt="gemini_31_pro old p02" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemini_31_pro" data-ver="v1" data-pid="p02"><img src="renders/new/gemini_31_pro__p02.png" alt="gemini_31_pro v1 p02" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemini_31_pro" data-ver="v2" data-pid="p02"><img src="renders/v2/gemini_31_pro__p02.png" alt="gemini_31_pro v2 p02" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemini_31_pro" data-ver="v3" data-pid="p02"><img src="renders/v3/gemini_31_pro__p02.png" alt="gemini_31_pro v3 p02" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemini_31_pro" data-ver="v4" data-pid="p02"><img src="renders/v4/gemini_31_pro__p02.png" alt="gemini_31_pro v4 p02" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemini_31_pro" data-ver="v5" data-pid="p02"><img src="renders/v5/gemini_31_pro__p02.png" alt="gemini_31_pro v5 p02" loading="lazy"></button></td></tr>
+<tr class="row-qwen3_235b"><th class="model-label">Qwen3-235B</th><td class="col-old v-old"><button class="img-btn" data-model="qwen3_235b" data-ver="old" data-pid="p02"><img src="renders/old/qwen3_235b__p02.png" alt="qwen3_235b old p02" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="qwen3_235b" data-ver="v1" data-pid="p02"><img src="renders/new/qwen3_235b__p02.png" alt="qwen3_235b v1 p02" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="qwen3_235b" data-ver="v2" data-pid="p02"><img src="renders/v2/qwen3_235b__p02.png" alt="qwen3_235b v2 p02" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="qwen3_235b" data-ver="v3" data-pid="p02"><img src="renders/v3/qwen3_235b__p02.png" alt="qwen3_235b v3 p02" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="qwen3_235b" data-ver="v4" data-pid="p02"><img src="renders/v4/qwen3_235b__p02.png" alt="qwen3_235b v4 p02" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="qwen3_235b" data-ver="v5" data-pid="p02"><img src="renders/v5/qwen3_235b__p02.png" alt="qwen3_235b v5 p02" loading="lazy"></button></td></tr>
+<tr class="row-gemma3_27b"><th class="model-label">Gemma 3 27B</th><td class="col-old v-old"><button class="img-btn" data-model="gemma3_27b" data-ver="old" data-pid="p02"><img src="renders/old/gemma3_27b__p02.png" alt="gemma3_27b old p02" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemma3_27b" data-ver="v1" data-pid="p02"><img src="renders/new/gemma3_27b__p02.png" alt="gemma3_27b v1 p02" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemma3_27b" data-ver="v2" data-pid="p02"><img src="renders/v2/gemma3_27b__p02.png" alt="gemma3_27b v2 p02" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemma3_27b" data-ver="v3" data-pid="p02"><img src="renders/v3/gemma3_27b__p02.png" alt="gemma3_27b v3 p02" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemma3_27b" data-ver="v4" data-pid="p02"><img src="renders/v4/gemma3_27b__p02.png" alt="gemma3_27b v4 p02" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemma3_27b" data-ver="v5" data-pid="p02"><img src="renders/v5/gemma3_27b__p02.png" alt="gemma3_27b v5 p02" loading="lazy"></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div class="cell">
-          <div class="cell-label">p01</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p01.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p01.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p01.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p01.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gemini_31_pro__p01.png" alt="v4" loading="lazy"></div>
-          </div>
+    <section class="prompt-block" id="p03" data-prompt="p03">
+      <header class="prompt-header">
+        <div class="prompt-meta">
+          <span class="prompt-id">p03</span>
+          <span class="prompt-medium">charcoal</span>
         </div>
+        <p class="prompt-text">A gestural figure study of a dancer mid-leap, drawn in loose charcoal with heavy smudges trailing behind the motion.</p>
+      </header>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr><th class="model-label"></th><th class="col-old v-old">old</th><th class="col-v1 v-v1">v1</th><th class="col-v2 v-v2">v2</th><th class="col-v3 v-v3">v3</th><th class="col-v4 v-v4">v4</th><th class="col-v5 v-v5">v5</th></tr>
+          </thead>
+          <tbody>
+            <tr class="row-claude_sonnet_46"><th class="model-label">Claude Sonnet 4.6</th><td class="col-old v-old"><button class="img-btn" data-model="claude_sonnet_46" data-ver="old" data-pid="p03"><img src="renders/old/claude_sonnet_46__p03.png" alt="claude_sonnet_46 old p03" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v1" data-pid="p03"><img src="renders/new/claude_sonnet_46__p03.png" alt="claude_sonnet_46 v1 p03" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v2" data-pid="p03"><img src="renders/v2/claude_sonnet_46__p03.png" alt="claude_sonnet_46 v2 p03" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v3" data-pid="p03"><img src="renders/v3/claude_sonnet_46__p03.png" alt="claude_sonnet_46 v3 p03" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v4" data-pid="p03"><img src="renders/v4/claude_sonnet_46__p03.png" alt="claude_sonnet_46 v4 p03" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v5" data-pid="p03"><img src="renders/v5/claude_sonnet_46__p03.png" alt="claude_sonnet_46 v5 p03" loading="lazy"></button></td></tr>
+<tr class="row-gpt_54"><th class="model-label">GPT-5.4</th><td class="col-old v-old"><button class="img-btn" data-model="gpt_54" data-ver="old" data-pid="p03"><img src="renders/old/gpt_54__p03.png" alt="gpt_54 old p03" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gpt_54" data-ver="v1" data-pid="p03"><img src="renders/new/gpt_54__p03.png" alt="gpt_54 v1 p03" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gpt_54" data-ver="v2" data-pid="p03"><img src="renders/v2/gpt_54__p03.png" alt="gpt_54 v2 p03" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gpt_54" data-ver="v3" data-pid="p03"><img src="renders/v3/gpt_54__p03.png" alt="gpt_54 v3 p03" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gpt_54" data-ver="v4" data-pid="p03"><img src="renders/v4/gpt_54__p03.png" alt="gpt_54 v4 p03" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gpt_54" data-ver="v5" data-pid="p03"><img src="renders/v5/gpt_54__p03.png" alt="gpt_54 v5 p03" loading="lazy"></button></td></tr>
+<tr class="row-gemini_31_pro"><th class="model-label">Gemini 3.1 Pro</th><td class="col-old v-old"><button class="img-btn" data-model="gemini_31_pro" data-ver="old" data-pid="p03"><img src="renders/old/gemini_31_pro__p03.png" alt="gemini_31_pro old p03" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemini_31_pro" data-ver="v1" data-pid="p03"><img src="renders/new/gemini_31_pro__p03.png" alt="gemini_31_pro v1 p03" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemini_31_pro" data-ver="v2" data-pid="p03"><img src="renders/v2/gemini_31_pro__p03.png" alt="gemini_31_pro v2 p03" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemini_31_pro" data-ver="v3" data-pid="p03"><img src="renders/v3/gemini_31_pro__p03.png" alt="gemini_31_pro v3 p03" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemini_31_pro" data-ver="v4" data-pid="p03"><img src="renders/v4/gemini_31_pro__p03.png" alt="gemini_31_pro v4 p03" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemini_31_pro" data-ver="v5" data-pid="p03"><img src="renders/v5/gemini_31_pro__p03.png" alt="gemini_31_pro v5 p03" loading="lazy"></button></td></tr>
+<tr class="row-qwen3_235b"><th class="model-label">Qwen3-235B</th><td class="col-old v-old"><button class="img-btn" data-model="qwen3_235b" data-ver="old" data-pid="p03"><img src="renders/old/qwen3_235b__p03.png" alt="qwen3_235b old p03" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="qwen3_235b" data-ver="v1" data-pid="p03"><img src="renders/new/qwen3_235b__p03.png" alt="qwen3_235b v1 p03" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="qwen3_235b" data-ver="v2" data-pid="p03"><img src="renders/v2/qwen3_235b__p03.png" alt="qwen3_235b v2 p03" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="qwen3_235b" data-ver="v3" data-pid="p03"><img src="renders/v3/qwen3_235b__p03.png" alt="qwen3_235b v3 p03" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="qwen3_235b" data-ver="v4" data-pid="p03"><img src="renders/v4/qwen3_235b__p03.png" alt="qwen3_235b v4 p03" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="qwen3_235b" data-ver="v5" data-pid="p03"><img src="renders/v5/qwen3_235b__p03.png" alt="qwen3_235b v5 p03" loading="lazy"></button></td></tr>
+<tr class="row-gemma3_27b"><th class="model-label">Gemma 3 27B</th><td class="col-old v-old"><button class="img-btn" data-model="gemma3_27b" data-ver="old" data-pid="p03"><img src="renders/old/gemma3_27b__p03.png" alt="gemma3_27b old p03" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemma3_27b" data-ver="v1" data-pid="p03"><img src="renders/new/gemma3_27b__p03.png" alt="gemma3_27b v1 p03" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemma3_27b" data-ver="v2" data-pid="p03"><img src="renders/v2/gemma3_27b__p03.png" alt="gemma3_27b v2 p03" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemma3_27b" data-ver="v3" data-pid="p03"><img src="renders/v3/gemma3_27b__p03.png" alt="gemma3_27b v3 p03" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemma3_27b" data-ver="v4" data-pid="p03"><img src="renders/v4/gemma3_27b__p03.png" alt="gemma3_27b v4 p03" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemma3_27b" data-ver="v5" data-pid="p03"><img src="renders/v5/gemma3_27b__p03.png" alt="gemma3_27b v5 p03" loading="lazy"></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div class="cell">
-          <div class="cell-label">p01</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p01.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p01.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p01.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p01.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/qwen3_235b__p01.png" alt="v4" loading="lazy"></div>
-          </div>
+    <section class="prompt-block" id="p04" data-prompt="p04">
+      <header class="prompt-header">
+        <div class="prompt-meta">
+          <span class="prompt-id">p04</span>
+          <span class="prompt-medium">cpencil</span>
         </div>
+        <p class="prompt-text">A portrait-like figure made from colored pencil only, with layered imperfect strokes in unexpected colors so the face feels more like a memory or mood than a person.</p>
+      </header>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr><th class="model-label"></th><th class="col-old v-old">old</th><th class="col-v1 v-v1">v1</th><th class="col-v2 v-v2">v2</th><th class="col-v3 v-v3">v3</th><th class="col-v4 v-v4">v4</th><th class="col-v5 v-v5">v5</th></tr>
+          </thead>
+          <tbody>
+            <tr class="row-claude_sonnet_46"><th class="model-label">Claude Sonnet 4.6</th><td class="col-old v-old"><button class="img-btn" data-model="claude_sonnet_46" data-ver="old" data-pid="p04"><img src="renders/old/claude_sonnet_46__p04.png" alt="claude_sonnet_46 old p04" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v1" data-pid="p04"><img src="renders/new/claude_sonnet_46__p04.png" alt="claude_sonnet_46 v1 p04" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v2" data-pid="p04"><img src="renders/v2/claude_sonnet_46__p04.png" alt="claude_sonnet_46 v2 p04" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v3" data-pid="p04"><img src="renders/v3/claude_sonnet_46__p04.png" alt="claude_sonnet_46 v3 p04" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v4" data-pid="p04"><img src="renders/v4/claude_sonnet_46__p04.png" alt="claude_sonnet_46 v4 p04" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v5" data-pid="p04"><img src="renders/v5/claude_sonnet_46__p04.png" alt="claude_sonnet_46 v5 p04" loading="lazy"></button></td></tr>
+<tr class="row-gpt_54"><th class="model-label">GPT-5.4</th><td class="col-old v-old"><button class="img-btn" data-model="gpt_54" data-ver="old" data-pid="p04"><img src="renders/old/gpt_54__p04.png" alt="gpt_54 old p04" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gpt_54" data-ver="v1" data-pid="p04"><img src="renders/new/gpt_54__p04.png" alt="gpt_54 v1 p04" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gpt_54" data-ver="v2" data-pid="p04"><img src="renders/v2/gpt_54__p04.png" alt="gpt_54 v2 p04" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gpt_54" data-ver="v3" data-pid="p04"><img src="renders/v3/gpt_54__p04.png" alt="gpt_54 v3 p04" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gpt_54" data-ver="v4" data-pid="p04"><img src="renders/v4/gpt_54__p04.png" alt="gpt_54 v4 p04" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gpt_54" data-ver="v5" data-pid="p04"><img src="renders/v5/gpt_54__p04.png" alt="gpt_54 v5 p04" loading="lazy"></button></td></tr>
+<tr class="row-gemini_31_pro"><th class="model-label">Gemini 3.1 Pro</th><td class="col-old v-old"><button class="img-btn" data-model="gemini_31_pro" data-ver="old" data-pid="p04"><img src="renders/old/gemini_31_pro__p04.png" alt="gemini_31_pro old p04" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemini_31_pro" data-ver="v1" data-pid="p04"><img src="renders/new/gemini_31_pro__p04.png" alt="gemini_31_pro v1 p04" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemini_31_pro" data-ver="v2" data-pid="p04"><img src="renders/v2/gemini_31_pro__p04.png" alt="gemini_31_pro v2 p04" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemini_31_pro" data-ver="v3" data-pid="p04"><img src="renders/v3/gemini_31_pro__p04.png" alt="gemini_31_pro v3 p04" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemini_31_pro" data-ver="v4" data-pid="p04"><img src="renders/v4/gemini_31_pro__p04.png" alt="gemini_31_pro v4 p04" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemini_31_pro" data-ver="v5" data-pid="p04"><img src="renders/v5/gemini_31_pro__p04.png" alt="gemini_31_pro v5 p04" loading="lazy"></button></td></tr>
+<tr class="row-qwen3_235b"><th class="model-label">Qwen3-235B</th><td class="col-old v-old"><button class="img-btn" data-model="qwen3_235b" data-ver="old" data-pid="p04"><img src="renders/old/qwen3_235b__p04.png" alt="qwen3_235b old p04" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="qwen3_235b" data-ver="v1" data-pid="p04"><img src="renders/new/qwen3_235b__p04.png" alt="qwen3_235b v1 p04" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="qwen3_235b" data-ver="v2" data-pid="p04"><img src="renders/v2/qwen3_235b__p04.png" alt="qwen3_235b v2 p04" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="qwen3_235b" data-ver="v3" data-pid="p04"><img src="renders/v3/qwen3_235b__p04.png" alt="qwen3_235b v3 p04" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="qwen3_235b" data-ver="v4" data-pid="p04"><img src="renders/v4/qwen3_235b__p04.png" alt="qwen3_235b v4 p04" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="qwen3_235b" data-ver="v5" data-pid="p04"><img src="renders/v5/qwen3_235b__p04.png" alt="qwen3_235b v5 p04" loading="lazy"></button></td></tr>
+<tr class="row-gemma3_27b"><th class="model-label">Gemma 3 27B</th><td class="col-old v-old"><button class="img-btn" data-model="gemma3_27b" data-ver="old" data-pid="p04"><img src="renders/old/gemma3_27b__p04.png" alt="gemma3_27b old p04" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemma3_27b" data-ver="v1" data-pid="p04"><img src="renders/new/gemma3_27b__p04.png" alt="gemma3_27b v1 p04" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemma3_27b" data-ver="v2" data-pid="p04"><img src="renders/v2/gemma3_27b__p04.png" alt="gemma3_27b v2 p04" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemma3_27b" data-ver="v3" data-pid="p04"><img src="renders/v3/gemma3_27b__p04.png" alt="gemma3_27b v3 p04" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemma3_27b" data-ver="v4" data-pid="p04"><img src="renders/v4/gemma3_27b__p04.png" alt="gemma3_27b v4 p04" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemma3_27b" data-ver="v5" data-pid="p04"><img src="renders/v5/gemma3_27b__p04.png" alt="gemma3_27b v5 p04" loading="lazy"></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div class="cell">
-          <div class="cell-label">p01</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p01.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p01.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemma3_27b__p01.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p01.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gemma3_27b__p01.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div></div>
-      </section>
-
-      <section class="prompt-row" data-prompt="p02">
-        <header>
-          <h3>p02 — pencil</h3>
-          <p class="prompt-text">A botanical study of wild grasses and seed heads in graphite pencil only — fine outlines, hatching, and tonal shading, no color, unfinished edges.</p>
-        </header>
-        <div class="models-grid">
-        <div class="cell">
-          <div class="cell-label">p02</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p02.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p02.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p02.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p02.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/claude_sonnet_46__p02.png" alt="v4" loading="lazy"></div>
-          </div>
+    <section class="prompt-block" id="p05" data-prompt="p05">
+      <header class="prompt-header">
+        <div class="prompt-meta">
+          <span class="prompt-id">p05</span>
+          <span class="prompt-medium">pen</span>
         </div>
+        <p class="prompt-text">A dense black-and-white forest made only with technical-pen hatching, where tree trunks, undergrowth, and shadows become a woven pattern that almost turns abstract.</p>
+      </header>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr><th class="model-label"></th><th class="col-old v-old">old</th><th class="col-v1 v-v1">v1</th><th class="col-v2 v-v2">v2</th><th class="col-v3 v-v3">v3</th><th class="col-v4 v-v4">v4</th><th class="col-v5 v-v5">v5</th></tr>
+          </thead>
+          <tbody>
+            <tr class="row-claude_sonnet_46"><th class="model-label">Claude Sonnet 4.6</th><td class="col-old v-old"><button class="img-btn" data-model="claude_sonnet_46" data-ver="old" data-pid="p05"><img src="renders/old/claude_sonnet_46__p05.png" alt="claude_sonnet_46 old p05" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v1" data-pid="p05"><img src="renders/new/claude_sonnet_46__p05.png" alt="claude_sonnet_46 v1 p05" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v2" data-pid="p05"><img src="renders/v2/claude_sonnet_46__p05.png" alt="claude_sonnet_46 v2 p05" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v3" data-pid="p05"><img src="renders/v3/claude_sonnet_46__p05.png" alt="claude_sonnet_46 v3 p05" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v4" data-pid="p05"><img src="renders/v4/claude_sonnet_46__p05.png" alt="claude_sonnet_46 v4 p05" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v5" data-pid="p05"><img src="renders/v5/claude_sonnet_46__p05.png" alt="claude_sonnet_46 v5 p05" loading="lazy"></button></td></tr>
+<tr class="row-gpt_54"><th class="model-label">GPT-5.4</th><td class="col-old v-old"><button class="img-btn" data-model="gpt_54" data-ver="old" data-pid="p05"><img src="renders/old/gpt_54__p05.png" alt="gpt_54 old p05" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gpt_54" data-ver="v1" data-pid="p05"><img src="renders/new/gpt_54__p05.png" alt="gpt_54 v1 p05" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gpt_54" data-ver="v2" data-pid="p05"><img src="renders/v2/gpt_54__p05.png" alt="gpt_54 v2 p05" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gpt_54" data-ver="v3" data-pid="p05"><img src="renders/v3/gpt_54__p05.png" alt="gpt_54 v3 p05" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gpt_54" data-ver="v4" data-pid="p05"><img src="renders/v4/gpt_54__p05.png" alt="gpt_54 v4 p05" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gpt_54" data-ver="v5" data-pid="p05"><img src="renders/v5/gpt_54__p05.png" alt="gpt_54 v5 p05" loading="lazy"></button></td></tr>
+<tr class="row-gemini_31_pro"><th class="model-label">Gemini 3.1 Pro</th><td class="col-old v-old"><button class="img-btn" data-model="gemini_31_pro" data-ver="old" data-pid="p05"><img src="renders/old/gemini_31_pro__p05.png" alt="gemini_31_pro old p05" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemini_31_pro" data-ver="v1" data-pid="p05"><img src="renders/new/gemini_31_pro__p05.png" alt="gemini_31_pro v1 p05" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemini_31_pro" data-ver="v2" data-pid="p05"><img src="renders/v2/gemini_31_pro__p05.png" alt="gemini_31_pro v2 p05" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemini_31_pro" data-ver="v3" data-pid="p05"><img src="renders/v3/gemini_31_pro__p05.png" alt="gemini_31_pro v3 p05" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemini_31_pro" data-ver="v4" data-pid="p05"><img src="renders/v4/gemini_31_pro__p05.png" alt="gemini_31_pro v4 p05" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemini_31_pro" data-ver="v5" data-pid="p05"><img src="renders/v5/gemini_31_pro__p05.png" alt="gemini_31_pro v5 p05" loading="lazy"></button></td></tr>
+<tr class="row-qwen3_235b"><th class="model-label">Qwen3-235B</th><td class="col-old v-old"><button class="img-btn" data-model="qwen3_235b" data-ver="old" data-pid="p05"><img src="renders/old/qwen3_235b__p05.png" alt="qwen3_235b old p05" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="qwen3_235b" data-ver="v1" data-pid="p05"><img src="renders/new/qwen3_235b__p05.png" alt="qwen3_235b v1 p05" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="qwen3_235b" data-ver="v2" data-pid="p05"><img src="renders/v2/qwen3_235b__p05.png" alt="qwen3_235b v2 p05" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="qwen3_235b" data-ver="v3" data-pid="p05"><img src="renders/v3/qwen3_235b__p05.png" alt="qwen3_235b v3 p05" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="qwen3_235b" data-ver="v4" data-pid="p05"><img src="renders/v4/qwen3_235b__p05.png" alt="qwen3_235b v4 p05" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="qwen3_235b" data-ver="v5" data-pid="p05"><img src="renders/v5/qwen3_235b__p05.png" alt="qwen3_235b v5 p05" loading="lazy"></button></td></tr>
+<tr class="row-gemma3_27b"><th class="model-label">Gemma 3 27B</th><td class="col-old v-old"><button class="img-btn" data-model="gemma3_27b" data-ver="old" data-pid="p05"><img src="renders/old/gemma3_27b__p05.png" alt="gemma3_27b old p05" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemma3_27b" data-ver="v1" data-pid="p05"><img src="renders/new/gemma3_27b__p05.png" alt="gemma3_27b v1 p05" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemma3_27b" data-ver="v2" data-pid="p05"><img src="renders/v2/gemma3_27b__p05.png" alt="gemma3_27b v2 p05" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemma3_27b" data-ver="v3" data-pid="p05"><img src="renders/v3/gemma3_27b__p05.png" alt="gemma3_27b v3 p05" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemma3_27b" data-ver="v4" data-pid="p05"><img src="renders/v4/gemma3_27b__p05.png" alt="gemma3_27b v4 p05" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemma3_27b" data-ver="v5" data-pid="p05"><img src="renders/v5/gemma3_27b__p05.png" alt="gemma3_27b v5 p05" loading="lazy"></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div class="cell">
-          <div class="cell-label">p02</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p02.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p02.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p02.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p02.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gpt_54__p02.png" alt="v4" loading="lazy"></div>
-          </div>
+    <section class="prompt-block" id="p06" data-prompt="p06">
+      <header class="prompt-header">
+        <div class="prompt-meta">
+          <span class="prompt-id">p06</span>
+          <span class="prompt-medium">marker</span>
         </div>
+        <p class="prompt-text">A flock of birds scattered across the page as quick marker gestures, their paths guided by an invisible swirling wind.</p>
+      </header>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr><th class="model-label"></th><th class="col-old v-old">old</th><th class="col-v1 v-v1">v1</th><th class="col-v2 v-v2">v2</th><th class="col-v3 v-v3">v3</th><th class="col-v4 v-v4">v4</th><th class="col-v5 v-v5">v5</th></tr>
+          </thead>
+          <tbody>
+            <tr class="row-claude_sonnet_46"><th class="model-label">Claude Sonnet 4.6</th><td class="col-old v-old"><button class="img-btn" data-model="claude_sonnet_46" data-ver="old" data-pid="p06"><img src="renders/old/claude_sonnet_46__p06.png" alt="claude_sonnet_46 old p06" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v1" data-pid="p06"><img src="renders/new/claude_sonnet_46__p06.png" alt="claude_sonnet_46 v1 p06" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v2" data-pid="p06"><img src="renders/v2/claude_sonnet_46__p06.png" alt="claude_sonnet_46 v2 p06" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v3" data-pid="p06"><img src="renders/v3/claude_sonnet_46__p06.png" alt="claude_sonnet_46 v3 p06" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v4" data-pid="p06"><img src="renders/v4/claude_sonnet_46__p06.png" alt="claude_sonnet_46 v4 p06" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v5" data-pid="p06"><img src="renders/v5/claude_sonnet_46__p06.png" alt="claude_sonnet_46 v5 p06" loading="lazy"></button></td></tr>
+<tr class="row-gpt_54"><th class="model-label">GPT-5.4</th><td class="col-old v-old"><button class="img-btn" data-model="gpt_54" data-ver="old" data-pid="p06"><img src="renders/old/gpt_54__p06.png" alt="gpt_54 old p06" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gpt_54" data-ver="v1" data-pid="p06"><img src="renders/new/gpt_54__p06.png" alt="gpt_54 v1 p06" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gpt_54" data-ver="v2" data-pid="p06"><img src="renders/v2/gpt_54__p06.png" alt="gpt_54 v2 p06" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gpt_54" data-ver="v3" data-pid="p06"><img src="renders/v3/gpt_54__p06.png" alt="gpt_54 v3 p06" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gpt_54" data-ver="v4" data-pid="p06"><img src="renders/v4/gpt_54__p06.png" alt="gpt_54 v4 p06" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gpt_54" data-ver="v5" data-pid="p06"><img src="renders/v5/gpt_54__p06.png" alt="gpt_54 v5 p06" loading="lazy"></button></td></tr>
+<tr class="row-gemini_31_pro"><th class="model-label">Gemini 3.1 Pro</th><td class="col-old v-old"><button class="img-btn" data-model="gemini_31_pro" data-ver="old" data-pid="p06"><img src="renders/old/gemini_31_pro__p06.png" alt="gemini_31_pro old p06" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemini_31_pro" data-ver="v1" data-pid="p06"><img src="renders/new/gemini_31_pro__p06.png" alt="gemini_31_pro v1 p06" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemini_31_pro" data-ver="v2" data-pid="p06"><img src="renders/v2/gemini_31_pro__p06.png" alt="gemini_31_pro v2 p06" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemini_31_pro" data-ver="v3" data-pid="p06"><img src="renders/v3/gemini_31_pro__p06.png" alt="gemini_31_pro v3 p06" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemini_31_pro" data-ver="v4" data-pid="p06"><img src="renders/v4/gemini_31_pro__p06.png" alt="gemini_31_pro v4 p06" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemini_31_pro" data-ver="v5" data-pid="p06"><img src="renders/v5/gemini_31_pro__p06.png" alt="gemini_31_pro v5 p06" loading="lazy"></button></td></tr>
+<tr class="row-qwen3_235b"><th class="model-label">Qwen3-235B</th><td class="col-old v-old"><button class="img-btn" data-model="qwen3_235b" data-ver="old" data-pid="p06"><img src="renders/old/qwen3_235b__p06.png" alt="qwen3_235b old p06" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="qwen3_235b" data-ver="v1" data-pid="p06"><img src="renders/new/qwen3_235b__p06.png" alt="qwen3_235b v1 p06" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="qwen3_235b" data-ver="v2" data-pid="p06"><img src="renders/v2/qwen3_235b__p06.png" alt="qwen3_235b v2 p06" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="qwen3_235b" data-ver="v3" data-pid="p06"><img src="renders/v3/qwen3_235b__p06.png" alt="qwen3_235b v3 p06" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="qwen3_235b" data-ver="v4" data-pid="p06"><img src="renders/v4/qwen3_235b__p06.png" alt="qwen3_235b v4 p06" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="qwen3_235b" data-ver="v5" data-pid="p06"><img src="renders/v5/qwen3_235b__p06.png" alt="qwen3_235b v5 p06" loading="lazy"></button></td></tr>
+<tr class="row-gemma3_27b"><th class="model-label">Gemma 3 27B</th><td class="col-old v-old"><button class="img-btn" data-model="gemma3_27b" data-ver="old" data-pid="p06"><img src="renders/old/gemma3_27b__p06.png" alt="gemma3_27b old p06" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemma3_27b" data-ver="v1" data-pid="p06"><img src="renders/new/gemma3_27b__p06.png" alt="gemma3_27b v1 p06" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemma3_27b" data-ver="v2" data-pid="p06"><img src="renders/v2/gemma3_27b__p06.png" alt="gemma3_27b v2 p06" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemma3_27b" data-ver="v3" data-pid="p06"><img src="renders/v3/gemma3_27b__p06.png" alt="gemma3_27b v3 p06" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemma3_27b" data-ver="v4" data-pid="p06"><img src="renders/v4/gemma3_27b__p06.png" alt="gemma3_27b v4 p06" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemma3_27b" data-ver="v5" data-pid="p06"><img src="renders/v5/gemma3_27b__p06.png" alt="gemma3_27b v5 p06" loading="lazy"></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div class="cell">
-          <div class="cell-label">p02</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p02.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p02.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p02.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p02.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gemini_31_pro__p02.png" alt="v4" loading="lazy"></div>
-          </div>
+    <section class="prompt-block" id="p07" data-prompt="p07">
+      <header class="prompt-header">
+        <div class="prompt-meta">
+          <span class="prompt-id">p07</span>
+          <span class="prompt-medium">spray</span>
         </div>
+        <p class="prompt-text">A city wall of overlapping spray-painted circles, drips, arrows, and ghosted hand-drawn marks, like fragments of graffiti building into an accidental composition.</p>
+      </header>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr><th class="model-label"></th><th class="col-old v-old">old</th><th class="col-v1 v-v1">v1</th><th class="col-v2 v-v2">v2</th><th class="col-v3 v-v3">v3</th><th class="col-v4 v-v4">v4</th><th class="col-v5 v-v5">v5</th></tr>
+          </thead>
+          <tbody>
+            <tr class="row-claude_sonnet_46"><th class="model-label">Claude Sonnet 4.6</th><td class="col-old v-old"><button class="img-btn" data-model="claude_sonnet_46" data-ver="old" data-pid="p07"><img src="renders/old/claude_sonnet_46__p07.png" alt="claude_sonnet_46 old p07" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v1" data-pid="p07"><img src="renders/new/claude_sonnet_46__p07.png" alt="claude_sonnet_46 v1 p07" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v2" data-pid="p07"><img src="renders/v2/claude_sonnet_46__p07.png" alt="claude_sonnet_46 v2 p07" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v3" data-pid="p07"><img src="renders/v3/claude_sonnet_46__p07.png" alt="claude_sonnet_46 v3 p07" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v4" data-pid="p07"><img src="renders/v4/claude_sonnet_46__p07.png" alt="claude_sonnet_46 v4 p07" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v5" data-pid="p07"><img src="renders/v5/claude_sonnet_46__p07.png" alt="claude_sonnet_46 v5 p07" loading="lazy"></button></td></tr>
+<tr class="row-gpt_54"><th class="model-label">GPT-5.4</th><td class="col-old v-old"><button class="img-btn" data-model="gpt_54" data-ver="old" data-pid="p07"><img src="renders/old/gpt_54__p07.png" alt="gpt_54 old p07" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gpt_54" data-ver="v1" data-pid="p07"><img src="renders/new/gpt_54__p07.png" alt="gpt_54 v1 p07" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gpt_54" data-ver="v2" data-pid="p07"><img src="renders/v2/gpt_54__p07.png" alt="gpt_54 v2 p07" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gpt_54" data-ver="v3" data-pid="p07"><img src="renders/v3/gpt_54__p07.png" alt="gpt_54 v3 p07" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gpt_54" data-ver="v4" data-pid="p07"><img src="renders/v4/gpt_54__p07.png" alt="gpt_54 v4 p07" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gpt_54" data-ver="v5" data-pid="p07"><img src="renders/v5/gpt_54__p07.png" alt="gpt_54 v5 p07" loading="lazy"></button></td></tr>
+<tr class="row-gemini_31_pro"><th class="model-label">Gemini 3.1 Pro</th><td class="col-old v-old"><button class="img-btn" data-model="gemini_31_pro" data-ver="old" data-pid="p07"><img src="renders/old/gemini_31_pro__p07.png" alt="gemini_31_pro old p07" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemini_31_pro" data-ver="v1" data-pid="p07"><img src="renders/new/gemini_31_pro__p07.png" alt="gemini_31_pro v1 p07" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemini_31_pro" data-ver="v2" data-pid="p07"><img src="renders/v2/gemini_31_pro__p07.png" alt="gemini_31_pro v2 p07" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemini_31_pro" data-ver="v3" data-pid="p07"><img src="renders/v3/gemini_31_pro__p07.png" alt="gemini_31_pro v3 p07" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemini_31_pro" data-ver="v4" data-pid="p07"><img src="renders/v4/gemini_31_pro__p07.png" alt="gemini_31_pro v4 p07" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemini_31_pro" data-ver="v5" data-pid="p07"><img src="renders/v5/gemini_31_pro__p07.png" alt="gemini_31_pro v5 p07" loading="lazy"></button></td></tr>
+<tr class="row-qwen3_235b"><th class="model-label">Qwen3-235B</th><td class="col-old v-old"><button class="img-btn" data-model="qwen3_235b" data-ver="old" data-pid="p07"><img src="renders/old/qwen3_235b__p07.png" alt="qwen3_235b old p07" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="qwen3_235b" data-ver="v1" data-pid="p07"><img src="renders/new/qwen3_235b__p07.png" alt="qwen3_235b v1 p07" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="qwen3_235b" data-ver="v2" data-pid="p07"><img src="renders/v2/qwen3_235b__p07.png" alt="qwen3_235b v2 p07" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="qwen3_235b" data-ver="v3" data-pid="p07"><img src="renders/v3/qwen3_235b__p07.png" alt="qwen3_235b v3 p07" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="qwen3_235b" data-ver="v4" data-pid="p07"><img src="renders/v4/qwen3_235b__p07.png" alt="qwen3_235b v4 p07" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="qwen3_235b" data-ver="v5" data-pid="p07"><img src="renders/v5/qwen3_235b__p07.png" alt="qwen3_235b v5 p07" loading="lazy"></button></td></tr>
+<tr class="row-gemma3_27b"><th class="model-label">Gemma 3 27B</th><td class="col-old v-old"><button class="img-btn" data-model="gemma3_27b" data-ver="old" data-pid="p07"><img src="renders/old/gemma3_27b__p07.png" alt="gemma3_27b old p07" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemma3_27b" data-ver="v1" data-pid="p07"><img src="renders/new/gemma3_27b__p07.png" alt="gemma3_27b v1 p07" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemma3_27b" data-ver="v2" data-pid="p07"><img src="renders/v2/gemma3_27b__p07.png" alt="gemma3_27b v2 p07" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemma3_27b" data-ver="v3" data-pid="p07"><img src="renders/v3/gemma3_27b__p07.png" alt="gemma3_27b v3 p07" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemma3_27b" data-ver="v4" data-pid="p07"><img src="renders/v4/gemma3_27b__p07.png" alt="gemma3_27b v4 p07" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemma3_27b" data-ver="v5" data-pid="p07"><img src="renders/v5/gemma3_27b__p07.png" alt="gemma3_27b v5 p07" loading="lazy"></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div class="cell">
-          <div class="cell-label">p02</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p02.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p02.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p02.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p02.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/qwen3_235b__p02.png" alt="v4" loading="lazy"></div>
-          </div>
+    <section class="prompt-block" id="p08" data-prompt="p08">
+      <header class="prompt-header">
+        <div class="prompt-meta">
+          <span class="prompt-id">p08</span>
+          <span class="prompt-medium">multi (watercolor + pencil)</span>
         </div>
+        <p class="prompt-text">A foggy harbor at dawn rendered in soft watercolor washes, with faint graphite pencil lines suggesting masts and ropes over the damp color.</p>
+      </header>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr><th class="model-label"></th><th class="col-old v-old">old</th><th class="col-v1 v-v1">v1</th><th class="col-v2 v-v2">v2</th><th class="col-v3 v-v3">v3</th><th class="col-v4 v-v4">v4</th><th class="col-v5 v-v5">v5</th></tr>
+          </thead>
+          <tbody>
+            <tr class="row-claude_sonnet_46"><th class="model-label">Claude Sonnet 4.6</th><td class="col-old v-old"><button class="img-btn" data-model="claude_sonnet_46" data-ver="old" data-pid="p08"><img src="renders/old/claude_sonnet_46__p08.png" alt="claude_sonnet_46 old p08" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v1" data-pid="p08"><img src="renders/new/claude_sonnet_46__p08.png" alt="claude_sonnet_46 v1 p08" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v2" data-pid="p08"><img src="renders/v2/claude_sonnet_46__p08.png" alt="claude_sonnet_46 v2 p08" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v3" data-pid="p08"><img src="renders/v3/claude_sonnet_46__p08.png" alt="claude_sonnet_46 v3 p08" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v4" data-pid="p08"><img src="renders/v4/claude_sonnet_46__p08.png" alt="claude_sonnet_46 v4 p08" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v5" data-pid="p08"><img src="renders/v5/claude_sonnet_46__p08.png" alt="claude_sonnet_46 v5 p08" loading="lazy"></button></td></tr>
+<tr class="row-gpt_54"><th class="model-label">GPT-5.4</th><td class="col-old v-old"><button class="img-btn" data-model="gpt_54" data-ver="old" data-pid="p08"><img src="renders/old/gpt_54__p08.png" alt="gpt_54 old p08" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gpt_54" data-ver="v1" data-pid="p08"><img src="renders/new/gpt_54__p08.png" alt="gpt_54 v1 p08" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gpt_54" data-ver="v2" data-pid="p08"><img src="renders/v2/gpt_54__p08.png" alt="gpt_54 v2 p08" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gpt_54" data-ver="v3" data-pid="p08"><img src="renders/v3/gpt_54__p08.png" alt="gpt_54 v3 p08" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gpt_54" data-ver="v4" data-pid="p08"><img src="renders/v4/gpt_54__p08.png" alt="gpt_54 v4 p08" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gpt_54" data-ver="v5" data-pid="p08"><img src="renders/v5/gpt_54__p08.png" alt="gpt_54 v5 p08" loading="lazy"></button></td></tr>
+<tr class="row-gemini_31_pro"><th class="model-label">Gemini 3.1 Pro</th><td class="col-old v-old"><button class="img-btn" data-model="gemini_31_pro" data-ver="old" data-pid="p08"><img src="renders/old/gemini_31_pro__p08.png" alt="gemini_31_pro old p08" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemini_31_pro" data-ver="v1" data-pid="p08"><img src="renders/new/gemini_31_pro__p08.png" alt="gemini_31_pro v1 p08" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemini_31_pro" data-ver="v2" data-pid="p08"><img src="renders/v2/gemini_31_pro__p08.png" alt="gemini_31_pro v2 p08" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemini_31_pro" data-ver="v3" data-pid="p08"><img src="renders/v3/gemini_31_pro__p08.png" alt="gemini_31_pro v3 p08" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemini_31_pro" data-ver="v4" data-pid="p08"><img src="renders/v4/gemini_31_pro__p08.png" alt="gemini_31_pro v4 p08" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemini_31_pro" data-ver="v5" data-pid="p08"><img src="renders/v5/gemini_31_pro__p08.png" alt="gemini_31_pro v5 p08" loading="lazy"></button></td></tr>
+<tr class="row-qwen3_235b"><th class="model-label">Qwen3-235B</th><td class="col-old v-old"><button class="img-btn" data-model="qwen3_235b" data-ver="old" data-pid="p08"><img src="renders/old/qwen3_235b__p08.png" alt="qwen3_235b old p08" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="qwen3_235b" data-ver="v1" data-pid="p08"><img src="renders/new/qwen3_235b__p08.png" alt="qwen3_235b v1 p08" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="qwen3_235b" data-ver="v2" data-pid="p08"><img src="renders/v2/qwen3_235b__p08.png" alt="qwen3_235b v2 p08" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="qwen3_235b" data-ver="v3" data-pid="p08"><img src="renders/v3/qwen3_235b__p08.png" alt="qwen3_235b v3 p08" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="qwen3_235b" data-ver="v4" data-pid="p08"><img src="renders/v4/qwen3_235b__p08.png" alt="qwen3_235b v4 p08" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="qwen3_235b" data-ver="v5" data-pid="p08"><img src="renders/v5/qwen3_235b__p08.png" alt="qwen3_235b v5 p08" loading="lazy"></button></td></tr>
+<tr class="row-gemma3_27b"><th class="model-label">Gemma 3 27B</th><td class="col-old v-old"><button class="img-btn" data-model="gemma3_27b" data-ver="old" data-pid="p08"><img src="renders/old/gemma3_27b__p08.png" alt="gemma3_27b old p08" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemma3_27b" data-ver="v1" data-pid="p08"><img src="renders/new/gemma3_27b__p08.png" alt="gemma3_27b v1 p08" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemma3_27b" data-ver="v2" data-pid="p08"><img src="renders/v2/gemma3_27b__p08.png" alt="gemma3_27b v2 p08" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemma3_27b" data-ver="v3" data-pid="p08"><img src="renders/v3/gemma3_27b__p08.png" alt="gemma3_27b v3 p08" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemma3_27b" data-ver="v4" data-pid="p08"><img src="renders/v4/gemma3_27b__p08.png" alt="gemma3_27b v4 p08" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemma3_27b" data-ver="v5" data-pid="p08"><img src="renders/v5/gemma3_27b__p08.png" alt="gemma3_27b v5 p08" loading="lazy"></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div class="cell">
-          <div class="cell-label">p02</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p02.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p02.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemma3_27b__p02.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p02.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gemma3_27b__p02.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div></div>
-      </section>
-
-      <section class="prompt-row" data-prompt="p03">
-        <header>
-          <h3>p03 — charcoal</h3>
-          <p class="prompt-text">A gestural figure study of a dancer mid-leap, drawn in loose charcoal with heavy smudges trailing behind the motion.</p>
-        </header>
-        <div class="models-grid">
-        <div class="cell">
-          <div class="cell-label">p03</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p03.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p03.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p03.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p03.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/claude_sonnet_46__p03.png" alt="v4" loading="lazy"></div>
-          </div>
+    <section class="prompt-block" id="p09" data-prompt="p09">
+      <header class="prompt-header">
+        <div class="prompt-meta">
+          <span class="prompt-id">p09</span>
+          <span class="prompt-medium">multi (watercolor + marker + pen)</span>
         </div>
+        <p class="prompt-text">A rainy city street at night suggested through wet watercolor bleeds, neon marker smears reflecting on the pavement, and sparse ink silhouettes of passersby.</p>
+      </header>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr><th class="model-label"></th><th class="col-old v-old">old</th><th class="col-v1 v-v1">v1</th><th class="col-v2 v-v2">v2</th><th class="col-v3 v-v3">v3</th><th class="col-v4 v-v4">v4</th><th class="col-v5 v-v5">v5</th></tr>
+          </thead>
+          <tbody>
+            <tr class="row-claude_sonnet_46"><th class="model-label">Claude Sonnet 4.6</th><td class="col-old v-old"><button class="img-btn" data-model="claude_sonnet_46" data-ver="old" data-pid="p09"><img src="renders/old/claude_sonnet_46__p09.png" alt="claude_sonnet_46 old p09" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v1" data-pid="p09"><img src="renders/new/claude_sonnet_46__p09.png" alt="claude_sonnet_46 v1 p09" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v2" data-pid="p09"><img src="renders/v2/claude_sonnet_46__p09.png" alt="claude_sonnet_46 v2 p09" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v3" data-pid="p09"><img src="renders/v3/claude_sonnet_46__p09.png" alt="claude_sonnet_46 v3 p09" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v4" data-pid="p09"><img src="renders/v4/claude_sonnet_46__p09.png" alt="claude_sonnet_46 v4 p09" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v5" data-pid="p09"><img src="renders/v5/claude_sonnet_46__p09.png" alt="claude_sonnet_46 v5 p09" loading="lazy"></button></td></tr>
+<tr class="row-gpt_54"><th class="model-label">GPT-5.4</th><td class="col-old v-old"><button class="img-btn" data-model="gpt_54" data-ver="old" data-pid="p09"><img src="renders/old/gpt_54__p09.png" alt="gpt_54 old p09" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gpt_54" data-ver="v1" data-pid="p09"><img src="renders/new/gpt_54__p09.png" alt="gpt_54 v1 p09" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gpt_54" data-ver="v2" data-pid="p09"><img src="renders/v2/gpt_54__p09.png" alt="gpt_54 v2 p09" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gpt_54" data-ver="v3" data-pid="p09"><img src="renders/v3/gpt_54__p09.png" alt="gpt_54 v3 p09" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gpt_54" data-ver="v4" data-pid="p09"><img src="renders/v4/gpt_54__p09.png" alt="gpt_54 v4 p09" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gpt_54" data-ver="v5" data-pid="p09"><img src="renders/v5/gpt_54__p09.png" alt="gpt_54 v5 p09" loading="lazy"></button></td></tr>
+<tr class="row-gemini_31_pro"><th class="model-label">Gemini 3.1 Pro</th><td class="col-old v-old"><button class="img-btn" data-model="gemini_31_pro" data-ver="old" data-pid="p09"><img src="renders/old/gemini_31_pro__p09.png" alt="gemini_31_pro old p09" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemini_31_pro" data-ver="v1" data-pid="p09"><img src="renders/new/gemini_31_pro__p09.png" alt="gemini_31_pro v1 p09" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemini_31_pro" data-ver="v2" data-pid="p09"><img src="renders/v2/gemini_31_pro__p09.png" alt="gemini_31_pro v2 p09" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemini_31_pro" data-ver="v3" data-pid="p09"><img src="renders/v3/gemini_31_pro__p09.png" alt="gemini_31_pro v3 p09" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemini_31_pro" data-ver="v4" data-pid="p09"><img src="renders/v4/gemini_31_pro__p09.png" alt="gemini_31_pro v4 p09" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemini_31_pro" data-ver="v5" data-pid="p09"><img src="renders/v5/gemini_31_pro__p09.png" alt="gemini_31_pro v5 p09" loading="lazy"></button></td></tr>
+<tr class="row-qwen3_235b"><th class="model-label">Qwen3-235B</th><td class="col-old v-old"><button class="img-btn" data-model="qwen3_235b" data-ver="old" data-pid="p09"><img src="renders/old/qwen3_235b__p09.png" alt="qwen3_235b old p09" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="qwen3_235b" data-ver="v1" data-pid="p09"><img src="renders/new/qwen3_235b__p09.png" alt="qwen3_235b v1 p09" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="qwen3_235b" data-ver="v2" data-pid="p09"><img src="renders/v2/qwen3_235b__p09.png" alt="qwen3_235b v2 p09" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="qwen3_235b" data-ver="v3" data-pid="p09"><img src="renders/v3/qwen3_235b__p09.png" alt="qwen3_235b v3 p09" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="qwen3_235b" data-ver="v4" data-pid="p09"><img src="renders/v4/qwen3_235b__p09.png" alt="qwen3_235b v4 p09" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="qwen3_235b" data-ver="v5" data-pid="p09"><img src="renders/v5/qwen3_235b__p09.png" alt="qwen3_235b v5 p09" loading="lazy"></button></td></tr>
+<tr class="row-gemma3_27b"><th class="model-label">Gemma 3 27B</th><td class="col-old v-old"><button class="img-btn" data-model="gemma3_27b" data-ver="old" data-pid="p09"><img src="renders/old/gemma3_27b__p09.png" alt="gemma3_27b old p09" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemma3_27b" data-ver="v1" data-pid="p09"><img src="renders/new/gemma3_27b__p09.png" alt="gemma3_27b v1 p09" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemma3_27b" data-ver="v2" data-pid="p09"><img src="renders/v2/gemma3_27b__p09.png" alt="gemma3_27b v2 p09" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemma3_27b" data-ver="v3" data-pid="p09"><img src="renders/v3/gemma3_27b__p09.png" alt="gemma3_27b v3 p09" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemma3_27b" data-ver="v4" data-pid="p09"><img src="renders/v4/gemma3_27b__p09.png" alt="gemma3_27b v4 p09" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemma3_27b" data-ver="v5" data-pid="p09"><img src="renders/v5/gemma3_27b__p09.png" alt="gemma3_27b v5 p09" loading="lazy"></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div class="cell">
-          <div class="cell-label">p03</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p03.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p03.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p03.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p03.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gpt_54__p03.png" alt="v4" loading="lazy"></div>
-          </div>
+    <section class="prompt-block" id="p10" data-prompt="p10">
+      <header class="prompt-header">
+        <div class="prompt-meta">
+          <span class="prompt-id">p10</span>
+          <span class="prompt-medium">multi (watercolor + charcoal + pen)</span>
         </div>
+        <p class="prompt-text">A cracked desert landscape with layered sand-colored washes, jagged charcoal rock formations, and a single thin pen-drawn horizon line bisecting the page.</p>
+      </header>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr><th class="model-label"></th><th class="col-old v-old">old</th><th class="col-v1 v-v1">v1</th><th class="col-v2 v-v2">v2</th><th class="col-v3 v-v3">v3</th><th class="col-v4 v-v4">v4</th><th class="col-v5 v-v5">v5</th></tr>
+          </thead>
+          <tbody>
+            <tr class="row-claude_sonnet_46"><th class="model-label">Claude Sonnet 4.6</th><td class="col-old v-old"><button class="img-btn" data-model="claude_sonnet_46" data-ver="old" data-pid="p10"><img src="renders/old/claude_sonnet_46__p10.png" alt="claude_sonnet_46 old p10" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v1" data-pid="p10"><img src="renders/new/claude_sonnet_46__p10.png" alt="claude_sonnet_46 v1 p10" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v2" data-pid="p10"><img src="renders/v2/claude_sonnet_46__p10.png" alt="claude_sonnet_46 v2 p10" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v3" data-pid="p10"><img src="renders/v3/claude_sonnet_46__p10.png" alt="claude_sonnet_46 v3 p10" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v4" data-pid="p10"><img src="renders/v4/claude_sonnet_46__p10.png" alt="claude_sonnet_46 v4 p10" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v5" data-pid="p10"><img src="renders/v5/claude_sonnet_46__p10.png" alt="claude_sonnet_46 v5 p10" loading="lazy"></button></td></tr>
+<tr class="row-gpt_54"><th class="model-label">GPT-5.4</th><td class="col-old v-old"><button class="img-btn" data-model="gpt_54" data-ver="old" data-pid="p10"><img src="renders/old/gpt_54__p10.png" alt="gpt_54 old p10" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gpt_54" data-ver="v1" data-pid="p10"><img src="renders/new/gpt_54__p10.png" alt="gpt_54 v1 p10" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gpt_54" data-ver="v2" data-pid="p10"><img src="renders/v2/gpt_54__p10.png" alt="gpt_54 v2 p10" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gpt_54" data-ver="v3" data-pid="p10"><img src="renders/v3/gpt_54__p10.png" alt="gpt_54 v3 p10" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gpt_54" data-ver="v4" data-pid="p10"><img src="renders/v4/gpt_54__p10.png" alt="gpt_54 v4 p10" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gpt_54" data-ver="v5" data-pid="p10"><img src="renders/v5/gpt_54__p10.png" alt="gpt_54 v5 p10" loading="lazy"></button></td></tr>
+<tr class="row-gemini_31_pro"><th class="model-label">Gemini 3.1 Pro</th><td class="col-old v-old"><button class="img-btn" data-model="gemini_31_pro" data-ver="old" data-pid="p10"><img src="renders/old/gemini_31_pro__p10.png" alt="gemini_31_pro old p10" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemini_31_pro" data-ver="v1" data-pid="p10"><img src="renders/new/gemini_31_pro__p10.png" alt="gemini_31_pro v1 p10" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemini_31_pro" data-ver="v2" data-pid="p10"><img src="renders/v2/gemini_31_pro__p10.png" alt="gemini_31_pro v2 p10" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemini_31_pro" data-ver="v3" data-pid="p10"><img src="renders/v3/gemini_31_pro__p10.png" alt="gemini_31_pro v3 p10" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemini_31_pro" data-ver="v4" data-pid="p10"><img src="renders/v4/gemini_31_pro__p10.png" alt="gemini_31_pro v4 p10" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemini_31_pro" data-ver="v5" data-pid="p10"><img src="renders/v5/gemini_31_pro__p10.png" alt="gemini_31_pro v5 p10" loading="lazy"></button></td></tr>
+<tr class="row-qwen3_235b"><th class="model-label">Qwen3-235B</th><td class="col-old v-old"><button class="img-btn" data-model="qwen3_235b" data-ver="old" data-pid="p10"><img src="renders/old/qwen3_235b__p10.png" alt="qwen3_235b old p10" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="qwen3_235b" data-ver="v1" data-pid="p10"><img src="renders/new/qwen3_235b__p10.png" alt="qwen3_235b v1 p10" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="qwen3_235b" data-ver="v2" data-pid="p10"><img src="renders/v2/qwen3_235b__p10.png" alt="qwen3_235b v2 p10" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="qwen3_235b" data-ver="v3" data-pid="p10"><img src="renders/v3/qwen3_235b__p10.png" alt="qwen3_235b v3 p10" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="qwen3_235b" data-ver="v4" data-pid="p10"><img src="renders/v4/qwen3_235b__p10.png" alt="qwen3_235b v4 p10" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="qwen3_235b" data-ver="v5" data-pid="p10"><img src="renders/v5/qwen3_235b__p10.png" alt="qwen3_235b v5 p10" loading="lazy"></button></td></tr>
+<tr class="row-gemma3_27b"><th class="model-label">Gemma 3 27B</th><td class="col-old v-old"><button class="img-btn" data-model="gemma3_27b" data-ver="old" data-pid="p10"><img src="renders/old/gemma3_27b__p10.png" alt="gemma3_27b old p10" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemma3_27b" data-ver="v1" data-pid="p10"><img src="renders/new/gemma3_27b__p10.png" alt="gemma3_27b v1 p10" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemma3_27b" data-ver="v2" data-pid="p10"><img src="renders/v2/gemma3_27b__p10.png" alt="gemma3_27b v2 p10" loading="lazy"></button></td><td class="col-v3 v-v3"><div class="fail" title="Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'kind')">no render</div></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemma3_27b" data-ver="v4" data-pid="p10"><img src="renders/v4/gemma3_27b__p10.png" alt="gemma3_27b v4 p10" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemma3_27b" data-ver="v5" data-pid="p10"><img src="renders/v5/gemma3_27b__p10.png" alt="gemma3_27b v5 p10" loading="lazy"></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div class="cell">
-          <div class="cell-label">p03</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p03.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p03.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p03.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p03.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><div class="fail">failed: Empty/short response</div></div>
-          </div>
+    <section class="prompt-block" id="p11" data-prompt="p11">
+      <header class="prompt-header">
+        <div class="prompt-meta">
+          <span class="prompt-id">p11</span>
+          <span class="prompt-medium">abstract (pen + cpencil)</span>
         </div>
+        <p class="prompt-text">An abstract composition of intersecting hatched rectangles in muted earth tones, like a Diebenkorn landscape rendered in pen and colored pencil.</p>
+      </header>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr><th class="model-label"></th><th class="col-old v-old">old</th><th class="col-v1 v-v1">v1</th><th class="col-v2 v-v2">v2</th><th class="col-v3 v-v3">v3</th><th class="col-v4 v-v4">v4</th><th class="col-v5 v-v5">v5</th></tr>
+          </thead>
+          <tbody>
+            <tr class="row-claude_sonnet_46"><th class="model-label">Claude Sonnet 4.6</th><td class="col-old v-old"><button class="img-btn" data-model="claude_sonnet_46" data-ver="old" data-pid="p11"><img src="renders/old/claude_sonnet_46__p11.png" alt="claude_sonnet_46 old p11" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v1" data-pid="p11"><img src="renders/new/claude_sonnet_46__p11.png" alt="claude_sonnet_46 v1 p11" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v2" data-pid="p11"><img src="renders/v2/claude_sonnet_46__p11.png" alt="claude_sonnet_46 v2 p11" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v3" data-pid="p11"><img src="renders/v3/claude_sonnet_46__p11.png" alt="claude_sonnet_46 v3 p11" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v4" data-pid="p11"><img src="renders/v4/claude_sonnet_46__p11.png" alt="claude_sonnet_46 v4 p11" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v5" data-pid="p11"><img src="renders/v5/claude_sonnet_46__p11.png" alt="claude_sonnet_46 v5 p11" loading="lazy"></button></td></tr>
+<tr class="row-gpt_54"><th class="model-label">GPT-5.4</th><td class="col-old v-old"><button class="img-btn" data-model="gpt_54" data-ver="old" data-pid="p11"><img src="renders/old/gpt_54__p11.png" alt="gpt_54 old p11" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gpt_54" data-ver="v1" data-pid="p11"><img src="renders/new/gpt_54__p11.png" alt="gpt_54 v1 p11" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gpt_54" data-ver="v2" data-pid="p11"><img src="renders/v2/gpt_54__p11.png" alt="gpt_54 v2 p11" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gpt_54" data-ver="v3" data-pid="p11"><img src="renders/v3/gpt_54__p11.png" alt="gpt_54 v3 p11" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gpt_54" data-ver="v4" data-pid="p11"><img src="renders/v4/gpt_54__p11.png" alt="gpt_54 v4 p11" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gpt_54" data-ver="v5" data-pid="p11"><img src="renders/v5/gpt_54__p11.png" alt="gpt_54 v5 p11" loading="lazy"></button></td></tr>
+<tr class="row-gemini_31_pro"><th class="model-label">Gemini 3.1 Pro</th><td class="col-old v-old"><button class="img-btn" data-model="gemini_31_pro" data-ver="old" data-pid="p11"><img src="renders/old/gemini_31_pro__p11.png" alt="gemini_31_pro old p11" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemini_31_pro" data-ver="v1" data-pid="p11"><img src="renders/new/gemini_31_pro__p11.png" alt="gemini_31_pro v1 p11" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemini_31_pro" data-ver="v2" data-pid="p11"><img src="renders/v2/gemini_31_pro__p11.png" alt="gemini_31_pro v2 p11" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemini_31_pro" data-ver="v3" data-pid="p11"><img src="renders/v3/gemini_31_pro__p11.png" alt="gemini_31_pro v3 p11" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemini_31_pro" data-ver="v4" data-pid="p11"><img src="renders/v4/gemini_31_pro__p11.png" alt="gemini_31_pro v4 p11" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemini_31_pro" data-ver="v5" data-pid="p11"><img src="renders/v5/gemini_31_pro__p11.png" alt="gemini_31_pro v5 p11" loading="lazy"></button></td></tr>
+<tr class="row-qwen3_235b"><th class="model-label">Qwen3-235B</th><td class="col-old v-old"><button class="img-btn" data-model="qwen3_235b" data-ver="old" data-pid="p11"><img src="renders/old/qwen3_235b__p11.png" alt="qwen3_235b old p11" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="qwen3_235b" data-ver="v1" data-pid="p11"><img src="renders/new/qwen3_235b__p11.png" alt="qwen3_235b v1 p11" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="qwen3_235b" data-ver="v2" data-pid="p11"><img src="renders/v2/qwen3_235b__p11.png" alt="qwen3_235b v2 p11" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="qwen3_235b" data-ver="v3" data-pid="p11"><img src="renders/v3/qwen3_235b__p11.png" alt="qwen3_235b v3 p11" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="qwen3_235b" data-ver="v4" data-pid="p11"><img src="renders/v4/qwen3_235b__p11.png" alt="qwen3_235b v4 p11" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="qwen3_235b" data-ver="v5" data-pid="p11"><img src="renders/v5/qwen3_235b__p11.png" alt="qwen3_235b v5 p11" loading="lazy"></button></td></tr>
+<tr class="row-gemma3_27b"><th class="model-label">Gemma 3 27B</th><td class="col-old v-old"><button class="img-btn" data-model="gemma3_27b" data-ver="old" data-pid="p11"><img src="renders/old/gemma3_27b__p11.png" alt="gemma3_27b old p11" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemma3_27b" data-ver="v1" data-pid="p11"><img src="renders/new/gemma3_27b__p11.png" alt="gemma3_27b v1 p11" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemma3_27b" data-ver="v2" data-pid="p11"><img src="renders/v2/gemma3_27b__p11.png" alt="gemma3_27b v2 p11" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemma3_27b" data-ver="v3" data-pid="p11"><img src="renders/v3/gemma3_27b__p11.png" alt="gemma3_27b v3 p11" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemma3_27b" data-ver="v4" data-pid="p11"><img src="renders/v4/gemma3_27b__p11.png" alt="gemma3_27b v4 p11" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemma3_27b" data-ver="v5" data-pid="p11"><img src="renders/v5/gemma3_27b__p11.png" alt="gemma3_27b v5 p11" loading="lazy"></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <div class="cell">
-          <div class="cell-label">p03</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p03.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p03.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p03.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p03.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/qwen3_235b__p03.png" alt="v4" loading="lazy"></div>
-          </div>
+    <section class="prompt-block" id="p12" data-prompt="p12">
+      <header class="prompt-header">
+        <div class="prompt-meta">
+          <span class="prompt-id">p12</span>
+          <span class="prompt-medium">abstract (spray, atmospheric)</span>
         </div>
-
-        <div class="cell">
-          <div class="cell-label">p03</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p03.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p03.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><div class="fail">failed: brush.noWiggle is not a function
-draw (file:///Users/suryanarreddi/projects/expe</div></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p03.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gemma3_27b__p03.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div></div>
-      </section>
-
-      <section class="prompt-row" data-prompt="p04">
-        <header>
-          <h3>p04 — cpencil</h3>
-          <p class="prompt-text">A portrait-like figure made from colored pencil only, with layered imperfect strokes in unexpected colors so the face feels more like a memory or mood than a person.</p>
-        </header>
-        <div class="models-grid">
-        <div class="cell">
-          <div class="cell-label">p04</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p04.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p04.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p04.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p04.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/claude_sonnet_46__p04.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p04</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p04.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p04.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p04.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p04.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gpt_54__p04.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p04</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p04.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p04.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p04.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p04.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><div class="fail">failed: Empty/short response</div></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p04</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p04.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p04.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p04.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p04.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/qwen3_235b__p04.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p04</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p04.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p04.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemma3_27b__p04.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><div class="fail">failed: no render</div></div>
-            <div class="half"><span class="badge v4">v4</span><div class="fail">failed: noHatch is not defined
-draw (file:///Users/suryanarreddi/projects/experiments/p5</div></div>
-          </div>
-        </div></div>
-      </section>
-
-      <section class="prompt-row" data-prompt="p05">
-        <header>
-          <h3>p05 — pen</h3>
-          <p class="prompt-text">A dense black-and-white forest made only with technical-pen hatching, where tree trunks, undergrowth, and shadows become a woven pattern that almost turns abstract.</p>
-        </header>
-        <div class="models-grid">
-        <div class="cell">
-          <div class="cell-label">p05</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p05.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p05.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p05.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p05.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/claude_sonnet_46__p05.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p05</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p05.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p05.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p05.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p05.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gpt_54__p05.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p05</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p05.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p05.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p05.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p05.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gemini_31_pro__p05.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p05</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p05.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p05.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p05.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p05.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><div class="fail">failed: Uncaught (in promise) Error: No brush or color set. Call brush.set('brushName', </div></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p05</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><div class="fail">failed: Uncaught (in promise) Error: No brush or color set. Call brush.set('brushName', </div></div>
-            <div class="half"><span class="badge new">v1</span><div class="fail">failed: Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'k</div></div>
-            <div class="half"><span class="badge v2">v2</span><div class="fail">failed: brush.ellipse is not a function
-draw (file:///Users/suryanarreddi/projects/exper</div></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p05.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gemma3_27b__p05.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div></div>
-      </section>
-
-      <section class="prompt-row" data-prompt="p06">
-        <header>
-          <h3>p06 — marker</h3>
-          <p class="prompt-text">A flock of birds scattered across the page as quick marker gestures, their paths guided by an invisible swirling wind.</p>
-        </header>
-        <div class="models-grid">
-        <div class="cell">
-          <div class="cell-label">p06</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p06.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p06.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p06.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p06.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/claude_sonnet_46__p06.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p06</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p06.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p06.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p06.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p06.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gpt_54__p06.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p06</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p06.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p06.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p06.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p06.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gemini_31_pro__p06.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p06</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p06.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p06.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p06.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p06.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/qwen3_235b__p06.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p06</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><div class="fail">failed: Cannot access 'color' before initialization
-draw (file:///Users/suryanarreddi/pr</div></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p06.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemma3_27b__p06.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p06.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gemma3_27b__p06.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div></div>
-      </section>
-
-      <section class="prompt-row" data-prompt="p07">
-        <header>
-          <h3>p07 — spray</h3>
-          <p class="prompt-text">A city wall of overlapping spray-painted circles, drips, arrows, and ghosted hand-drawn marks, like fragments of graffiti building into an accidental composition.</p>
-        </header>
-        <div class="models-grid">
-        <div class="cell">
-          <div class="cell-label">p07</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p07.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p07.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p07.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p07.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/claude_sonnet_46__p07.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p07</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p07.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p07.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p07.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p07.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gpt_54__p07.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p07</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p07.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p07.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p07.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p07.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><div class="fail">failed: Empty/short response</div></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p07</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p07.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p07.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p07.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p07.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/qwen3_235b__p07.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p07</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><div class="fail">failed: Cannot access 'color' before initialization
-draw (file:///Users/suryanarreddi/pr</div></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p07.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><div class="fail">failed: Cannot access 'color' before initialization
-draw (file:///Users/suryanarreddi/pr</div></div>
-            <div class="half"><span class="badge v3">v3</span><div class="fail">failed: Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'k</div></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gemma3_27b__p07.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div></div>
-      </section>
-
-      <section class="prompt-row" data-prompt="p08">
-        <header>
-          <h3>p08 — multi (watercolor + pencil)</h3>
-          <p class="prompt-text">A foggy harbor at dawn rendered in soft watercolor washes, with faint graphite pencil lines suggesting masts and ropes over the damp color.</p>
-        </header>
-        <div class="models-grid">
-        <div class="cell">
-          <div class="cell-label">p08</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p08.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p08.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p08.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p08.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/claude_sonnet_46__p08.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p08</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p08.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p08.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p08.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p08.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gpt_54__p08.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p08</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p08.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p08.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p08.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p08.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gemini_31_pro__p08.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p08</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p08.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p08.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p08.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p08.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/qwen3_235b__p08.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p08</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p08.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p08.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemma3_27b__p08.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p08.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gemma3_27b__p08.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div></div>
-      </section>
-
-      <section class="prompt-row" data-prompt="p09">
-        <header>
-          <h3>p09 — multi (watercolor + marker + pen)</h3>
-          <p class="prompt-text">A rainy city street at night suggested through wet watercolor bleeds, neon marker smears reflecting on the pavement, and sparse ink silhouettes of passersby.</p>
-        </header>
-        <div class="models-grid">
-        <div class="cell">
-          <div class="cell-label">p09</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p09.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p09.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p09.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p09.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/claude_sonnet_46__p09.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p09</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p09.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p09.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p09.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p09.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gpt_54__p09.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p09</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p09.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p09.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p09.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p09.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gemini_31_pro__p09.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p09</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p09.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p09.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p09.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p09.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/qwen3_235b__p09.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p09</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p09.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p09.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemma3_27b__p09.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p09.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><div class="fail">failed: Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'x</div></div>
-          </div>
-        </div></div>
-      </section>
-
-      <section class="prompt-row" data-prompt="p10">
-        <header>
-          <h3>p10 — multi (watercolor + charcoal + pen)</h3>
-          <p class="prompt-text">A cracked desert landscape with layered sand-colored washes, jagged charcoal rock formations, and a single thin pen-drawn horizon line bisecting the page.</p>
-        </header>
-        <div class="models-grid">
-        <div class="cell">
-          <div class="cell-label">p10</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p10.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p10.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p10.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p10.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/claude_sonnet_46__p10.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p10</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p10.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p10.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p10.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p10.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gpt_54__p10.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p10</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p10.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p10.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p10.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p10.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gemini_31_pro__p10.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p10</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p10.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p10.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p10.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p10.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/qwen3_235b__p10.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p10</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><div class="fail">failed: Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'x</div></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p10.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><div class="fail">failed: Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'k</div></div>
-            <div class="half"><span class="badge v3">v3</span><div class="fail">failed: Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'k</div></div>
-            <div class="half"><span class="badge v4">v4</span><div class="fail">failed: Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'k</div></div>
-          </div>
-        </div></div>
-      </section>
-
-      <section class="prompt-row" data-prompt="p11">
-        <header>
-          <h3>p11 — abstract (pen + cpencil)</h3>
-          <p class="prompt-text">An abstract composition of intersecting hatched rectangles in muted earth tones, like a Diebenkorn landscape rendered in pen and colored pencil.</p>
-        </header>
-        <div class="models-grid">
-        <div class="cell">
-          <div class="cell-label">p11</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p11.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p11.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p11.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p11.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/claude_sonnet_46__p11.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p11</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p11.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p11.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p11.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p11.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gpt_54__p11.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p11</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p11.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p11.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p11.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p11.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gemini_31_pro__p11.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p11</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p11.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p11.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><div class="fail">failed: brush.push is not a function
-hatchedRect (file:///Users/suryanarreddi/projects/e</div></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p11.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/qwen3_235b__p11.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p11</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p11.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemma3_27b__p11.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemma3_27b__p11.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p11.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gemma3_27b__p11.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div></div>
-      </section>
-
-      <section class="prompt-row" data-prompt="p12">
-        <header>
-          <h3>p12 — abstract (spray, atmospheric)</h3>
-          <p class="prompt-text">A swarm of particles following a vector field, each leaving a trail of spray-paint dots that build up into ghostly cloud formations.</p>
-        </header>
-        <div class="models-grid">
-        <div class="cell">
-          <div class="cell-label">p12</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/claude_sonnet_46__p12.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/claude_sonnet_46__p12.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/claude_sonnet_46__p12.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/claude_sonnet_46__p12.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/claude_sonnet_46__p12.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p12</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gpt_54__p12.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gpt_54__p12.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gpt_54__p12.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gpt_54__p12.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gpt_54__p12.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p12</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemini_31_pro__p12.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/gemini_31_pro__p12.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemini_31_pro__p12.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemini_31_pro__p12.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/gemini_31_pro__p12.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p12</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/qwen3_235b__p12.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><img src="renders/new/qwen3_235b__p12.png" alt="new" loading="lazy"></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/qwen3_235b__p12.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/qwen3_235b__p12.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><img src="renders/v4/qwen3_235b__p12.png" alt="v4" loading="lazy"></div>
-          </div>
-        </div>
-
-        <div class="cell">
-          <div class="cell-label">p12</div>
-          <div class="pair quint">
-            <div class="half"><span class="badge old">old</span><img src="renders/old/gemma3_27b__p12.png" alt="old" loading="lazy"></div>
-            <div class="half"><span class="badge new">v1</span><div class="fail">failed: no render</div></div>
-            <div class="half"><span class="badge v2">v2</span><img src="renders/v2/gemma3_27b__p12.png" alt="v2" loading="lazy"></div>
-            <div class="half"><span class="badge v3">v3</span><img src="renders/v3/gemma3_27b__p12.png" alt="v3" loading="lazy"></div>
-            <div class="half"><span class="badge v4">v4</span><div class="fail">failed: brush.noWiggle is not a function
-draw (file:///Users/suryanarreddi/projects/expe</div></div>
-          </div>
-        </div></div>
-      </section>
-
-<h2 id="clips">Live sessions</h2>
-<p class="lede">
-The controlled test above uses context injection via OpenRouter. Below are three screen recordings of the realistic deployment flow: a user shares the GitHub URL with their AI assistant, which fetches and uses the docs directly. Same prompts, three frontier models.
-</p>
-<p><em>Coming — see <code>methodology/clips/</code>.</em></p>
+        <p class="prompt-text">A swarm of particles following a vector field, each leaving a trail of spray-paint dots that build up into ghostly cloud formations.</p>
+      </header>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr><th class="model-label"></th><th class="col-old v-old">old</th><th class="col-v1 v-v1">v1</th><th class="col-v2 v-v2">v2</th><th class="col-v3 v-v3">v3</th><th class="col-v4 v-v4">v4</th><th class="col-v5 v-v5">v5</th></tr>
+          </thead>
+          <tbody>
+            <tr class="row-claude_sonnet_46"><th class="model-label">Claude Sonnet 4.6</th><td class="col-old v-old"><button class="img-btn" data-model="claude_sonnet_46" data-ver="old" data-pid="p12"><img src="renders/old/claude_sonnet_46__p12.png" alt="claude_sonnet_46 old p12" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v1" data-pid="p12"><img src="renders/new/claude_sonnet_46__p12.png" alt="claude_sonnet_46 v1 p12" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v2" data-pid="p12"><img src="renders/v2/claude_sonnet_46__p12.png" alt="claude_sonnet_46 v2 p12" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v3" data-pid="p12"><img src="renders/v3/claude_sonnet_46__p12.png" alt="claude_sonnet_46 v3 p12" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v4" data-pid="p12"><img src="renders/v4/claude_sonnet_46__p12.png" alt="claude_sonnet_46 v4 p12" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="claude_sonnet_46" data-ver="v5" data-pid="p12"><img src="renders/v5/claude_sonnet_46__p12.png" alt="claude_sonnet_46 v5 p12" loading="lazy"></button></td></tr>
+<tr class="row-gpt_54"><th class="model-label">GPT-5.4</th><td class="col-old v-old"><button class="img-btn" data-model="gpt_54" data-ver="old" data-pid="p12"><img src="renders/old/gpt_54__p12.png" alt="gpt_54 old p12" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gpt_54" data-ver="v1" data-pid="p12"><img src="renders/new/gpt_54__p12.png" alt="gpt_54 v1 p12" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gpt_54" data-ver="v2" data-pid="p12"><img src="renders/v2/gpt_54__p12.png" alt="gpt_54 v2 p12" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gpt_54" data-ver="v3" data-pid="p12"><img src="renders/v3/gpt_54__p12.png" alt="gpt_54 v3 p12" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gpt_54" data-ver="v4" data-pid="p12"><img src="renders/v4/gpt_54__p12.png" alt="gpt_54 v4 p12" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gpt_54" data-ver="v5" data-pid="p12"><img src="renders/v5/gpt_54__p12.png" alt="gpt_54 v5 p12" loading="lazy"></button></td></tr>
+<tr class="row-gemini_31_pro"><th class="model-label">Gemini 3.1 Pro</th><td class="col-old v-old"><button class="img-btn" data-model="gemini_31_pro" data-ver="old" data-pid="p12"><img src="renders/old/gemini_31_pro__p12.png" alt="gemini_31_pro old p12" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemini_31_pro" data-ver="v1" data-pid="p12"><img src="renders/new/gemini_31_pro__p12.png" alt="gemini_31_pro v1 p12" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemini_31_pro" data-ver="v2" data-pid="p12"><img src="renders/v2/gemini_31_pro__p12.png" alt="gemini_31_pro v2 p12" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemini_31_pro" data-ver="v3" data-pid="p12"><img src="renders/v3/gemini_31_pro__p12.png" alt="gemini_31_pro v3 p12" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemini_31_pro" data-ver="v4" data-pid="p12"><img src="renders/v4/gemini_31_pro__p12.png" alt="gemini_31_pro v4 p12" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemini_31_pro" data-ver="v5" data-pid="p12"><img src="renders/v5/gemini_31_pro__p12.png" alt="gemini_31_pro v5 p12" loading="lazy"></button></td></tr>
+<tr class="row-qwen3_235b"><th class="model-label">Qwen3-235B</th><td class="col-old v-old"><button class="img-btn" data-model="qwen3_235b" data-ver="old" data-pid="p12"><img src="renders/old/qwen3_235b__p12.png" alt="qwen3_235b old p12" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="qwen3_235b" data-ver="v1" data-pid="p12"><img src="renders/new/qwen3_235b__p12.png" alt="qwen3_235b v1 p12" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="qwen3_235b" data-ver="v2" data-pid="p12"><img src="renders/v2/qwen3_235b__p12.png" alt="qwen3_235b v2 p12" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="qwen3_235b" data-ver="v3" data-pid="p12"><img src="renders/v3/qwen3_235b__p12.png" alt="qwen3_235b v3 p12" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="qwen3_235b" data-ver="v4" data-pid="p12"><img src="renders/v4/qwen3_235b__p12.png" alt="qwen3_235b v4 p12" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="qwen3_235b" data-ver="v5" data-pid="p12"><img src="renders/v5/qwen3_235b__p12.png" alt="qwen3_235b v5 p12" loading="lazy"></button></td></tr>
+<tr class="row-gemma3_27b"><th class="model-label">Gemma 3 27B</th><td class="col-old v-old"><button class="img-btn" data-model="gemma3_27b" data-ver="old" data-pid="p12"><img src="renders/old/gemma3_27b__p12.png" alt="gemma3_27b old p12" loading="lazy"></button></td><td class="col-v1 v-v1"><button class="img-btn" data-model="gemma3_27b" data-ver="v1" data-pid="p12"><img src="renders/new/gemma3_27b__p12.png" alt="gemma3_27b v1 p12" loading="lazy"></button></td><td class="col-v2 v-v2"><button class="img-btn" data-model="gemma3_27b" data-ver="v2" data-pid="p12"><img src="renders/v2/gemma3_27b__p12.png" alt="gemma3_27b v2 p12" loading="lazy"></button></td><td class="col-v3 v-v3"><button class="img-btn" data-model="gemma3_27b" data-ver="v3" data-pid="p12"><img src="renders/v3/gemma3_27b__p12.png" alt="gemma3_27b v3 p12" loading="lazy"></button></td><td class="col-v4 v-v4"><button class="img-btn" data-model="gemma3_27b" data-ver="v4" data-pid="p12"><img src="renders/v4/gemma3_27b__p12.png" alt="gemma3_27b v4 p12" loading="lazy"></button></td><td class="col-v5 v-v5"><button class="img-btn" data-model="gemma3_27b" data-ver="v5" data-pid="p12"><img src="renders/v5/gemma3_27b__p12.png" alt="gemma3_27b v5 p12" loading="lazy"></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
 <h2 id="limits">Honest limitations</h2>
-<ul class="limitations">
-  <li><strong>Library ceilings are real.</strong> Marker simulation can't fully reproduce real marker streakiness; spray loses subject recognition without structural anchoring. Recipes flag this honestly rather than promising perfection.</li>
-  <li><strong>Open-source models have their own ceilings.</strong> Qwen3-235B and Gemma 3 27B may struggle with p5.brush code regardless of docs. We include them for breadth and display failures alongside successes.</li>
-  <li><strong>One seed per cell.</strong> This is a snapshot, not a distribution. Scripts and manifest are committed — anyone can rerun with more seeds.</li>
-  <li><strong>No automated judge.</strong> Prior experiments showed VLM judges had ~0.36 human correlation and a translucency bias that penalized structured output. No scores. Trust your eyes.</li>
-  <li><strong>Controlled test uses context injection.</strong> OpenRouter doesn't fetch URLs, so the realistic URL-share flow is demonstrated only in the live clips.</li>
+<ul>
+  <li><strong>Library ceilings are real.</strong> Marker and spray simulations can't fully reproduce their physical mediums. Recipes flag this honestly rather than promising perfection.</li>
+  <li><strong>Open-source models have their own ceilings.</strong> Qwen3-235B and Gemma 3 27B sometimes produce runtime JS errors regardless of docs. Failures are shown, not hidden.</li>
+  <li><strong>One seed per cell.</strong> This is a snapshot. Scripts and manifest are committed; anyone can rerun with more seeds.</li>
+  <li><strong>No automated judge.</strong> Prior experiments showed VLM judges have ~0.36 human correlation and pathological biases. Trust your eyes.</li>
+  <li><strong>Controlled test uses context injection.</strong> OpenRouter API calls don't fetch URLs, so the realistic URL-share flow is demonstrated only in the live clips.</li>
 </ul>
 
 <h2 id="method">Methodology</h2>
-<ul class="methodology">
-  <li><strong>Prompts.</strong> 12 generative-art sketch ideas, selected from 24 blind-generated ideas (Opus 4.7 + GPT-5.4, independent queries). Coverage: ≥1 per medium (7), 3 multi-medium, 2 abstract/pattern. See <code>prompts.json</code> + <code>prompts_raw.json</code>.</li>
-  <li><strong>A/B conditions.</strong> Old = upstream <code>README.md</code> + <code>llms.txt</code> in system prompt. New = same with the <code>## Recipes</code> section appended (+338 lines). User prompt + structural rules are identical across conditions.</li>
-  <li><strong>Models.</strong> Claude Sonnet 4.6, GPT-5.4, Gemini 3.1 Pro, Qwen3-235B, Gemma 3 27B — frontier + open-source.</li>
+<ul>
+  <li><strong>Prompts.</strong> 12 generative-art sketch ideas, selected from 24 blind-generated ideas (Opus 4.7 + GPT-5.4, independent queries). Coverage: ≥1 per medium (7), 3 multi-medium, 2 abstract/pattern.</li>
+  <li><strong>Conditions.</strong> Old = upstream <code>README.md</code> + <code>llms.txt</code>. v1–v4 = upstream plus increasingly refined <code>## Recipes</code> sections. User prompt + structural rules identical across conditions.</li>
+  <li><strong>Models.</strong> Claude Sonnet 4.6, GPT-5.4, Gemini 3.1 Pro, Qwen3-235B, Gemma 3 27B.</li>
   <li><strong>Rendering.</strong> Headless Puppeteer with Metal WebGL backend; p5.brush 2.1.0-beta pinned. Code pastes directly into a 600×600 WEBGL canvas.</li>
-  <li><strong>Reproducibility.</strong> <code>scripts/run_ab.py</code> + <code>scripts/render_local.js</code> + <code>manifest.json</code> in the repo. Rerun with any model set, any number of seeds.</li>
+  <li><strong>Reproducibility.</strong> <code>scripts/run_ab.py</code> + <code>scripts/render_local.js</code> + <code>manifest*.json</code> in the repo. Rerun with any model set, any number of seeds.</li>
 </ul>
 
 <p class="footnote">
@@ -861,5 +541,81 @@ Methodology source: <a href="https://github.com/kickingkeys/p5.brush/tree/method
 </p>
 
 </main>
+
+<!-- Lightbox overlay -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <div class="lightbox-header">
+      <h3 id="lb-title"></h3>
+      <button class="close" id="lb-close">Close ✕</button>
+    </div>
+    <p class="lightbox-prompt" id="lb-prompt"></p>
+    <p class="lightbox-model" id="lb-model"></p>
+    <div class="lightbox-grid" id="lb-grid"></div>
+  </div>
+</div>
+
+<script>
+const MODELS = [["claude_sonnet_46", "Claude Sonnet 4.6"], ["gpt_54", "GPT-5.4"], ["gemini_31_pro", "Gemini 3.1 Pro"], ["qwen3_235b", "Qwen3-235B"], ["gemma3_27b", "Gemma 3 27B"]];
+const VERSIONS = [["old", "old"], ["v1", "v1"], ["v2", "v2"], ["v3", "v3"], ["v4", "v4"], ["v5", "v5"]];
+const DATA = {"p01": {"text": "An abstract field of overlapping circular watercolor blooms in dusty pinks and ochres, their edges bleeding into each other on warm paper.", "medium": "watercolor", "cells": {"claude_sonnet_46": {"old": "renders/old/claude_sonnet_46__p01.png", "v1": "renders/new/claude_sonnet_46__p01.png", "v2": "renders/v2/claude_sonnet_46__p01.png", "v3": "renders/v3/claude_sonnet_46__p01.png", "v4": "renders/v4/claude_sonnet_46__p01.png", "v5": "renders/v5/claude_sonnet_46__p01.png"}, "gpt_54": {"old": "renders/old/gpt_54__p01.png", "v1": "renders/new/gpt_54__p01.png", "v2": "renders/v2/gpt_54__p01.png", "v3": "renders/v3/gpt_54__p01.png", "v4": "renders/v4/gpt_54__p01.png", "v5": "renders/v5/gpt_54__p01.png"}, "gemini_31_pro": {"old": "renders/old/gemini_31_pro__p01.png", "v1": "renders/new/gemini_31_pro__p01.png", "v2": "renders/v2/gemini_31_pro__p01.png", "v3": "renders/v3/gemini_31_pro__p01.png", "v4": "renders/v4/gemini_31_pro__p01.png", "v5": "renders/v5/gemini_31_pro__p01.png"}, "qwen3_235b": {"old": "renders/old/qwen3_235b__p01.png", "v1": "renders/new/qwen3_235b__p01.png", "v2": "renders/v2/qwen3_235b__p01.png", "v3": "renders/v3/qwen3_235b__p01.png", "v4": "renders/v4/qwen3_235b__p01.png", "v5": "renders/v5/qwen3_235b__p01.png"}, "gemma3_27b": {"old": "renders/old/gemma3_27b__p01.png", "v1": "renders/new/gemma3_27b__p01.png", "v2": "renders/v2/gemma3_27b__p01.png", "v3": "renders/v3/gemma3_27b__p01.png", "v4": "renders/v4/gemma3_27b__p01.png", "v5": "renders/v5/gemma3_27b__p01.png"}}}, "p02": {"text": "A botanical study of wild grasses and seed heads in graphite pencil only \u2014 fine outlines, hatching, and tonal shading, no color, unfinished edges.", "medium": "pencil", "cells": {"claude_sonnet_46": {"old": "renders/old/claude_sonnet_46__p02.png", "v1": "renders/new/claude_sonnet_46__p02.png", "v2": "renders/v2/claude_sonnet_46__p02.png", "v3": "renders/v3/claude_sonnet_46__p02.png", "v4": "renders/v4/claude_sonnet_46__p02.png", "v5": "renders/v5/claude_sonnet_46__p02.png"}, "gpt_54": {"old": "renders/old/gpt_54__p02.png", "v1": "renders/new/gpt_54__p02.png", "v2": "renders/v2/gpt_54__p02.png", "v3": "renders/v3/gpt_54__p02.png", "v4": "renders/v4/gpt_54__p02.png", "v5": "renders/v5/gpt_54__p02.png"}, "gemini_31_pro": {"old": "renders/old/gemini_31_pro__p02.png", "v1": "renders/new/gemini_31_pro__p02.png", "v2": "renders/v2/gemini_31_pro__p02.png", "v3": "renders/v3/gemini_31_pro__p02.png", "v4": "renders/v4/gemini_31_pro__p02.png", "v5": "renders/v5/gemini_31_pro__p02.png"}, "qwen3_235b": {"old": "renders/old/qwen3_235b__p02.png", "v1": "renders/new/qwen3_235b__p02.png", "v2": "renders/v2/qwen3_235b__p02.png", "v3": "renders/v3/qwen3_235b__p02.png", "v4": "renders/v4/qwen3_235b__p02.png", "v5": "renders/v5/qwen3_235b__p02.png"}, "gemma3_27b": {"old": "renders/old/gemma3_27b__p02.png", "v1": "renders/new/gemma3_27b__p02.png", "v2": "renders/v2/gemma3_27b__p02.png", "v3": "renders/v3/gemma3_27b__p02.png", "v4": "renders/v4/gemma3_27b__p02.png", "v5": "renders/v5/gemma3_27b__p02.png"}}}, "p03": {"text": "A gestural figure study of a dancer mid-leap, drawn in loose charcoal with heavy smudges trailing behind the motion.", "medium": "charcoal", "cells": {"claude_sonnet_46": {"old": "renders/old/claude_sonnet_46__p03.png", "v1": "renders/new/claude_sonnet_46__p03.png", "v2": "renders/v2/claude_sonnet_46__p03.png", "v3": "renders/v3/claude_sonnet_46__p03.png", "v4": "renders/v4/claude_sonnet_46__p03.png", "v5": "renders/v5/claude_sonnet_46__p03.png"}, "gpt_54": {"old": "renders/old/gpt_54__p03.png", "v1": "renders/new/gpt_54__p03.png", "v2": "renders/v2/gpt_54__p03.png", "v3": "renders/v3/gpt_54__p03.png", "v4": "renders/v4/gpt_54__p03.png", "v5": "renders/v5/gpt_54__p03.png"}, "gemini_31_pro": {"old": "renders/old/gemini_31_pro__p03.png", "v1": "renders/new/gemini_31_pro__p03.png", "v2": "renders/v2/gemini_31_pro__p03.png", "v3": "renders/v3/gemini_31_pro__p03.png", "v4": "renders/v4/gemini_31_pro__p03.png", "v5": "renders/v5/gemini_31_pro__p03.png"}, "qwen3_235b": {"old": "renders/old/qwen3_235b__p03.png", "v1": "renders/new/qwen3_235b__p03.png", "v2": "renders/v2/qwen3_235b__p03.png", "v3": "renders/v3/qwen3_235b__p03.png", "v4": "renders/v4/qwen3_235b__p03.png", "v5": "renders/v5/qwen3_235b__p03.png"}, "gemma3_27b": {"old": "renders/old/gemma3_27b__p03.png", "v1": "renders/new/gemma3_27b__p03.png", "v2": "renders/v2/gemma3_27b__p03.png", "v3": "renders/v3/gemma3_27b__p03.png", "v4": "renders/v4/gemma3_27b__p03.png", "v5": "renders/v5/gemma3_27b__p03.png"}}}, "p04": {"text": "A portrait-like figure made from colored pencil only, with layered imperfect strokes in unexpected colors so the face feels more like a memory or mood than a person.", "medium": "cpencil", "cells": {"claude_sonnet_46": {"old": "renders/old/claude_sonnet_46__p04.png", "v1": "renders/new/claude_sonnet_46__p04.png", "v2": "renders/v2/claude_sonnet_46__p04.png", "v3": "renders/v3/claude_sonnet_46__p04.png", "v4": "renders/v4/claude_sonnet_46__p04.png", "v5": "renders/v5/claude_sonnet_46__p04.png"}, "gpt_54": {"old": "renders/old/gpt_54__p04.png", "v1": "renders/new/gpt_54__p04.png", "v2": "renders/v2/gpt_54__p04.png", "v3": "renders/v3/gpt_54__p04.png", "v4": "renders/v4/gpt_54__p04.png", "v5": "renders/v5/gpt_54__p04.png"}, "gemini_31_pro": {"old": "renders/old/gemini_31_pro__p04.png", "v1": "renders/new/gemini_31_pro__p04.png", "v2": "renders/v2/gemini_31_pro__p04.png", "v3": "renders/v3/gemini_31_pro__p04.png", "v4": "renders/v4/gemini_31_pro__p04.png", "v5": "renders/v5/gemini_31_pro__p04.png"}, "qwen3_235b": {"old": "renders/old/qwen3_235b__p04.png", "v1": "renders/new/qwen3_235b__p04.png", "v2": "renders/v2/qwen3_235b__p04.png", "v3": "renders/v3/qwen3_235b__p04.png", "v4": "renders/v4/qwen3_235b__p04.png", "v5": "renders/v5/qwen3_235b__p04.png"}, "gemma3_27b": {"old": "renders/old/gemma3_27b__p04.png", "v1": "renders/new/gemma3_27b__p04.png", "v2": "renders/v2/gemma3_27b__p04.png", "v3": "renders/v3/gemma3_27b__p04.png", "v4": "renders/v4/gemma3_27b__p04.png", "v5": "renders/v5/gemma3_27b__p04.png"}}}, "p05": {"text": "A dense black-and-white forest made only with technical-pen hatching, where tree trunks, undergrowth, and shadows become a woven pattern that almost turns abstract.", "medium": "pen", "cells": {"claude_sonnet_46": {"old": "renders/old/claude_sonnet_46__p05.png", "v1": "renders/new/claude_sonnet_46__p05.png", "v2": "renders/v2/claude_sonnet_46__p05.png", "v3": "renders/v3/claude_sonnet_46__p05.png", "v4": "renders/v4/claude_sonnet_46__p05.png", "v5": "renders/v5/claude_sonnet_46__p05.png"}, "gpt_54": {"old": "renders/old/gpt_54__p05.png", "v1": "renders/new/gpt_54__p05.png", "v2": "renders/v2/gpt_54__p05.png", "v3": "renders/v3/gpt_54__p05.png", "v4": "renders/v4/gpt_54__p05.png", "v5": "renders/v5/gpt_54__p05.png"}, "gemini_31_pro": {"old": "renders/old/gemini_31_pro__p05.png", "v1": "renders/new/gemini_31_pro__p05.png", "v2": "renders/v2/gemini_31_pro__p05.png", "v3": "renders/v3/gemini_31_pro__p05.png", "v4": "renders/v4/gemini_31_pro__p05.png", "v5": "renders/v5/gemini_31_pro__p05.png"}, "qwen3_235b": {"old": "renders/old/qwen3_235b__p05.png", "v1": "renders/new/qwen3_235b__p05.png", "v2": "renders/v2/qwen3_235b__p05.png", "v3": "renders/v3/qwen3_235b__p05.png", "v4": "renders/v4/qwen3_235b__p05.png", "v5": "renders/v5/qwen3_235b__p05.png"}, "gemma3_27b": {"old": "renders/old/gemma3_27b__p05.png", "v1": "renders/new/gemma3_27b__p05.png", "v2": "renders/v2/gemma3_27b__p05.png", "v3": "renders/v3/gemma3_27b__p05.png", "v4": "renders/v4/gemma3_27b__p05.png", "v5": "renders/v5/gemma3_27b__p05.png"}}}, "p06": {"text": "A flock of birds scattered across the page as quick marker gestures, their paths guided by an invisible swirling wind.", "medium": "marker", "cells": {"claude_sonnet_46": {"old": "renders/old/claude_sonnet_46__p06.png", "v1": "renders/new/claude_sonnet_46__p06.png", "v2": "renders/v2/claude_sonnet_46__p06.png", "v3": "renders/v3/claude_sonnet_46__p06.png", "v4": "renders/v4/claude_sonnet_46__p06.png", "v5": "renders/v5/claude_sonnet_46__p06.png"}, "gpt_54": {"old": "renders/old/gpt_54__p06.png", "v1": "renders/new/gpt_54__p06.png", "v2": "renders/v2/gpt_54__p06.png", "v3": "renders/v3/gpt_54__p06.png", "v4": "renders/v4/gpt_54__p06.png", "v5": "renders/v5/gpt_54__p06.png"}, "gemini_31_pro": {"old": "renders/old/gemini_31_pro__p06.png", "v1": "renders/new/gemini_31_pro__p06.png", "v2": "renders/v2/gemini_31_pro__p06.png", "v3": "renders/v3/gemini_31_pro__p06.png", "v4": "renders/v4/gemini_31_pro__p06.png", "v5": "renders/v5/gemini_31_pro__p06.png"}, "qwen3_235b": {"old": "renders/old/qwen3_235b__p06.png", "v1": "renders/new/qwen3_235b__p06.png", "v2": "renders/v2/qwen3_235b__p06.png", "v3": "renders/v3/qwen3_235b__p06.png", "v4": "renders/v4/qwen3_235b__p06.png", "v5": "renders/v5/qwen3_235b__p06.png"}, "gemma3_27b": {"old": "renders/old/gemma3_27b__p06.png", "v1": "renders/new/gemma3_27b__p06.png", "v2": "renders/v2/gemma3_27b__p06.png", "v3": "renders/v3/gemma3_27b__p06.png", "v4": "renders/v4/gemma3_27b__p06.png", "v5": "renders/v5/gemma3_27b__p06.png"}}}, "p07": {"text": "A city wall of overlapping spray-painted circles, drips, arrows, and ghosted hand-drawn marks, like fragments of graffiti building into an accidental composition.", "medium": "spray", "cells": {"claude_sonnet_46": {"old": "renders/old/claude_sonnet_46__p07.png", "v1": "renders/new/claude_sonnet_46__p07.png", "v2": "renders/v2/claude_sonnet_46__p07.png", "v3": "renders/v3/claude_sonnet_46__p07.png", "v4": "renders/v4/claude_sonnet_46__p07.png", "v5": "renders/v5/claude_sonnet_46__p07.png"}, "gpt_54": {"old": "renders/old/gpt_54__p07.png", "v1": "renders/new/gpt_54__p07.png", "v2": "renders/v2/gpt_54__p07.png", "v3": "renders/v3/gpt_54__p07.png", "v4": "renders/v4/gpt_54__p07.png", "v5": "renders/v5/gpt_54__p07.png"}, "gemini_31_pro": {"old": "renders/old/gemini_31_pro__p07.png", "v1": "renders/new/gemini_31_pro__p07.png", "v2": "renders/v2/gemini_31_pro__p07.png", "v3": "renders/v3/gemini_31_pro__p07.png", "v4": "renders/v4/gemini_31_pro__p07.png", "v5": "renders/v5/gemini_31_pro__p07.png"}, "qwen3_235b": {"old": "renders/old/qwen3_235b__p07.png", "v1": "renders/new/qwen3_235b__p07.png", "v2": "renders/v2/qwen3_235b__p07.png", "v3": "renders/v3/qwen3_235b__p07.png", "v4": "renders/v4/qwen3_235b__p07.png", "v5": "renders/v5/qwen3_235b__p07.png"}, "gemma3_27b": {"old": "renders/old/gemma3_27b__p07.png", "v1": "renders/new/gemma3_27b__p07.png", "v2": "renders/v2/gemma3_27b__p07.png", "v3": "renders/v3/gemma3_27b__p07.png", "v4": "renders/v4/gemma3_27b__p07.png", "v5": "renders/v5/gemma3_27b__p07.png"}}}, "p08": {"text": "A foggy harbor at dawn rendered in soft watercolor washes, with faint graphite pencil lines suggesting masts and ropes over the damp color.", "medium": "multi (watercolor + pencil)", "cells": {"claude_sonnet_46": {"old": "renders/old/claude_sonnet_46__p08.png", "v1": "renders/new/claude_sonnet_46__p08.png", "v2": "renders/v2/claude_sonnet_46__p08.png", "v3": "renders/v3/claude_sonnet_46__p08.png", "v4": "renders/v4/claude_sonnet_46__p08.png", "v5": "renders/v5/claude_sonnet_46__p08.png"}, "gpt_54": {"old": "renders/old/gpt_54__p08.png", "v1": "renders/new/gpt_54__p08.png", "v2": "renders/v2/gpt_54__p08.png", "v3": "renders/v3/gpt_54__p08.png", "v4": "renders/v4/gpt_54__p08.png", "v5": "renders/v5/gpt_54__p08.png"}, "gemini_31_pro": {"old": "renders/old/gemini_31_pro__p08.png", "v1": "renders/new/gemini_31_pro__p08.png", "v2": "renders/v2/gemini_31_pro__p08.png", "v3": "renders/v3/gemini_31_pro__p08.png", "v4": "renders/v4/gemini_31_pro__p08.png", "v5": "renders/v5/gemini_31_pro__p08.png"}, "qwen3_235b": {"old": "renders/old/qwen3_235b__p08.png", "v1": "renders/new/qwen3_235b__p08.png", "v2": "renders/v2/qwen3_235b__p08.png", "v3": "renders/v3/qwen3_235b__p08.png", "v4": "renders/v4/qwen3_235b__p08.png", "v5": "renders/v5/qwen3_235b__p08.png"}, "gemma3_27b": {"old": "renders/old/gemma3_27b__p08.png", "v1": "renders/new/gemma3_27b__p08.png", "v2": "renders/v2/gemma3_27b__p08.png", "v3": "renders/v3/gemma3_27b__p08.png", "v4": "renders/v4/gemma3_27b__p08.png", "v5": "renders/v5/gemma3_27b__p08.png"}}}, "p09": {"text": "A rainy city street at night suggested through wet watercolor bleeds, neon marker smears reflecting on the pavement, and sparse ink silhouettes of passersby.", "medium": "multi (watercolor + marker + pen)", "cells": {"claude_sonnet_46": {"old": "renders/old/claude_sonnet_46__p09.png", "v1": "renders/new/claude_sonnet_46__p09.png", "v2": "renders/v2/claude_sonnet_46__p09.png", "v3": "renders/v3/claude_sonnet_46__p09.png", "v4": "renders/v4/claude_sonnet_46__p09.png", "v5": "renders/v5/claude_sonnet_46__p09.png"}, "gpt_54": {"old": "renders/old/gpt_54__p09.png", "v1": "renders/new/gpt_54__p09.png", "v2": "renders/v2/gpt_54__p09.png", "v3": "renders/v3/gpt_54__p09.png", "v4": "renders/v4/gpt_54__p09.png", "v5": "renders/v5/gpt_54__p09.png"}, "gemini_31_pro": {"old": "renders/old/gemini_31_pro__p09.png", "v1": "renders/new/gemini_31_pro__p09.png", "v2": "renders/v2/gemini_31_pro__p09.png", "v3": "renders/v3/gemini_31_pro__p09.png", "v4": "renders/v4/gemini_31_pro__p09.png", "v5": "renders/v5/gemini_31_pro__p09.png"}, "qwen3_235b": {"old": "renders/old/qwen3_235b__p09.png", "v1": "renders/new/qwen3_235b__p09.png", "v2": "renders/v2/qwen3_235b__p09.png", "v3": "renders/v3/qwen3_235b__p09.png", "v4": "renders/v4/qwen3_235b__p09.png", "v5": "renders/v5/qwen3_235b__p09.png"}, "gemma3_27b": {"old": "renders/old/gemma3_27b__p09.png", "v1": "renders/new/gemma3_27b__p09.png", "v2": "renders/v2/gemma3_27b__p09.png", "v3": "renders/v3/gemma3_27b__p09.png", "v4": "renders/v4/gemma3_27b__p09.png", "v5": "renders/v5/gemma3_27b__p09.png"}}}, "p10": {"text": "A cracked desert landscape with layered sand-colored washes, jagged charcoal rock formations, and a single thin pen-drawn horizon line bisecting the page.", "medium": "multi (watercolor + charcoal + pen)", "cells": {"claude_sonnet_46": {"old": "renders/old/claude_sonnet_46__p10.png", "v1": "renders/new/claude_sonnet_46__p10.png", "v2": "renders/v2/claude_sonnet_46__p10.png", "v3": "renders/v3/claude_sonnet_46__p10.png", "v4": "renders/v4/claude_sonnet_46__p10.png", "v5": "renders/v5/claude_sonnet_46__p10.png"}, "gpt_54": {"old": "renders/old/gpt_54__p10.png", "v1": "renders/new/gpt_54__p10.png", "v2": "renders/v2/gpt_54__p10.png", "v3": "renders/v3/gpt_54__p10.png", "v4": "renders/v4/gpt_54__p10.png", "v5": "renders/v5/gpt_54__p10.png"}, "gemini_31_pro": {"old": "renders/old/gemini_31_pro__p10.png", "v1": "renders/new/gemini_31_pro__p10.png", "v2": "renders/v2/gemini_31_pro__p10.png", "v3": "renders/v3/gemini_31_pro__p10.png", "v4": "renders/v4/gemini_31_pro__p10.png", "v5": "renders/v5/gemini_31_pro__p10.png"}, "qwen3_235b": {"old": "renders/old/qwen3_235b__p10.png", "v1": "renders/new/qwen3_235b__p10.png", "v2": "renders/v2/qwen3_235b__p10.png", "v3": "renders/v3/qwen3_235b__p10.png", "v4": "renders/v4/qwen3_235b__p10.png", "v5": "renders/v5/qwen3_235b__p10.png"}, "gemma3_27b": {"old": "renders/old/gemma3_27b__p10.png", "v1": "renders/new/gemma3_27b__p10.png", "v2": "renders/v2/gemma3_27b__p10.png", "v3": null, "v4": "renders/v4/gemma3_27b__p10.png", "v5": "renders/v5/gemma3_27b__p10.png"}}}, "p11": {"text": "An abstract composition of intersecting hatched rectangles in muted earth tones, like a Diebenkorn landscape rendered in pen and colored pencil.", "medium": "abstract (pen + cpencil)", "cells": {"claude_sonnet_46": {"old": "renders/old/claude_sonnet_46__p11.png", "v1": "renders/new/claude_sonnet_46__p11.png", "v2": "renders/v2/claude_sonnet_46__p11.png", "v3": "renders/v3/claude_sonnet_46__p11.png", "v4": "renders/v4/claude_sonnet_46__p11.png", "v5": "renders/v5/claude_sonnet_46__p11.png"}, "gpt_54": {"old": "renders/old/gpt_54__p11.png", "v1": "renders/new/gpt_54__p11.png", "v2": "renders/v2/gpt_54__p11.png", "v3": "renders/v3/gpt_54__p11.png", "v4": "renders/v4/gpt_54__p11.png", "v5": "renders/v5/gpt_54__p11.png"}, "gemini_31_pro": {"old": "renders/old/gemini_31_pro__p11.png", "v1": "renders/new/gemini_31_pro__p11.png", "v2": "renders/v2/gemini_31_pro__p11.png", "v3": "renders/v3/gemini_31_pro__p11.png", "v4": "renders/v4/gemini_31_pro__p11.png", "v5": "renders/v5/gemini_31_pro__p11.png"}, "qwen3_235b": {"old": "renders/old/qwen3_235b__p11.png", "v1": "renders/new/qwen3_235b__p11.png", "v2": "renders/v2/qwen3_235b__p11.png", "v3": "renders/v3/qwen3_235b__p11.png", "v4": "renders/v4/qwen3_235b__p11.png", "v5": "renders/v5/qwen3_235b__p11.png"}, "gemma3_27b": {"old": "renders/old/gemma3_27b__p11.png", "v1": "renders/new/gemma3_27b__p11.png", "v2": "renders/v2/gemma3_27b__p11.png", "v3": "renders/v3/gemma3_27b__p11.png", "v4": "renders/v4/gemma3_27b__p11.png", "v5": "renders/v5/gemma3_27b__p11.png"}}}, "p12": {"text": "A swarm of particles following a vector field, each leaving a trail of spray-paint dots that build up into ghostly cloud formations.", "medium": "abstract (spray, atmospheric)", "cells": {"claude_sonnet_46": {"old": "renders/old/claude_sonnet_46__p12.png", "v1": "renders/new/claude_sonnet_46__p12.png", "v2": "renders/v2/claude_sonnet_46__p12.png", "v3": "renders/v3/claude_sonnet_46__p12.png", "v4": "renders/v4/claude_sonnet_46__p12.png", "v5": "renders/v5/claude_sonnet_46__p12.png"}, "gpt_54": {"old": "renders/old/gpt_54__p12.png", "v1": "renders/new/gpt_54__p12.png", "v2": "renders/v2/gpt_54__p12.png", "v3": "renders/v3/gpt_54__p12.png", "v4": "renders/v4/gpt_54__p12.png", "v5": "renders/v5/gpt_54__p12.png"}, "gemini_31_pro": {"old": "renders/old/gemini_31_pro__p12.png", "v1": "renders/new/gemini_31_pro__p12.png", "v2": "renders/v2/gemini_31_pro__p12.png", "v3": "renders/v3/gemini_31_pro__p12.png", "v4": "renders/v4/gemini_31_pro__p12.png", "v5": "renders/v5/gemini_31_pro__p12.png"}, "qwen3_235b": {"old": "renders/old/qwen3_235b__p12.png", "v1": "renders/new/qwen3_235b__p12.png", "v2": "renders/v2/qwen3_235b__p12.png", "v3": "renders/v3/qwen3_235b__p12.png", "v4": "renders/v4/qwen3_235b__p12.png", "v5": "renders/v5/qwen3_235b__p12.png"}, "gemma3_27b": {"old": "renders/old/gemma3_27b__p12.png", "v1": "renders/new/gemma3_27b__p12.png", "v2": "renders/v2/gemma3_27b__p12.png", "v3": "renders/v3/gemma3_27b__p12.png", "v4": "renders/v4/gemma3_27b__p12.png", "v5": "renders/v5/gemma3_27b__p12.png"}}}};
+
+// --- Filter: version checkboxes ---
+document.querySelectorAll('.ver-chk').forEach(chk => {
+  chk.addEventListener('change', () => {
+    document.body.classList.toggle('hide-' + chk.dataset.ver, !chk.checked);
+  });
+  // initial state
+  document.body.classList.toggle('hide-' + chk.dataset.ver, !chk.checked);
+});
+
+// --- Filter: model focus ---
+document.querySelector('.model-focus').addEventListener('change', (e) => {
+  document.body.dataset.focus = e.target.value;
+});
+
+// --- Size toggle ---
+document.querySelectorAll('.size-btns button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.body.classList.remove('size-md', 'size-lg', 'size-xl');
+    document.body.classList.add('size-' + btn.dataset.size);
+    document.querySelectorAll('.size-btns button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// --- Lightbox ---
+const lb = document.getElementById('lightbox');
+const lbTitle = document.getElementById('lb-title');
+const lbPrompt = document.getElementById('lb-prompt');
+const lbModel = document.getElementById('lb-model');
+const lbGrid = document.getElementById('lb-grid');
+
+function openLightbox(model, pid) {
+  const p = DATA[pid];
+  if (!p) return;
+  const modelLabel = MODELS.find(([k]) => k === model)[1];
+  lbTitle.textContent = pid + ' — ' + p.medium;
+  lbPrompt.textContent = p.text;
+  lbModel.textContent = modelLabel;
+  lbGrid.innerHTML = VERSIONS.map(([v, label]) => {
+    const path = p.cells[model][v];
+    const body = path
+      ? `<img src="${path}" alt="${v}">`
+      : `<div class="lb-missing">no render</div>`;
+    return `<div class="lightbox-cell lb-${v}"><div class="lb-label">${label}</div>${body}</div>`;
+  }).join('');
+  lb.classList.add('open');
+}
+
+document.querySelectorAll('.img-btn').forEach(btn => {
+  btn.addEventListener('click', () => openLightbox(btn.dataset.model, btn.dataset.pid));
+});
+
+document.getElementById('lb-close').addEventListener('click', () => lb.classList.remove('open'));
+lb.addEventListener('click', (e) => { if (e.target === lb) lb.classList.remove('open'); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lb.classList.remove('open'); });
+</script>
+
 </body>
 </html>

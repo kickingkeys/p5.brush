@@ -2311,14 +2311,14 @@
   },
   "gemma3_27b__old__p05": {
     "generated": true,
-    "lines": 52,
+    "lines": 65,
     "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/old/gemma3_27b__p05.js",
     "js_exists": true,
     "usage": {
-      "prompt_tokens": 21219,
-      "completion_tokens": 614,
-      "total_tokens": 21833,
-      "cost": 0.0017778024,
+      "prompt_tokens": 21223,
+      "completion_tokens": 977,
+      "total_tokens": 22200,
+      "cost": 0.00269372763,
       "is_byok": false,
       "prompt_tokens_details": {
         "cached_tokens": 0,
@@ -2327,9 +2327,9 @@
         "video_tokens": 0
       },
       "cost_details": {
-        "upstream_inference_cost": 0.00179576,
-        "upstream_inference_prompt_cost": 0.00169752,
-        "upstream_inference_completions_cost": 9.824e-05
+        "upstream_inference_cost": 0.002720937,
+        "upstream_inference_prompt_cost": 0.002525537,
+        "upstream_inference_completions_cost": 0.0001954
       },
       "completion_tokens_details": {
         "reasoning_tokens": 0,
@@ -2337,21 +2337,22 @@
         "audio_tokens": 0
       }
     },
-    "rendered": false,
-    "render_note": "Uncaught (in promise) Error: No brush or color set. Call brush.set('brushName', color) before drawing.",
-    "png_path": null,
-    "render_size": 2665
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/old/gemma3_27b__p05.png",
+    "render_size": 104712
   },
   "gemma3_27b__old__p06": {
     "generated": true,
-    "lines": 35,
+    "lines": 38,
     "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/old/gemma3_27b__p06.js",
     "js_exists": true,
     "usage": {
-      "prompt_tokens": 21211,
-      "completion_tokens": 434,
-      "total_tokens": 21645,
-      "cost": 0.0018732582,
+      "prompt_tokens": 21207,
+      "completion_tokens": 439,
+      "total_tokens": 21646,
+      "cost": 0.001749132,
       "is_byok": false,
       "prompt_tokens_details": {
         "cached_tokens": 0,
@@ -2360,9 +2361,9 @@
         "video_tokens": 0
       },
       "cost_details": {
-        "upstream_inference_cost": 0.00189218,
-        "upstream_inference_prompt_cost": 0.00169688,
-        "upstream_inference_completions_cost": 0.0001953
+        "upstream_inference_cost": 0.0017668,
+        "upstream_inference_prompt_cost": 0.00169656,
+        "upstream_inference_completions_cost": 7.024e-05
       },
       "completion_tokens_details": {
         "reasoning_tokens": 0,
@@ -2370,10 +2371,11 @@
         "audio_tokens": 0
       }
     },
-    "rendered": false,
-    "render_note": "Cannot access 'color' before initialization\ndraw (file:///Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/scripts/_tmp_32310_1776531986704.html:27:17)",
-    "png_path": null,
-    "render_size": 2279
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/old/gemma3_27b__p06.png",
+    "render_size": 11808
   },
   "gemma3_27b__old__p08": {
     "generated": true,
@@ -2410,25 +2412,25 @@
   },
   "gemma3_27b__old__p07": {
     "generated": true,
-    "lines": 67,
+    "lines": 53,
     "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/old/gemma3_27b__p07.js",
     "js_exists": true,
     "usage": {
-      "prompt_tokens": 21221,
-      "completion_tokens": 809,
-      "total_tokens": 22030,
-      "cost": 0.0012104631,
+      "prompt_tokens": 21217,
+      "completion_tokens": 613,
+      "total_tokens": 21830,
+      "cost": 0.0017774856,
       "is_byok": false,
       "prompt_tokens_details": {
-        "cached_tokens": 20976,
+        "cached_tokens": 0,
         "cache_write_tokens": 0,
         "audio_tokens": 0,
         "video_tokens": 0
       },
       "cost_details": {
-        "upstream_inference_cost": 0.00122269,
-        "upstream_inference_prompt_cost": 0.00085864,
-        "upstream_inference_completions_cost": 0.00036405
+        "upstream_inference_cost": 0.00179544,
+        "upstream_inference_prompt_cost": 0.00169736,
+        "upstream_inference_completions_cost": 9.808e-05
       },
       "completion_tokens_details": {
         "reasoning_tokens": 0,
@@ -2436,10 +2438,11 @@
         "audio_tokens": 0
       }
     },
-    "rendered": false,
-    "render_note": "Cannot access 'color' before initialization\ndraw (file:///Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/scripts/_tmp_32459_1776531993266.html:27:17)",
-    "png_path": null,
-    "render_size": 2279
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/old/gemma3_27b__p07.png",
+    "render_size": 120699
   },
   "gemma3_27b__old__p11": {
     "generated": true,
@@ -2476,14 +2479,14 @@
   },
   "gemma3_27b__old__p10": {
     "generated": true,
-    "lines": 57,
+    "lines": 59,
     "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/old/gemma3_27b__p10.js",
     "js_exists": true,
     "usage": {
       "prompt_tokens": 21216,
-      "completion_tokens": 640,
-      "total_tokens": 21856,
-      "cost": 0.0017816832,
+      "completion_tokens": 628,
+      "total_tokens": 21844,
+      "cost": 0.0017797824,
       "is_byok": false,
       "prompt_tokens_details": {
         "cached_tokens": 0,
@@ -2492,9 +2495,9 @@
         "video_tokens": 0
       },
       "cost_details": {
-        "upstream_inference_cost": 0.00179968,
+        "upstream_inference_cost": 0.00179776,
         "upstream_inference_prompt_cost": 0.00169728,
-        "upstream_inference_completions_cost": 0.0001024
+        "upstream_inference_completions_cost": 0.00010048
       },
       "completion_tokens_details": {
         "reasoning_tokens": 0,
@@ -2502,10 +2505,11 @@
         "audio_tokens": 0
       }
     },
-    "rendered": false,
-    "render_note": "Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'x')",
-    "png_path": null,
-    "render_size": 2279
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/old/gemma3_27b__p10.png",
+    "render_size": 32884
   },
   "gemma3_27b__old__p09": {
     "generated": true,
@@ -3697,14 +3701,14 @@
   },
   "gemma3_27b__new__p05": {
     "generated": true,
-    "lines": 75,
+    "lines": 72,
     "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/new/gemma3_27b__p05.js",
     "js_exists": true,
     "usage": {
-      "prompt_tokens": 26024,
-      "completion_tokens": 797,
-      "total_tokens": 26821,
-      "cost": 0.00322369344,
+      "prompt_tokens": 26021,
+      "completion_tokens": 845,
+      "total_tokens": 26866,
+      "cost": 0.0021947112,
       "is_byok": false,
       "prompt_tokens_details": {
         "cached_tokens": 0,
@@ -3713,9 +3717,9 @@
         "video_tokens": 0
       },
       "cost_details": {
-        "upstream_inference_cost": 0.003256256,
-        "upstream_inference_prompt_cost": 0.003096856,
-        "upstream_inference_completions_cost": 0.0001594
+        "upstream_inference_cost": 0.00221688,
+        "upstream_inference_prompt_cost": 0.00208168,
+        "upstream_inference_completions_cost": 0.0001352
       },
       "completion_tokens_details": {
         "reasoning_tokens": 0,
@@ -3723,10 +3727,11 @@
         "audio_tokens": 0
       }
     },
-    "rendered": false,
-    "render_note": "Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'kind')",
-    "png_path": null,
-    "render_size": 2279
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/new/gemma3_27b__p05.png",
+    "render_size": 54325
   },
   "gemma3_27b__new__p10": {
     "generated": true,
@@ -3763,14 +3768,14 @@
   },
   "gemma3_27b__new__p12": {
     "generated": true,
-    "lines": 48,
+    "lines": 41,
     "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/new/gemma3_27b__p12.js",
     "js_exists": true,
     "usage": {
-      "prompt_tokens": 26017,
-      "completion_tokens": 460,
-      "total_tokens": 26477,
-      "cost": 0.00315614277,
+      "prompt_tokens": 26013,
+      "completion_tokens": 384,
+      "total_tokens": 26397,
+      "cost": 0.0021210552,
       "is_byok": false,
       "prompt_tokens_details": {
         "cached_tokens": 0,
@@ -3779,9 +3784,9 @@
         "video_tokens": 0
       },
       "cost_details": {
-        "upstream_inference_cost": 0.003188023,
-        "upstream_inference_prompt_cost": 0.003096023,
-        "upstream_inference_completions_cost": 9.2e-05
+        "upstream_inference_cost": 0.00214248,
+        "upstream_inference_prompt_cost": 0.00208104,
+        "upstream_inference_completions_cost": 6.144e-05
       },
       "completion_tokens_details": {
         "reasoning_tokens": 0,
@@ -3789,10 +3794,11 @@
         "audio_tokens": 0
       }
     },
-    "rendered": false,
+    "retry": true,
+    "rendered": true,
     "render_note": "",
-    "png_path": null,
-    "render_size": 2279
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/new/gemma3_27b__p12.png",
+    "render_size": 23926
   },
   "gpt_54__old__p12": {
     "generated": true,

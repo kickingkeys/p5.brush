@@ -1387,14 +1387,14 @@
   },
   "qwen3_235b__v2__p11": {
     "generated": true,
-    "lines": 72,
+    "lines": 70,
     "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v2/qwen3_235b__p11.js",
     "js_exists": true,
     "usage": {
       "prompt_tokens": 25259,
-      "completion_tokens": 885,
-      "total_tokens": 26144,
-      "cost": 0.002588256,
+      "completion_tokens": 952,
+      "total_tokens": 26211,
+      "cost": 0.0028160649,
       "is_byok": false,
       "prompt_tokens_details": {
         "cached_tokens": 0,
@@ -1403,9 +1403,9 @@
         "video_tokens": 0
       },
       "cost_details": {
-        "upstream_inference_cost": 0.0026144,
-        "upstream_inference_prompt_cost": 0.0025259,
-        "upstream_inference_completions_cost": 8.85e-05
+        "upstream_inference_cost": 0.00284451,
+        "upstream_inference_prompt_cost": 0.00227331,
+        "upstream_inference_completions_cost": 0.0005712
       },
       "completion_tokens_details": {
         "reasoning_tokens": 0,
@@ -1413,10 +1413,11 @@
         "audio_tokens": 0
       }
     },
-    "rendered": false,
-    "render_note": "brush.push is not a function\nhatchedRect (file:///Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/scripts/_tmp_97371_1776535200704.html:28:11)",
-    "png_path": null,
-    "render_size": 2279
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v2/qwen3_235b__p11.png",
+    "render_size": 560516
   },
   "qwen3_235b__v2__p12": {
     "generated": true,
@@ -1651,14 +1652,14 @@
   },
   "gemma3_27b__v2__p03": {
     "generated": true,
-    "lines": 66,
+    "lines": 57,
     "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v2/gemma3_27b__p03.js",
     "js_exists": true,
     "usage": {
       "prompt_tokens": 27252,
-      "completion_tokens": 718,
-      "total_tokens": 27970,
-      "cost": 0.002911194,
+      "completion_tokens": 562,
+      "total_tokens": 27814,
+      "cost": 0.0022473792,
       "is_byok": false,
       "prompt_tokens_details": {
         "cached_tokens": 0,
@@ -1667,9 +1668,9 @@
         "video_tokens": 0
       },
       "cost_details": {
-        "upstream_inference_cost": 0.0029406,
-        "upstream_inference_prompt_cost": 0.0027252,
-        "upstream_inference_completions_cost": 0.0002154
+        "upstream_inference_cost": 0.00227008,
+        "upstream_inference_prompt_cost": 0.00218016,
+        "upstream_inference_completions_cost": 8.992e-05
       },
       "completion_tokens_details": {
         "reasoning_tokens": 0,
@@ -1677,10 +1678,11 @@
         "audio_tokens": 0
       }
     },
-    "rendered": false,
-    "render_note": "brush.noWiggle is not a function\ndraw (file:///Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/scripts/_tmp_98592_1776535253263.html:33:9)",
-    "png_path": null,
-    "render_size": 2279
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v2/gemma3_27b__p03.png",
+    "render_size": 12070
   },
   "gemma3_27b__v2__p04": {
     "generated": true,
@@ -1717,25 +1719,25 @@
   },
   "gemma3_27b__v2__p05": {
     "generated": true,
-    "lines": 65,
+    "lines": 66,
     "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v2/gemma3_27b__p05.js",
     "js_exists": true,
     "usage": {
-      "prompt_tokens": 27265,
-      "completion_tokens": 676,
-      "total_tokens": 27941,
-      "cost": 0.0013910292,
+      "prompt_tokens": 27261,
+      "completion_tokens": 733,
+      "total_tokens": 27994,
+      "cost": 0.00291654,
       "is_byok": false,
       "prompt_tokens_details": {
-        "cached_tokens": 27008,
+        "cached_tokens": 0,
         "cache_write_tokens": 0,
         "audio_tokens": 0,
         "video_tokens": 0
       },
       "cost_details": {
-        "upstream_inference_cost": 0.00140508,
-        "upstream_inference_prompt_cost": 0.00110088,
-        "upstream_inference_completions_cost": 0.0003042
+        "upstream_inference_cost": 0.002946,
+        "upstream_inference_prompt_cost": 0.0027261,
+        "upstream_inference_completions_cost": 0.0002199
       },
       "completion_tokens_details": {
         "reasoning_tokens": 0,
@@ -1743,10 +1745,11 @@
         "audio_tokens": 0
       }
     },
-    "rendered": false,
-    "render_note": "brush.ellipse is not a function\ndraw (file:///Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/scripts/_tmp_98911_1776535266372.html:50:11)",
-    "png_path": null,
-    "render_size": 2279
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v2/gemma3_27b__p05.png",
+    "render_size": 20506
   },
   "gemma3_27b__v2__p08": {
     "generated": true,
@@ -1821,9 +1824,9 @@
     "js_exists": true,
     "usage": {
       "prompt_tokens": 27258,
-      "completion_tokens": 569,
-      "total_tokens": 27827,
-      "cost": 0.0022489632,
+      "completion_tokens": 662,
+      "total_tokens": 27920,
+      "cost": 0.002895156,
       "is_byok": false,
       "prompt_tokens_details": {
         "cached_tokens": 0,
@@ -1832,9 +1835,9 @@
         "video_tokens": 0
       },
       "cost_details": {
-        "upstream_inference_cost": 0.00227168,
-        "upstream_inference_prompt_cost": 0.00218064,
-        "upstream_inference_completions_cost": 9.104e-05
+        "upstream_inference_cost": 0.0029244,
+        "upstream_inference_prompt_cost": 0.0027258,
+        "upstream_inference_completions_cost": 0.0001986
       },
       "completion_tokens_details": {
         "reasoning_tokens": 0,
@@ -1842,10 +1845,11 @@
         "audio_tokens": 0
       }
     },
-    "rendered": false,
-    "render_note": "Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'kind')",
-    "png_path": null,
-    "render_size": 2279
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v2/gemma3_27b__p10.png",
+    "render_size": 72014
   },
   "gemma3_27b__v2__p12": {
     "generated": true,
@@ -1882,14 +1886,14 @@
   },
   "gemma3_27b__v2__p07": {
     "generated": true,
-    "lines": 103,
+    "lines": 74,
     "js_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v2/gemma3_27b__p07.js",
     "js_exists": true,
     "usage": {
-      "prompt_tokens": 27262,
-      "completion_tokens": 1029,
-      "total_tokens": 28291,
-      "cost": 0.00341547822,
+      "prompt_tokens": 27259,
+      "completion_tokens": 848,
+      "total_tokens": 28107,
+      "cost": 0.002293236,
       "is_byok": false,
       "prompt_tokens_details": {
         "cached_tokens": 0,
@@ -1898,9 +1902,9 @@
         "video_tokens": 0
       },
       "cost_details": {
-        "upstream_inference_cost": 0.003449978,
-        "upstream_inference_prompt_cost": 0.003244178,
-        "upstream_inference_completions_cost": 0.0002058
+        "upstream_inference_cost": 0.0023164,
+        "upstream_inference_prompt_cost": 0.00218072,
+        "upstream_inference_completions_cost": 0.00013568
       },
       "completion_tokens_details": {
         "reasoning_tokens": 0,
@@ -1908,10 +1912,11 @@
         "audio_tokens": 0
       }
     },
-    "rendered": false,
-    "render_note": "Cannot access 'color' before initialization\ndraw (file:///Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/scripts/_tmp_99635_1776535299226.html:25:17)",
-    "png_path": null,
-    "render_size": 2279
+    "retry": true,
+    "rendered": true,
+    "render_note": "",
+    "png_path": "/Users/suryanarreddi/projects/experiments/p5-brush-fork/methodology/renders/v2/gemma3_27b__p07.png",
+    "render_size": 125331
   },
   "gemma3_27b__v2__p11": {
     "generated": true,

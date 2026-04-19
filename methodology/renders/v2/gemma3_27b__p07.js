@@ -1,103 +1,74 @@
 function setup() {
   createCanvas(600, 600, WEBGL);
-  brush.scaleBrushes(3);
   angleMode(DEGREES);
-  background("#fffaf3");
+  brush.scaleBrushes(3);
 }
 
 function draw() {
-  translate(-width/2, -height/2);
+  background("#fffaf3");
+  translate(-width / 2, -height / 2);
 
-  for (let i = 0; i < 150; i++) {
-    let x = random(-250, 250);
-    let y = random(-250, 250);
-    let size = random(20, 60);
-    let opacity = random(50, 200);
-    let color = color(random(255), random(255), random(255), opacity);
-
-    let tool = floor(random(0, 10));
-    switch (tool) {
-      case 0:
-        brush.set("spray", color, 1);
-        brush.circle(x, y, size);
-        break;
-      case 1:
-        brush.set("marker", color, 0.8);
-        brush.circle(x, y, size);
-        break;
-      case 2:
-        brush.set("crayon", color, 1.2);
-        brush.circle(x, y, size);
-        break;
-      case 3:
-        brush.set("pastel", color, 1);
-        brush.circle(x, y, size);
-        break;
-      case 4:
-        brush.set("2B", color, 0.5);
-        brush.circle(x, y, size);
-        break;
-      case 5:
-        brush.set("HB", color, 0.7);
-        brush.circle(x, y, size);
-        break;
-      case 6:
-        brush.set("2H", color, 0.3);
-        brush.circle(x, y, size);
-        break;
-      case 7:
-        brush.set("rotring", color, 0.6);
-        brush.circle(x, y, size);
-        break;
-      case 8:
-        brush.set("pen", color, 0.4);
-        brush.circle(x, y, size);
-        break;
-      case 9:
-        brush.set("charcoal", color, 1);
-        brush.circle(x, y, size);
-        break;
-    }
+  // Base layer - spray paint circles
+  for (let i = 0; i < 30; i++) {
+    let x = random(-200, 200);
+    let y = random(-200, 200);
+    let size = random(20, 80);
+    brush.set("spray", "#e63946", random(0.5, 1)); // Red
+    brush.circle(x, y, size, true);
   }
 
-  for (let i = 0; i < 80; i++) {
-    let x = random(-250, 250);
-    let y = random(-250, 250);
-    let angle = random(0, 360);
-    let length = random(30,80);
-    let opacity = random(30,100);
-    let arrowColor = color(random(0,100), random(0,100), random(0,100), opacity);
+  for (let i = 0; i < 20; i++) {
+    let x = random(-200, 200);
+    let y = random(-200, 200);
+    let size = random(20, 80);
+    brush.set("spray", "#a8dadc", random(0.5, 1)); // Teal
+    brush.circle(x, y, size, true);
+  }
 
-    brush.set("rotring", arrowColor, 0.5);
+  // Charcoal drips
+  brush.set("charcoal", "#222", 1.5);
+  for (let i = 0; i < 15; i++) {
+    let x = random(-200, 200);
+    let y = random(100, 200);
+    brush.beginShape();
+    brush.vertex(x, y);
+    brush.vertex(x + random(-10, 10), y + random(20, 50));
+    brush.vertex(x + random(-20, 20), y + random(40, 80));
+    brush.endShape();
+  }
+
+  // Marker arrows
+  brush.set("marker", "#3498db", 1.2);
+  for (let i = 0; i < 10; i++) {
+    let x = random(-200, 200);
+    let y = random(-100, 100);
+    let angle = random(0, 360);
+    let len = random(30, 60);
     push();
-    translate(x,y);
+    translate(x, y);
     rotate(angle);
-    beginShape();
-    vertex(0, 0);
-    vertex(length, 0);
-    vertex(length/2, 15);
-    vertex(length/2, -15);
-    endShape(CLOSE);
+    line(0, 0, len, 0);
+    triangle(len, 0, len - 10, -5, len - 10, 5);
     pop();
   }
 
-  for (let i = 0; i < 50; i++){
-    let x = random(-250, 250);
-    let y = random(-250, 250);
-    let size = random(50, 100);
-    let opacity = random(20, 60);
-    let ghostColor = color(255, 255, 255, opacity);
-
-    brush.set("cpencil", ghostColor, 0.2);
-    brush.beginShape();
-    for(let j = 0; j < 360; j += 10) {
-      let r = size/2 + noise(j * 0.05) * 10;
-      let px = x + cos(j) * r;
-      let py = y + sin(j) * r;
-      vertex(px, py);
-    }
-    brush.endShape(CLOSE);
+  // HB pencil ghosted shapes
+  brush.set("HB", "#95a5a6", 0.4);
+  for (let i = 0; i < 10; i++) {
+    let x = random(-150, 150);
+    let y = random(-150, 150);
+    let size = random(30, 70);
+    brush.circle(x, y, size, true);
   }
+
+  // Pastel fill in some areas
+  brush.fill("#f1c40f", 100);
+  brush.beginShape();
+  brush.vertex(-100, -100);
+  brush.vertex(100, -100);
+  brush.vertex(100, 100);
+  brush.vertex(-100, 100);
+  brush.endShape(CLOSE);
 
   noLoop();
 }
