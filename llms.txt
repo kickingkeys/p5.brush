@@ -442,7 +442,14 @@ for (const [scale, opacity] of [[1.00, 150], [0.75, 180], [0.45, 210]]) {
 
 **Opacity and weight ranges are sweet spots, not hard constraints.** Recipe ranges (watercolor wash 150–200, pencil weight 0.4–1.5, spray passes ≥ 5) produce the target medium look in typical scenes. Break them deliberately when the subject demands it — an opaque night sky is `brush.wash(color, 255)`, a heavy dramatic pencil mark can go above 1.5. The ranges are where you land by default, not walls.
 
-**When NOT to apply graduated density.** The 3-layer template above is for rendering *form* — a subject with volume, shading, or internal depth. For **pattern fields** (many overlapping primitives meant to blend), atmospheric haze, abstract mark-making, or particle/swarm subjects, skip the layering: use single-pass primitives and let quantity + overlap + `fillBleed("out")` do the work. Over-layering collapses the airy, gestural character of field-based subjects. See Watercolor → Field below for the canonical example.
+**When NOT to apply graduated density.** The 3-layer template above is for rendering *form* — a subject with volume, shading, or internal depth. Skip the layering and use single-pass marks + quantity + variation when the subject is:
+
+- **Pattern fields** (bloom fields, bird flocks, particle swarms, overlapping graffiti circles) — character comes from mutual overlap, not per-shape depth.
+- **Dense hatching-as-composition** (forests, cross-hatched landscapes) — density from **many zones × angle variation**, not 3–5 sub-layers per zone.
+- **Gestural / chaotic subjects** (graffiti walls, tags, drips, loose flock gestures) — the gesture *is* the structure.
+- **Abstract motion** (vector fields, swarm trails, noise-driven compositions) — field + wiggle + weight variation *is* the aesthetic.
+
+Over-layering these collapses their airy/gestural character. The rule across mediums is the same: when density or character emerges from **quantity + overlap + variation**, keep each primitive flat and skip the per-shape 3-layer template. See Watercolor → Field below for the canonical example; the Spray Chaos and Pen dense-composition notes below apply the same principle.
 
 ---
 
@@ -625,7 +632,9 @@ brush.noHatch();
 
 Use 2–3 colors per area (light → mid → dark of the same hue) at different hatch angles (e.g. 30°, 75°, 120°). Different color per angle creates optical color mixing. Stroke weights 0.5–1.2.
 
-**Avoid**: `fill()` or `wash()`; single color; single hatch angle (flat, un-mixed); stroke weights above 1.2 (loses waxy feel).
+**Cap at 3 colors per area.** More than 3 hue passes becomes muddy and loses the waxy optical-mixing effect. "Graduated density" for cpencil means angle rotation + tonal step across those 2–3 passes — *not* stacking additional layers. For a portrait, each anatomical zone (cheek, jaw, hair mass, shoulder) gets its own 2–3 color set; don't re-layer the same zone 4+ times.
+
+**Avoid**: `fill()` or `wash()`; single color; single hatch angle (flat, un-mixed); stroke weights above 1.2 (loses waxy feel); more than 3 colors per area (muddy — stop at the 3rd pass).
 
 ---
 
@@ -653,6 +662,8 @@ brush.noHatch();
 `pen` = slightly variable width, natural feel (best for outlines). `rotring` = more uniform, thinner (best for hatching). Hatch angles offset 15–30° per zone.
 
 **Hatching IS the composition, not a fill for shapes.** For a dense pen scene (forests, cross-hatched landscapes, architectural studies), build the image directly from overlapping `brush.hatch()` calls at different spacings and angles over the whole canvas — do *not* draw polygon shapes first and wrap hatching inside them. `beginShape`/`endShape` with hatch is for *zones* of a larger hatched composition, not for converting pen into a shape-fill medium.
+
+**Dense composition: cap per-zone layers at 1–2.** When you do use zones, scene density comes from **zone quantity + angle variation across the composition**, not from stacking 3–5 sub-layers inside each zone. Two overlapping hatch calls at different angles (e.g. 60° and 135°) is plenty per zone; the overall scene darkness emerges from zones overlapping each other and from the angle rotation, not from deep per-zone layering. Adding a third or fourth sub-layer per zone flattens the composition into grayscale mud and loses the pen-illustration line quality.
 
 **Avoid**: fills (`fill`, `wash` — pen is line-only); single-angle hatching (causes moiré); using `charcoal` or `2B` for hatching (wrong texture); wrapping hatched zones inside closed polygons to "fill" them (the output reads as polygon-with-texture instead of pen illustration).
 
@@ -709,7 +720,16 @@ Vary weight and color lightly per stroke for liveness. Marker gestures don't nee
 
 Soft, diffuse, atmospheric. Smooth gradients from many layered passes. No hard edges.
 
-Build form through **5+ tonal passes** (dark → mid-dark → mid → light → highlight), not one or two heavy ones. Each lighter pass: lower weight, shorter line length, smaller radius, smaller count. Pure spray loses subject — always pair with structural elements.
+**Two modes depending on what you're drawing:**
+
+- **Form spray** — a *recognizable subject* rendered atmospherically (a figure, a flower, a face). Build form through 5+ tonal passes and pair with structural elements (charcoal/pen skeleton). Recipe below.
+- **Chaos spray** — *graffiti walls, tags, urban layering, drips, abstract overlapping marks*. The overlap itself is the composition. Skip the 5-pass tonal structure; skip the structural skeleton. Second recipe below.
+
+Prompt language like *"graffiti"*, *"spray-painted"*, *"tags"*, *"drips"*, *"wall"*, *"overlapping circles"* signals Chaos. *"atmospheric"*, *"misty"*, *"a rendered figure"*, *"soft portrait"* signals Form.
+
+**Form spray recipe — 5 tonal passes + skeleton:**
+
+Build form through **5+ tonal passes** (dark → mid-dark → mid → light → highlight), not one or two heavy ones. Each lighter pass: lower weight, shorter line length, smaller radius, smaller count.
 
 ```js
 brush.field("curved");
@@ -758,9 +778,44 @@ brush.spline(skeletonPoints, 0.4);
 
 **Weight controls spread**: fine 0.3–1.0, medium 1.1–2.0, atmospheric 2.5–3.5. Offset each pass spatially toward the light source (shadow passes toward dark side, highlight passes toward light side).
 
-**Avoid**: fewer than 5 passes (reads as flat noise); uniform weight across passes; outlines drawn with `spray` (loses crispness); spray-only compositions (always add `charcoal` or `pen` skeleton lines).
+**Chaos spray recipe — graffiti wall / tags / drips / overlapping chaos:**
 
-**Library limitation**: spray produces beautiful atmospheric effects but has no subject-recognition on its own. Structural anchoring is mandatory.
+No tonal passes, no skeleton. The composition *is* the overlap. Use 2–4 spray colors at varied weights; drop drips (short downward lines); optional tag/arrow splines. No `field()` — motion comes from spray weight + random placement.
+
+```js
+const sprayColors = ["#e8574c", "#4f8dc7", "#f2b84c", "#2a2a2a"];
+
+// Pass A — overlapping circular sprays
+for (let i = 0; i < 40; i++) {
+  brush.set("spray", random(sprayColors), random(0.8, 2.8));
+  brush.flowLine(
+    random(50, 550), random(50, 550),
+    random(15, 45), random(360)
+  );
+}
+
+// Pass B — drips (short downward lines, thin spray)
+for (let i = 0; i < 14; i++) {
+  brush.set("spray", random(sprayColors), random(0.4, 0.8));
+  const x = random(50, 550), y = random(100, 400);
+  brush.line(x, y, x + random(-4, 4), y + random(40, 120));
+}
+
+// Pass C — tags / arrows (splines at higher weight)
+for (let i = 0; i < 6; i++) {
+  brush.set("spray", random(sprayColors), random(1.5, 2.5));
+  const x0 = random(80, 500), y0 = random(100, 500);
+  brush.spline([
+    [x0, y0, 0.7],
+    [x0 + random(40, 120), y0 + random(-30, 30), 0.6],
+    [x0 + random(120, 220), y0 + random(-20, 20), 0.5],
+  ], 0.4);
+}
+```
+
+**Avoid**: fewer than 5 passes *for Form spray* (reads as flat noise); uniform weight across passes; outlines drawn with `spray` (loses crispness); adding a structural `charcoal`/`pen` skeleton to Chaos spray (kills the graffiti character — overlap is the structure).
+
+**Library limitation**: spray produces beautiful atmospheric effects but has no subject-recognition on its own. For *Form* subjects, structural anchoring is mandatory; for *Chaos* subjects, no anchor is needed and adding one hurts.
 
 ---
 
@@ -801,7 +856,9 @@ brush.noField();
 
 Use `brush.field("curved")` for organic flows, `"hand"` for gestural, or `brush.addField()` for custom noise-driven flows. Combine `brush.flowLine(x, y, length, 0)` for straight field-following trails with `brush.spline(pts, 0.4)` when you want curved hand-drawn trails.
 
-**Avoid**: running particle spawns inside `brush.loop()` without a cap (runaway frames); using `field` without `wiggle` (reads mechanical); pure spray with no structural anchor (reads as flat noise — always add at least a faint `pen` or `charcoal` skeleton when the prompt implies a scene rather than pure abstraction).
+**Anchor or no anchor?** Add a faint `pen` / `charcoal` skeleton only when the prompt names a **recognizable subject or scene** (a city, a street, a forest, a figure). For **pure-abstract motion** (swarms, vector fields, particle trails, noise flows, "each leaving a trail of dust") the field + wiggle + weight variation IS the subject — adding a structural anchor reads as a mis-interpreted scene and flattens the motion. When in doubt: if the prompt has a noun naming a coherent physical thing, anchor; if the prompt names a *behavior* or *pattern* (swarm, flow, trail, drift), don't.
+
+**Avoid**: running particle spawns inside `brush.loop()` without a cap (runaway frames); using `field` without `wiggle` (reads mechanical); adding a structural anchor to pure-abstract motion prompts (see above — kills the field aesthetic).
 
 ---
 
