@@ -442,14 +442,9 @@ for (const [scale, opacity] of [[1.00, 150], [0.75, 180], [0.45, 210]]) {
 
 **Opacity and weight ranges are sweet spots, not hard constraints.** Recipe ranges (watercolor wash 150–200, pencil weight 0.4–1.5, spray passes ≥ 5) produce the target medium look in typical scenes. Break them deliberately when the subject demands it — an opaque night sky is `brush.wash(color, 255)`, a heavy dramatic pencil mark can go above 1.5. The ranges are where you land by default, not walls.
 
-**When NOT to apply graduated density.** The 3-layer template above is for rendering *form* — a subject with volume, shading, or internal depth. Skip the layering and use single-pass marks + quantity + variation when the subject is:
+**Two ways density can emerge.** The 3-layer template above is for rendering *form* — a subject with volume, internal depth, or defined shading. But density can also emerge the other way: from **quantity + overlap + variation** across many flat primitives, where no single primitive carries depth and the composition is carried by their sum.
 
-- **Pattern fields** (bloom fields, bird flocks, particle swarms, overlapping graffiti circles) — character comes from mutual overlap, not per-shape depth.
-- **Dense hatching-as-composition** (forests, cross-hatched landscapes) — density from **many zones × angle variation**, not 3–5 sub-layers per zone.
-- **Gestural / chaotic subjects** (graffiti walls, tags, drips, loose flock gestures) — the gesture *is* the structure.
-- **Abstract motion** (vector fields, swarm trails, noise-driven compositions) — field + wiggle + weight variation *is* the aesthetic.
-
-Over-layering these collapses their airy/gestural character. The rule across mediums is the same: when density or character emerges from **quantity + overlap + variation**, keep each primitive flat and skip the per-shape 3-layer template. See Watercolor → Field below for the canonical example; the Spray Chaos and Pen dense-composition notes below apply the same principle.
+Ask: does each mark in this piece *represent* depth (layer inside one shape), or does the *population of marks* create it (many shapes, each flat, overlapping)? Per-mark depth → use the 3-layer template. Population density → keep each primitive single-pass and scale *quantity + angle/position variation* instead. Over-layering the population case collapses its airy/gestural character; under-layering the form case reads as flat color. See Watercolor → Field, Spray → Chaos, and Pen dense-composition below for how this plays out per medium.
 
 ---
 
@@ -457,10 +452,12 @@ Over-layering these collapses their airy/gestural character. The rule across med
 
 Translucent washes. Color bleeds at edges. Paper shows through. **Two recipes depending on what you're drawing:**
 
-- **Form watercolor** — *one* subject rendered as a layered object (a flower, a boat, a single defined stain). Use wash + fill layers + optional inner `"in"` bleed for a dried-puddle shadow.
-- **Field watercolor** — *many* overlapping primitives that blend through overlap (bloom fields, atmospheric clouds, scattered stains, loose pigment). Use single-fill passes at low opacity with `"out"` bleed only.
+- **Form watercolor** — *one* subject rendered as a layered object. Use wash + fill layers + optional inner `"in"` bleed for a dried-puddle shadow.
+- **Field watercolor** — *many* overlapping primitives that blend through mutual overlap. Use single-fill passes at low opacity with `"out"` bleed only.
 
-Choose by asking: is the subject **one thing with internal structure**, or **many things that blend together**? Prompt language like *"field of"*, *"overlapping"*, *"bleeding into each other"*, *"scattered"*, *"cluster"*, *"cloud of"*, *"dusty"* signals Field. *"a single …"*, *"rendered …"*, *"a pooled …"*, *"a defined …"* signals Form. Multi-medium prompts with a structured subject (harbor boats, desert rocks) → Form for the subject, Field for the atmosphere.
+Choose by asking: is the subject **one thing with internal structure**, or **many things that blend together**? A defined subject with volume (e.g. a flower, a boat, a pooled stain) → Form. A population that reads as a mass (e.g. bloom cluster, atmospheric cloud, scattered pigment) → Field. Multi-medium scenes with a structured subject and atmospheric surround → Form for the subject, Field for the atmosphere.
+
+**Form watercolor always uses ≥3 passes.** A single `fill()` on a subject reads as flat translucent color, not watercolor — the medium character emerges from wash + fill + (optional) inner shadow layering together. Even for a simple subject, ship all three passes; skip only when you are explicitly rendering Field.
 
 **Form watercolor — minimal working recipe (one layered blob):**
 
@@ -724,10 +721,10 @@ Soft, diffuse, atmospheric. Smooth gradients from many layered passes. No hard e
 
 **Two modes depending on what you're drawing:**
 
-- **Form spray** — a *recognizable subject* rendered atmospherically (a figure, a flower, a face). Build form through 5+ tonal passes and pair with structural elements (charcoal/pen skeleton). Recipe below.
-- **Chaos spray** — *graffiti walls, tags, urban layering, drips, abstract overlapping marks*. The overlap itself is the composition. Skip the 5-pass tonal structure; skip the structural skeleton. Second recipe below.
+- **Form spray** — a *recognizable subject* rendered atmospherically. Build form through 5+ tonal passes and pair with structural elements (charcoal/pen skeleton).
+- **Chaos spray** — *overlapping marks whose overlap IS the composition*. Skip the 5-pass tonal structure; skip the structural skeleton.
 
-Prompt language like *"graffiti"*, *"spray-painted"*, *"tags"*, *"drips"*, *"wall"*, *"overlapping circles"* signals Chaos. *"atmospheric"*, *"misty"*, *"a rendered figure"*, *"soft portrait"* signals Form.
+Choose by asking: is the subject a coherent depth-carrying thing, or is the piece carried by the population of marks itself? An identifiable subject rendered in soft atmosphere (e.g. a figure, a portrait, a misty shape) → Form. A population piece where the stacking of sprays is the subject (e.g. graffiti-layering, overlapping circles, drip-mark compositions) → Chaos. This mirrors the Form/Field split in watercolor: per-mark depth vs population density.
 
 **Form spray recipe — 5 tonal passes + skeleton:**
 
