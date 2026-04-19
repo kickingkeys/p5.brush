@@ -20,6 +20,7 @@ PROMPTS = json.loads((ROOT / "prompts.json").read_text())
 MANIFEST = json.loads((ROOT / "manifest.json").read_text())
 MANIFEST_V2 = json.loads((ROOT / "manifest_v2.json").read_text()) if (ROOT / "manifest_v2.json").exists() else {}
 MANIFEST_V3 = json.loads((ROOT / "manifest_v3.json").read_text()) if (ROOT / "manifest_v3.json").exists() else {}
+MANIFEST_V4 = json.loads((ROOT / "manifest_v4.json").read_text()) if (ROOT / "manifest_v4.json").exists() else {}
 OUT = ROOT / "index.html"
 
 MODELS = [
@@ -46,10 +47,12 @@ def cell(model_key: str, prompt_id: str) -> str:
     new_key = f"{model_key}__new__{prompt_id}"
     v2_key  = f"{model_key}__v2__{prompt_id}"
     v3_key  = f"{model_key}__v3__{prompt_id}"
+    v4_key  = f"{model_key}__v4__{prompt_id}"
     old_entry = MANIFEST.get(old_key, {})
     new_entry = MANIFEST.get(new_key, {})
     v2_entry  = MANIFEST_V2.get(v2_key, {})
     v3_entry  = MANIFEST_V3.get(v3_key, {})
+    v4_entry  = MANIFEST_V4.get(v4_key, {})
 
     v2_half = (
         f'<div class="half"><span class="badge v2">v2</span>{img_for(v2_entry, "v2")}</div>'
@@ -59,7 +62,13 @@ def cell(model_key: str, prompt_id: str) -> str:
         f'<div class="half"><span class="badge v3">v3</span>{img_for(v3_entry, "v3")}</div>'
         if v3_entry else ""
     )
-    if v3_entry:
+    v4_half = (
+        f'<div class="half"><span class="badge v4">v4</span>{img_for(v4_entry, "v4")}</div>'
+        if v4_entry else ""
+    )
+    if v4_entry:
+        pair_cls = "pair quint"
+    elif v3_entry:
         pair_cls = "pair quad"
     elif v2_entry:
         pair_cls = "pair triple"
@@ -74,6 +83,7 @@ def cell(model_key: str, prompt_id: str) -> str:
             <div class="half"><span class="badge new">v1</span>{img_for(new_entry, 'new')}</div>
             {v2_half}
             {v3_half}
+            {v4_half}
           </div>
         </div>"""
 
@@ -129,6 +139,7 @@ nav a {{ margin-right: 16px; color: var(--ink); text-decoration: underline }}
 .pair {{ display: grid; grid-template-columns: 1fr 1fr; gap: 4px }}
 .pair.triple {{ grid-template-columns: 1fr 1fr 1fr }}
 .pair.quad {{ grid-template-columns: 1fr 1fr 1fr 1fr }}
+.pair.quint {{ grid-template-columns: 1fr 1fr 1fr 1fr 1fr }}
 .half {{ position: relative; background: #eee1c6; aspect-ratio: 1/1; overflow: hidden; border-radius: 4px }}
 .half img {{ width: 100%; height: 100%; object-fit: cover; display: block }}
 .badge {{
@@ -141,6 +152,7 @@ nav a {{ margin-right: 16px; color: var(--ink); text-decoration: underline }}
 .badge.new {{ color: var(--new) }}
 .badge.v2 {{ color: #2f6b9a }}
 .badge.v3 {{ color: #8e4fa3 }}
+.badge.v4 {{ color: #c2410c }}
 .fail {{ padding: 8px; font-size: 0.75rem; color: #c03; background: #ffeeea; height: 100%; display: flex; align-items: center }}
 .model-heads {{ display: grid; grid-template-columns: repeat({len(MODELS)}, 1fr); gap: 10px; margin-bottom: 8px; position: sticky; top: 0; background: var(--bg); padding: 10px 0; z-index: 5; border-bottom: 1px solid #e0d4bd }}
 .model-head {{ font-size: 0.9rem; font-weight: 600; text-align: center }}
@@ -168,7 +180,7 @@ An additive <code>## Recipes</code> section for p5.brush's <code>llms.txt</code>
 
 <h2 id="grid">Controlled comparison</h2>
 <p class="lede">
-For each prompt, each model generates a sketch in four conditions: <span style="color:var(--old)">old</span> (upstream docs only), <span style="color:var(--new)">v1</span> (upstream + our Recipes), <span style="color:#2f6b9a">v2</span> (Recipes + Particle Fields, Gestural marker, tighter Pen), and <span style="color:#8e4fa3">v3</span> (v2 + Watercolor Form/Field split + "When NOT to apply graduated density"). One seed per cell. Failures stay visible — blank/error canvases are data.
+For each prompt, each model generates a sketch in five conditions: <span style="color:var(--old)">old</span> (upstream docs only), <span style="color:var(--new)">v1</span> (upstream + our Recipes), <span style="color:#2f6b9a">v2</span> (Recipes + Particle Fields, Gestural marker, tighter Pen), <span style="color:#8e4fa3">v3</span> (v2 + Watercolor Form/Field split), and <span style="color:#c2410c">v4</span> (v3 + Spray Chaos mode, cpencil color cap, pen per-zone cap, narrowed Particle Fields anchor rule). One seed per cell. Failures stay visible — blank/error canvases are data.
 </p>
 <div class="model-heads">{model_heads}</div>
 {rows}

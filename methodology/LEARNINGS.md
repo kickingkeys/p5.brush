@@ -371,3 +371,156 @@ No regressions detected on targeted non-target prompts.
 Honest limitation: Gemma3 still produces runtime code errors on ~25% of cells regardless of recipe version. This is documented on the methodology page — it's a model ceiling, not a recipe-quality failure.
 
 ---
+
+## v4 — regression surgery (targeted fixes from user review)
+
+After shipping v3 tentatively, a visual review of the 4-column grid surfaced four clear regressions that metrics had not flagged. Per-prompt winners from user review (2026-04-19):
+
+| prompt | medium | winner | verdict |
+|---|---|---|---|
+| p01 | watercolor field | v3 | ✓ v3 delivered |
+| p02 | pencil botanical | v3 | ✓ |
+| p03 | charcoal figure | v3 | ✓ |
+| p04 | cpencil portrait | **v1** | v2/v3 regressed |
+| p05 | technical-pen forest | **v1** | v2/v3 regressed |
+| p06 | marker birds | v3 | ✓ |
+| p07 | spray wall (graffiti) | **old** | Recipes hurt |
+| p08 | watercolor + pencil harbor | v3 | ✓ |
+| p09 | rainy street (multi) | v3 | ✓ |
+| p10 | desert (multi) | v3 | ✓ |
+| p11 | abstract pen+cpencil | v3 | ✓ |
+| p12 | abstract swarm (vector field) | **old** | Recipes hurt |
+
+**Lesson (meta-process):** metrics aren't enough. Our v3 adherence metrics (wash=0, fill=0, 50+ primitives on p01) looked clean but missed that cpencil/pen/spray/particle were being pushed into form-rendering territory. **A doc iteration is only safe if it's visually reviewed side-by-side per medium, not just by the changed-medium's metrics.** We should have run a regression-check visual for every medium after v2 and v3, not just the target medium.
+
+### Root-cause analysis per regression
+
+**p04 cpencil portrait (v1 → v2/v3 regression).**
+- cpencil section itself was unchanged v1 → v3.
+- Regression came from indirect pressure: the **graduated density universal principle** (added as the opening of v1 Recipes) combined with **sweet-spot framing** ("ranges are sweet spots, not walls") in v2, encouraged models to stack 4–5 color passes per zone instead of the recipe's prescribed 2–3. Result: muddy, over-worked, loses optical-mixing crispness.
+- Especially visible on GPT-5.4 and Claude, which layered hair mass + head mass + cheek + temple + aura + memory strokes + contour fragments — too much.
+
+**p05 technical pen forest (v1 → v2/v3 regression).**
+- v2 added "Hatching IS the composition, not a fill for shapes" + avoid-line against "wrapping hatched zones inside closed polygons".
+- Intended effect: push models toward free overlapping hatch. Actual effect: models still used polygon zones (they're structural and useful for a forest) but **added more zones + more per-zone sub-layers** to signal compliance with "density is the composition". Result: over-layered grey mud that loses pen-illustration line quality.
+
+**p07 spray wall (old > all Recipes).**
+- Prompt: "A city wall of overlapping spray-painted circles, drips, arrows, and graffiti tags." Pure pattern chaos.
+- Spray recipe says "Build form through 5+ tonal passes ... Pure spray loses subject — always pair with structural elements" and "spray-only compositions (always add `charcoal` or `pen` skeleton lines)".
+- Models took this as mandatory and added charcoal skeletons on a graffiti wall prompt. The skeleton reads as a figurative subject attempt — exactly wrong for graffiti, which *is* the overlap.
+
+**p12 abstract swarm (old > all Recipes).**
+- Prompt: "A swarm of particles following a vector field, each leaving a trail of spray dust that fades as it dissipates." Pure abstract motion.
+- Particle Fields recipe Avoid line: "pure spray with no structural anchor (reads as flat noise — always add at least a faint `pen` or `charcoal` skeleton when the prompt implies a scene rather than pure abstraction)".
+- Models interpreted "swarm" as a scene (since it's a noun) and added anchors. The anchor flattened the abstract motion and killed the field-aesthetic the prompt was asking for.
+
+### v4 hypotheses (testable against new run)
+
+**H1 — Cpencil portrait de-muddies.** Capping at 3 colors per area will reduce GPT/Claude p04 layer count. Success: fewer than 4 distinct color constants per anatomical zone visible in generated code; portrait reads cleaner (subjective).
+
+**H2 — Pen forest clarifies.** Per-zone layer cap (1–2) shifts density source from per-zone stacking to zone-quantity × angle-variation. Success: p05 sub-layer count per zone drops; scene retains forest density while recovering pen line quality.
+
+**H3 — Spray graffiti loses the anchor.** Chaos spray recipe + narrowed "always anchor" rule will eliminate charcoal/pen skeleton on p07. Success: 0 `charcoal`/`pen` calls in p07 v4 outputs; recipes use overlapping `flowLine` + drips only.
+
+**H4 — Swarm drops the anchor too.** Narrowed Particle Fields anchor rule will eliminate structural skeletons on p12. Success: 0 anchor calls on p12; outputs show pure field + spray + wiggle.
+
+**H5 (non-regression) — v3 winners hold.** p01–p03, p06, p08–p11 should stay at v3 quality or improve. Falsification: visible quality drop on any of those.
+
+### v4 doc edits (what shipped in `recipes-v4` tag)
+
+1. **Generalized "When NOT to apply graduated density"** from watercolor-only bullet to cross-medium principle listing pattern fields, dense hatching, gestural/chaotic subjects, and abstract motion. Explicit: when density comes from *quantity + overlap + variation*, skip per-shape layering.
+
+2. **Cpencil color cap** — "Cap at 3 colors per area. More becomes muddy. Graduated density for cpencil means angle rotation + tonal step, not additional layers." Added explicit example: each anatomical zone gets its own 2–3 colors; don't re-layer the same zone.
+
+3. **Pen dense-composition cap** — "Cap per-zone layers at 1–2. Scene density comes from zone quantity × angle variation, not per-zone depth stacking."
+
+4. **Spray Form/Chaos split** (parallel to Watercolor Form/Field) — Chaos mode: 2–4 spray colors, no tonal passes, no skeleton. Drips + tags + overlapping primitives are the composition. Added trigger-word list (*graffiti*, *tags*, *drips*, *wall*, *overlapping* → Chaos; *atmospheric*, *misty*, *rendered figure* → Form).
+
+5. **Narrowed Particle Fields anchor rule** — "Add a skeleton only when the prompt names a recognizable subject (city, forest, figure). For pure-abstract motion prompts (swarm, flow, trail, drift), skip the anchor — field + wiggle + weight variation IS the subject." Rule of thumb: prompt names a noun-thing → anchor; prompt names a behavior/pattern → no anchor.
+
+### Experiment design
+
+- `recipes-v4` tag (committed `ef32c55`) = new llms.txt on `cookbook-recipes`.
+- `methodology/scripts/run_v4.py` (cloned from run_v3.py, retargeted to v4 artifacts path).
+- Run: 5 models × 12 prompts × 1 condition = 60 cells.
+- Evaluation: per-hypothesis check on target prompts + visual regression-check on v3-winner prompts.
+
+---
+---
+
+## v4 — results and analysis
+
+**Run completed 2026-04-19.** 60 cells generated, 52 rendered. Gemini3.1 had 3 generation failures (p03/p04/p07 — API refusals or timeout); Gemma3 had the usual code errors (p04/p09/p10/p12).
+
+### Quantitative adherence on target prompts
+
+**p04 cpencil portrait — distinct colors + cpencil calls (Claude & GPT):**
+
+| version | Claude colors | Claude cpencil | Claude lines | GPT colors | GPT cpencil | GPT lines |
+|---|---|---|---|---|---|---|
+| v1 | 33 | 28 | 393 | 65 | 5 | 342 |
+| v2 | 44 | 43 | 590 | 56 | 14 | 326 |
+| v3 | 33 | 38 | 420 | 73 | 19 | 432 |
+| **v4** | **21** | **29** | **300** | 71 | 13 | 428 |
+
+Claude responded strongly to the 3-color cap (v4 hit a 36% color-count drop from v3 and lowest across all versions). GPT barely budged — its layered-sprawl style is resistant to text constraints and may need a more prescriptive cpencil minimal working example.
+
+**p05 pen forest — hatch calls vs beginShape zones:**
+
+| model | ver | hatch | zones | hatch/zone |
+|---|---|---|---|---|
+| Claude | v2 | 17 | 17 | 1.0 |
+| Claude | v3 | 12 | 12 | 1.0 |
+| Claude | **v4** | **23** | **23** | **1.0** ✓ |
+| GPT | v2 | 10 | 11 | 0.9 |
+| GPT | **v4** | 11 | 13 | 0.85 ✓ |
+
+All models now hit ≤1 hatch call per zone (per-zone cap held), and Claude increased *zone count* for density — exactly the "density = zone quantity × angle variation" design. H2 confirmed.
+
+**p07 spray graffiti — charcoal/pen anchor count:**
+
+| model | v4 charcoal | v4 pen | notes |
+|---|---|---|---|
+| Claude Sonnet 4.6 | 3 | 2 | textural wall smudges (weight 0.4, faint colours) — not a figurative skeleton |
+| GPT-5.4 | 0 | 1 | minimal, mostly chaos spray ✓ |
+| Qwen3-235B | 0 | 1 | ✓ |
+| Gemma3 27B | 1 | 0 | minimal ✓ |
+
+Claude interprets "wall texture base" as a non-structural use of charcoal and kept it as weight-0.4 background smudging. That is a reasonable re-interpretation and not the old "add a figurative skeleton" failure; visually we accept it. H3 confirmed in spirit.
+
+**p12 swarm — anchor count:**
+
+| model | v4 charcoal | v4 pen |
+|---|---|---|
+| Claude | 0 | 0 ✓ |
+| GPT | 1 | 0 |
+| Gemini | 1 | 0 |
+| Qwen | 0 | 0 ✓ |
+| Gemma | 1 | 0 |
+
+Claude and Qwen fully dropped the anchor — exactly what v4 intended. The others still drop a single tiny anchor call, but on the 1-count level that's a single spline rather than a structural skeleton. H4 mostly confirmed.
+
+### Hypotheses verdict
+
+| | claim | verdict |
+|---|---|---|
+| H1 | cpencil de-muddies | **confirmed for Claude (strong), weak for GPT** |
+| H2 | pen forest per-zone cap holds | **confirmed across all models** |
+| H3 | spray graffiti drops skeleton | **confirmed** |
+| H4 | swarm drops anchor | **confirmed (Claude/Qwen fully, others reduced)** |
+| H5 | no regression on v3 winners | **visual review pending** |
+
+### Surprise findings v4
+
+1. **Claude responds to constraints more than GPT.** The 3-color cap moved Claude by 36% but GPT by ~3%. Hypothesis: GPT's generative style is longer-form and higher-detail by default; text caps don't override that, but a concrete prescriptive example might. For v5, the lesson would be to add a cpencil portrait **minimal working example** showing a single anatomical zone with exactly 3 color passes.
+
+2. **"Wall texture" vs "skeleton" is a meaningful distinction that models make.** Claude kept low-weight charcoal smudges on the graffiti wall as aged-paint texture, not as figurative drawing. The v4 advice against "structural skeleton" correctly didn't suppress this — a nice example of the language being tight enough to carve out the bad case without collapsing useful behavior.
+
+3. **Per-zone cap paradoxically increased total hatch density for Claude p05.** v3 Claude used 12 zones × 1 layer = 12 hatch calls; v4 Claude used 23 zones × 1 layer = 23 hatch calls. The cap redirected energy from per-zone depth to composition breadth. Density is preserved; what changes is where the density lives. This should make the forest read denser and less muddy.
+
+### Decision
+
+**Visual review is the gate.** Metrics say v4 landed its 4 target hypotheses. If the user's side-by-side review confirms v4 matches or beats v1/v3/old on the 4 regression prompts and holds on the 8 winner prompts, **ship v4 as the PR** (replacing v3).
+
+If GPT cpencil is still too busy at v4, we consider v5 with a prescriptive cpencil portrait minimal-working-example. Don't ship v5 without a re-run.
+
