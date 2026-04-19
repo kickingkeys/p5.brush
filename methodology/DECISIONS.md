@@ -93,3 +93,29 @@ Clearly labeled on the final page as two distinct experiments answering two dist
 **Why**: This came out of the research phase (real, validated finding across all mediums), but a single-line observation in Universal Principles steers every color decision downstream without needing per-medium reminders. Under-noted in prior versions.
 
 ---
+
+## 2026-04-19 — v6: de-prescriptivize + reassert Form 3-pass
+
+**Hypothesis**: Subject-example lists (e.g. "graffiti, drips, tags signals Chaos") read as *category boundaries* rather than illustrations. Generalizing to principle-first prose should free models to interpret prompts more broadly without losing the underlying medium rules.
+
+**Edits**: (1) "When NOT to apply graduated density" → "Two ways density can emerge" (positive principle, per-mark vs population). (2) Watercolor Form/Field trigger vocab softened to "e.g.". (3) Same for Spray Chaos/Form. (4) Added explicit "Form watercolor always uses ≥3 passes" bullet to fix v3→v5 p01 regression.
+
+**Observed v5→v6** (60 cells, 5 models × 12 prompts):
+
+- **Wins**: p01 Claude Sonnet 1→4 fills (target fix landed). p05 pen forest scaled up dramatically across all strong models (Claude +42, GPT +10, Gemini +8) — population-density framing produced richer hatched compositions.
+- **Losses**: p03 Charcoal Claude lost 6 layers and near-paper `#b0aba2` crept back into mass colors despite the value-floor bullet being intact. p08–p10 multi-medium scenes simpler across strong models (drops of 3–6 layers each) — softer Form/Field vocabulary let models default to Field single-pass even for Form elements.
+- **Neutral**: p06 marker, p12 abstract spray unchanged.
+
+**Learning**: De-prescriptivization is a variance move, not a quality move. Softer prose broadens *all* adjacent rules, not just the target. Strong models (Claude) benefit on prompts where v5 was rigid but lose coherence on prompts that need sharp distinctions (multi-medium). The "≥3 passes" bullet only landed on Claude — GPT/Gemini/Qwen/Gemma need the hint inside code, not as prose.
+
+---
+
+## 2026-04-19 — v7: narrow reversion + in-code comment hints
+
+**Hypothesis**: Two targeted fixes can keep v6's wins (p05, p01 Claude) while recovering v6's losses (p03 charcoal, p08–p10 multi-medium).
+
+**Edits planned**: (1) Re-tighten Watercolor Form/Field trigger vocabulary for multi-medium specifically (partial revert of v6's softening — keep the "e.g." for simple prompts, re-tighten for "harbor boats, desert rocks" case). (2) Add `// all 3 passes — do not skip` comment inside the Form watercolor code snippet so weak models see the ≥3 rule while reading runnable code, not just prose. (3) Add analogous `// mass color must be < #888` comment inside charcoal example to reinforce value floor where Claude slipped.
+
+**Why this combination**: v6 proved that prose bullets only reach Claude. Weaker models pattern-match off code comments. v6 also proved language softening cascades beyond the target sentence. Narrowing the softening to only the simple case + doubling down on code-comment hints should preserve variety where it helped and restore precision where it hurt.
+
+---
