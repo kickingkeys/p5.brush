@@ -602,11 +602,13 @@ brush.noMass(); brush.noHatch();
 brush.noField();
 ```
 
-**Critical**: preserve ≥30% of the canvas as light/paper values. Charcoal can only darken — the paper *is* your highlight. Plan light areas before drawing.
+**Critical — leave ≥30% of the *canvas* as untouched paper** (not as light-gray fills on the subject). The paper *is* your highlight: what you don't draw on. Charcoal can only darken, so plan which paper areas stay empty before drawing.
+
+**Mass color value floor.** `brush.mass("pastel" | "crayon", color, …)` colors must be visibly darker than the cream paper — stay in `#222`–`#666` for mid tones and `#000`–`#1a1a1a` for darks. Near-paper pastel (anything lighter than ~`#888`) is effectively invisible; when dark charcoal strokes are drawn on top of it, the result reads as *skeleton lines over blank paper* instead of massed charcoal. The subject must be built from genuinely dark masses.
 
 **`mass` strength by tone**: light 0.2–0.4 (1 pass), mid 0.45–0.65 (2 passes), dark 0.7–0.9 (3 passes).
 
-**Avoid**: over-darkening to all-black (common failure mode); `mass("charcoal")`; watercolor APIs (`fill`, `wash`, `fillBleed`); mechanical marks (always `field("hand")` + `wiggle(3–5)`).
+**Avoid**: over-darkening to all-black (common failure mode); near-paper pastel/crayon colors on the subject (e.g. `#b0aba2`, `#d4d0c9` — produces "skeleton over blank paper" look); `mass("charcoal")`; watercolor APIs (`fill`, `wash`, `fillBleed`); mechanical marks (always `field("hand")` + `wiggle(3–5)`).
 
 ---
 
