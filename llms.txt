@@ -455,7 +455,9 @@ Translucent washes. Color bleeds at edges. Paper shows through. **Two recipes de
 - **Form watercolor** — *one* subject rendered as a layered object. Use wash + fill layers + optional inner `"in"` bleed for a dried-puddle shadow.
 - **Field watercolor** — *many* overlapping primitives that blend through mutual overlap. Use single-fill passes at low opacity with `"out"` bleed only.
 
-Choose by asking: is the subject **one thing with internal structure**, or **many things that blend together**? A defined subject with volume (e.g. a flower, a boat, a pooled stain) → Form. A population that reads as a mass (e.g. bloom cluster, atmospheric cloud, scattered pigment) → Field. Multi-medium scenes with a structured subject and atmospheric surround → Form for the subject, Field for the atmosphere.
+Choose by asking: is the subject **one thing with internal structure**, or **many things that blend together**? A defined subject with volume (e.g. a flower, a boat, a pooled stain) → Form. A population that reads as a mass (e.g. bloom cluster, atmospheric cloud, scattered pigment) → Field.
+
+**Multi-medium scenes need both modes, not one.** When the prompt names a structured subject AND an atmospheric surround (e.g. "boats in a foggy harbor", "rocks in a dust storm"), the structured subject gets the full Form recipe (≥3 passes, wash + fill + optional inner shadow) and the atmosphere gets Field (many single-pass primitives). Do **not** default the whole scene to Field — the named subject will collapse into a single translucent shape and lose its structural role. Treat "structured subject + atmosphere" as a compound: Form recipe for the foreground noun, Field recipe for the background mass.
 
 **Form watercolor always uses ≥3 passes.** A single `fill()` on a subject reads as flat translucent color, not watercolor — the medium character emerges from wash + fill + (optional) inner shadow layering together. Even for a simple subject, ship all three passes; skip only when you are explicitly rendering Field.
 
@@ -470,10 +472,10 @@ for (let i = 0; i < 36; i++) {
   pts.push([cx + cos(a) * r, cy + sin(a) * r]);
 }
 
-// Wash base for color saturation + fill layer for watercolor texture
+// PASS 1 of 3 — wash base for color saturation
 brush.fillTexture(0.85, 0.5);
 brush.wash("#b8860b", 160);
-brush.fill("#d4a017", 200);
+brush.fill("#d4a017", 200);                         // PASS 2 of 3 — fill layer for watercolor texture
 brush.fillBleed(0.35, "out");
 brush.noStroke();
 brush.beginShape(0.5);
@@ -481,7 +483,9 @@ for (const p of pts) brush.vertex(p[0], p[1]);
 brush.endShape(CLOSE);
 brush.noWash();
 
-// Inner warm-shadow layer — bleeds inward (dried-puddle effect)
+// PASS 3 of 3 — inner warm-shadow layer, bleeds inward (dried-puddle effect).
+// For Form watercolor, ship all three passes. Skipping any pass produces flat
+// translucent color that does not read as watercolor.
 brush.fill("#ff9900", 70);
 brush.fillBleed(0.4, "in");
 brush.beginShape(0.5);
@@ -582,7 +586,9 @@ brush.hatch(8, 45, { rand: 0.12 });
 brush.beginShape(0.3); /* light zone */ brush.endShape(true);
 brush.noHatch();
 
-// Mid tone — mass("pastel") + hatch
+// Mid tone — mass("pastel") + hatch.
+// IMPORTANT: mass color MUST be darker than #888. Near-paper values
+// (e.g. #b0aba2, #d4d0c9) are invisible against the cream background.
 brush.mass("pastel", "#3a3a3a", { strength: 0.45, precision: 0.5, gradient: 0.6 });
 brush.hatchStyle("charcoal", "#444", 1.0);
 brush.hatch(6, 75, { rand: 0.15 });
